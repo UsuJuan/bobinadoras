@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Paro Update</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<!-- <link rel="stylesheet" href="css/estilos.css" /> -->
+	<style>
+		body{
+			font-size: 18px;
+		}
+		.search
+		{
+			color: white;
+			font-size: 20px;
+			padding-right: 8px;
+		}			
+		.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+			background-color: #BEBEBE;
+		}
+		.glyphicon-chevron-down{
+			color:white;
+			font-size: 25px;
+
+		}
+		.icono-menu{
+			font-size: 2.5em;
+			padding-right: 0.5em;
+			font-weight: bold;
+			color : #428bca;
+		}
+		.icono-menu:hover{
+			cursor: pointer;
+		}
+		.icono-menu:hover{
+			text-decoration: none;
+		}		
+		@media screen and (max-width: 600px) {
+			form{
+				margin-left: 3em;
+			}
+			.btn{
+				font-size: 1.5em;
+			}
+			.search{
+				font-size: 1.5em;
+			}
+			input#search {
+				height: 1.2em;
+				font-size: 4em;
+			}
+			form.navbar-form.navbar-left {
+				margin-left: 0;
+			}
+		}
+	</style>
+</head>
+<body>	
+	<!-- INICIO BUSCAR -->
+	<nav class="navbar navbar-inverse navbar-fixed-navigation" role="navigation">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="glyphicon glyphicon-chevron-down"></span>
+	      </button>
+	      <p id="menu" class="icono-menu" >
+				<span class="glyphicon glyphicon-align-justify" ></span> MENU
+		  </p>
+	    </div>
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	      	<form class="navbar-form navbar-left" role="search" name="form-buscar">
+		        <div class="form-group">
+		          <label for="search" class="search " >Fecha </label>
+		          <input type="date" id="search" class="form-control" autocomplete="off" >
+		        </div>
+		        <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-search" ></span> Buscar</button>
+		    </form>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<!-- FIN BUSCAR -->
+	<div class="alert alert-danger" role="alert">
+		<button class="btn btn-success btn-lg" id="atras" ><span class="glyphicon glyphicon-arrow-left" ></span> Atras</button>
+	</div>
+	<!-- Button trigger modal -->
+	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
+	  	Modal
+	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      <div class="modal-header">
+			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="alert alert-danger" role="alert">
+		      			<h4>
+		      				Desea Eliminar el Paro ?
+		      			</h4>
+		      		</div>
+		      </div>
+		      <div class="modal-footer">
+			        <button type="button" data-dismiss="modal" id="si" class="btn-lg btn-success" >SI</button>
+			        <button type="button" id="no" data-dismiss="modal" class="btn-lg btn-danger" >NO</button>
+		      </div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Modal -->
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr class="alert-info" >
+					<th class="text-center" >MAQUINA(S)</th>
+					<th class="text-center" >H. INICIO</th>
+					<th class="text-center" >H. FIN</th>
+					<th class="text-center" >FECHA</th>
+					<th class="text-center" ></th>
+				</tr>
+			</thead>
+			<tbody class="text-center" >
+				
+			</tbody>
+		</table>	  
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
+	<script type="text/javascript" src="js/bootstrap.js" ></script>
+	<script>
+		$(function(){
+
+			$('#menu').on('click',function(){
+				window.location = 'index.html';
+			});
+
+			$('#atras').on('click',function(){
+				window.location = 'paromenu.html';
+			});
+
+			$('#si').on('click',function(){
+				var id = localStorage.getItem('id_paro_update');
+				new_array = JSON.parse(localStorage.getItem('lista_paros'));
+				array_individual = JSON.parse(localStorage.getItem('lista_paros_individual'));
+				for (i=0;i<new_array.length;i++){
+					if (new_array[i]['id']==id){
+						new_array.splice(i,1);						
+					}
+				}
+				var jsontostring = JSON.stringify(new_array);
+				localStorage.setItem("lista_paros", jsontostring);
+				for (i=0;i<array_individual.length;i++){
+					if (array_individual[i]['id']==id){
+						i=-1;
+						array_individual.splice(i,1);						
+					}
+				}
+				var jsontostring = JSON.stringify(array_individual);
+				localStorage.setItem("lista_paros_individual", jsontostring);
+				if(new_array.length==0){
+					localStorage.removeItem('lista_paros_individual');
+					localStorage.removeItem('lista_paros');
+				}				
+				window.location = 'parodelete.html';
+			});
+			
+			function Prueba (){
+				$('a').on('click',function(event){
+					event.preventDefault();
+					id_paro = $(this).attr('id');
+					localStorage.setItem('id_paro_update',id_paro);
+					$('#modalbox').click();
+				});
+			}
+
+			$('form[name=form-buscar]').on('submit', function(event) {
+				var a=0;
+				event.preventDefault();
+				$('tbody').empty();
+				fecha_search = $('#search').val();
+				ap1 = JSON.parse(localStorage.getItem('lista_paros'));
+				for(var i=0;i<ap1.length;i++){					
+					if(ap1[i]['fecha']==fecha_search){
+						$('tbody').append("<tr><td>"+ap[i]['nro_maquina_uno']+" - "+ap[i]['nro_maquina_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+						a = 1;
+					}	
+				}
+				if(a==0){
+					$('tbody').append("<tr><td colspan='4' ><h2>0 REGISTROS ENCONTRADOS.</h2></td></tr>");
+				}
+				Prueba();
+			});
+
+			if(localStorage.getItem('lista_paros')!=null){
+				ap = JSON.parse(localStorage.getItem('lista_paros'));
+				for(var i=0;i<ap.length;i++){
+					$('tbody').append("<tr><td>"+ap[i]['nro_maquina_uno']+" - "+ap[i]['nro_maquina_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");		
+				}
+				Prueba();
+			}
+		})
+	</script>
+</body>
+</html>

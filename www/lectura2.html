@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Ingresar datos</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>
+	<!-- <div class="alert alert-danger text-center" role="alert">
+		<h3>
+			DEBE LLENAR UN CAMPO.
+		</h3>
+	</div> -->
+	<!-- Button trigger modal -->
+	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
+	  	Modal
+	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      <div class="modal-header">
+			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="alert alert-success" role="alert">
+		      			<h4>
+		      				La ruta ha terminado. Los datos han sido guardados con exito.
+		      			</h4>
+		      		</div>
+		      </div>
+		      <div class="modal-footer">
+			        <a href="index.html" name="ok" class="btn btn-primary btn-lg">Ok</a>
+		      </div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Modal -->
+	<form class="form-horizontal my_form" role="form" name="form_lectura" action="" method="POST" >
+		<div class="form-group">
+		   	<div class="text-center">
+		   		<label for="maquina" class="control-label label_grande">MAQUINA</label>
+		   	</div>
+	   		<div class="col-md-4"></div>
+			<div class="col-sm-1 col-md-4">
+			      <input type="text" class="form-control input_grande" id="maquina" name="maquina" disabled>
+			</div>			
+		</div>
+		<div class="form-group">
+		   	<div class="text-center">
+		   		<label for="unidad" class="control-label label_grande">UNIDAD</label>
+		   	</div>
+	   		<div class="col-md-4"></div>
+			<div class="col-sm-1 col-md-4">
+			      <input type="text" class="form-control input_grande" id="unidad" name="unidad" disabled>
+			</div>			
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="kgs" class="control-label label_grande">KGS</label>
+		   	</div>
+		   	<div class="col-md-4"></div>
+		    <div class="col-sm-1 col-md-4">
+		      <input type="number" class="form-control input_grande numero" id="kgs" name="kgs" autocomplete="off" >
+		    </div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-kgs" role="alert">
+	      		<h2>COMPLETAR!</h2>
+	      	</div>
+	    </div> -->
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="purgador" class="control-label label_grande">CORTE PURGADOR</label>
+		   	</div>
+		   	<div class="col-md-4"></div>
+		    <div class="col-sm-1 col-md-4">
+		      <input type="number" class="form-control input_grande numero" id="purgador" name="purgador" autocomplete="off" >
+		    </div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-purgador" role="alert">
+	      		<h2>COMPLETAR!</h2>
+	      	</div>
+	    </div> -->
+		<div class="form-group">
+		    <div class="col-sm-offset-3">
+		      <a href="lecturamenu.html" class="btn btn-danger boton" >ATRAS</a>
+		      <button type="submit" class="btn btn-primary boton">GUARDAR</button>
+		    </div>
+		</div>
+	</form>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script>
+	// var MyJson_lectura;
+	// var array = [];
+	// if (localStorage.getItem("lista_lectura_bovinadora")!=null){
+	// 	array = JSON.parse(localStorage.getItem("lista_lectura_bovinadora"));
+	// 	len_lecturas = JSON.parse(localStorage.getItem("lista_lectura_bovinadora")).length;
+	// }else{
+	// 	len_lecturas = 0;
+	// }
+	// if(localStorage.getItem('id')==null){
+	// 	localStorage.setItem('id',1);
+	// }
+	// if (localStorage.getItem("contador")==null){
+	// 	cont = 0;
+	// }else{
+	// 	cont = localStorage.getItem("contador");
+	// }
+	// // FECHA Y HORA						
+	// 	var fecha = new Date();
+	// 	dia = fecha.getDate();
+	// 	mes = fecha.getMonth()+1;
+	// 	annio = fecha.getFullYear();
+	// 	hora = fecha.getHours();
+	// 	minutos = fecha.getMinutes();	
+	// 	if(dia<10) dia = String("0"+dia);
+	// 	if(mes<10) mes = String("0"+mes);
+	// 	fecha_ingreso = String(annio+"-"+mes+"-"+dia);
+	// // FECHA Y HORA
+
+	// $(function(){
+
+	// 	$(".numero").keypress(function(evt){
+	//         if((evt.charCode < 48 || evt.charCode > 57)){
+	//             return false;
+	//         } 
+	//     });
+
+	//     // FECHA Y TURNO
+	//     my_array = JSON.parse(localStorage.getItem('turnos'));
+	//     hora_turno = my_array[2].hora_inicio;
+	//     hora_max = parseInt(hora_turno.substring(0,2));
+ //    	if((localStorage.getItem('turno')=="2" || localStorage.getItem('turno')=="3") && hora < hora_max){
+ //    		fecha.setDate(fecha.getDate()-1);
+ //    	}
+ //    	dia = fecha.getDate();
+	// 	mes = fecha.getMonth()+1;
+	// 	annio = fecha.getFullYear();	
+ //    	if(dia<10) dia = String("0"+dia);
+	// 	if(mes<10) mes = String("0"+mes);	
+	// 	if(hora<10) hora = String("0"+hora);
+	// 	if(minutos<10) minutos = String("0"+minutos);
+	// 	fecha_lectura = String(annio+"-"+mes+"-"+dia);
+	// 	hora_ingreso = String(hora+":"+minutos+":"+"00");
+	//     // FECHA Y TURNO
+	
+	// 	$('#maquina').attr('readonly',true);
+	// 	$('#error-metros').css('display','none');
+	// 	var metros="";
+	// 	function MyFunction(){
+	// 		$('#maquina').val(JSON.parse(localStorage.getItem("maquinas"))[0].nombre);
+	// 		// if(JSON.parse(localStorage.getItem("maquinas"))[0].tipomaquina==1){
+	// 		// 	$('#horas').css('display', 'none');
+	// 		// }
+	// 	}
+	// 	if(len_lecturas == 0){
+	// 		localStorage.setItem("contador",0);
+	// 		cont=0;
+	// 		MyFunction()			;
+	// 	}else if((len_lecturas % JSON.parse(localStorage.getItem("maquinas")).length)==0){
+	// 		localStorage.setItem("contador",0);		
+	// 		cont = localStorage.getItem("contador");	
+	// 		cont=0;
+	// 		MyFunction();
+	// 	}else{
+	// 		$('#maquina').val(JSON.parse(localStorage.getItem("maquinas"))[cont].nombre);
+	// 		// if(JSON.parse(localStorage.getItem("maquinas"))[cont].tipomaquina==1){
+	// 		// 	$('#horas').css('display', 'none');
+	// 		// }
+	// 	}
+
+	// 	function Valida(){
+	// 		var rpta=1;
+	// 		var nro_dig = parseInt(JSON.parse(localStorage.getItem("maquinas"))[cont].digitos);
+	// 		$('#digitos').remove();
+	// 		if ($('#nro_metros').val()==""){
+	// 			rpta = 0;
+	// 			$('#error-metros').show().delay(5000).fadeOut();
+	// 		}else if($('#nro_metros').val()!=0){				
+	// 			if(nro_dig!=parseInt($('#nro_metros').val().length)){					
+	// 				rpta=0;
+	// 				$('#error-metros').append('<h2 id="digitos" >'+nro_dig+' digitos</h2>');
+	// 				$('#error-metros').show().delay(5000).fadeOut();
+	// 			}
+	// 		}
+	// 		return rpta;
+	// 	}
+
+	// 	$('form[name=form_lectura]').on('submit',function(evt){
+	// 		evt.preventDefault();			
+	// 		if(Valida()==1){
+	// 			metros = $('#nro_metros').val();
+	// 			MyJson_lectura = {
+	// 				"id" : localStorage.getItem("id"),
+	// 				"turno" : localStorage.getItem("turno"),
+	// 				"nro_maquina" : parseInt($('#maquina').val()),
+	// 				"nro_horas"	 : "",
+	// 				"nro_metros" : metros,
+	// 				"fecha" : fecha_lectura,
+	// 				"hora" : hora_ingreso,
+	// 				"tipo_lectura" :"NORMAL",
+	// 				"fecha_ingreso" : fecha_ingreso,
+	// 			}
+	// 			array.push(MyJson_lectura);
+	// 			var jsontostring = JSON.stringify(array);
+	// 			cont++;
+	// 			id = parseInt(localStorage.getItem("id"));
+	// 			localStorage.setItem('id',id+1);
+	// 			localStorage.setItem("contador", cont);
+	// 			localStorage.setItem("lista_lectura_bovinadora", jsontostring);
+	// 			if(((len_lecturas+1) % JSON.parse(localStorage.getItem("maquinas")).length)==0){
+	// 				$('#modalbox').click();
+	// 				localStorage.removeItem('turno');
+	// 			}else{
+	// 				window.location = 'lectura2.html';					
+	// 			}
+	// 		}else{
+	// 			$('#error-metros').show().delay(5000).fadeOut();
+	// 		}
+			
+	// 	});
+	// })
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Lectura Update</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<style>
+		body{
+			font-size: 18px;
+		}
+		.search
+		{
+			color: white;
+			font-size: 20px;
+			padding-right: 8px;
+		}			
+		.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+			background-color: #BEBEBE;
+		}
+		.glyphicon-chevron-down{
+			color:white;
+			font-size: 25px;
+
+		}
+		.icono-menu{
+			font-size: 2.5em;
+			padding-right: 0.5em;
+			font-weight: bold;
+		}
+		.icono-menu:hover{
+			text-decoration: none;
+		}		
+		@media screen and (max-width: 600px) {
+			form{
+				margin-left: 3em;
+			}
+			.btn{
+				font-size: 1.5em;
+			}
+			.search{
+				font-size: 1.5em;
+			}
+			input#search {
+				height: 1.2em;
+				font-size: 4em;
+			}
+			form.navbar-form.navbar-left {
+				margin-left: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!-- INICIO BUSCAR -->
+	<nav class="navbar navbar-inverse navbar-fixed-navigation" role="navigation">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="glyphicon glyphicon-chevron-down"></span>
+	      </button>
+	      <a href="index.html" class="icono-menu" >
+				<span class="glyphicon glyphicon-align-justify" ></span> MENU
+		  </a>
+	    </div>
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	      	<form class="navbar-form navbar-left" role="search" name="form-buscar">
+		        <div class="form-group">
+		          <label for="search" class="search " >N° Maquina </label>
+		          <input type="number" id="search" class="form-control" autocomplete="off" >
+		        </div>
+		        <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-search" ></span> Buscar</button>
+		    </form>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<!-- FIN BUSCAR -->
+	<div class="alert alert-danger" role="alert">
+		<a href="lecturamenu.html" class="btn btn-success btn-lg" ><span class="glyphicon glyphicon-arrow-left" ></span> Atras</a>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr class="alert-info" >
+					<th class="text-center" >MAQUINA</th>
+					<th class="text-center" >N° METROS</th>
+					<th class="text-center" >N° HORAS</th>
+					<th class="text-center" >FECHA</th>
+					<th class="text-center" >TURNO</th>
+					<th class="text-center" ></th>
+				</tr>
+			</thead>
+			<tbody class="text-center" >
+				
+			</tbody>
+		</table>	  
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
+	<script type="text/javascript" src="js/bootstrap.js" ></script>
+	<script>
+		$(function(){
+			
+			function Prueba (){
+				$('a').on('click',function(event){
+					id_lectura = $(this).attr('id');
+					localStorage.setItem('id_lectura_update',id_lectura);
+				});
+			}
+
+			function knowTurno(myvar){
+				if(myvar==1){
+					turno = "Mañana";
+				}else if(myvar==2){
+					turno = "Tarde";
+				}else{
+					turno = "Noche";
+				}
+				return turno;
+			}
+
+			// {$(window).scroll(function(){
+			// 	if ($(window).scrollTop() == $(document).height() - $(window).height()){
+
+			// 	}
+			// });}
+
+			$('form[name=form-buscar]').on('submit', function(event) {
+				var a=0;
+				event.preventDefault();
+				$('tbody').empty();
+				numero = $('#search').val();
+				array_lectura = JSON.parse(localStorage.getItem('lista_lectura'));
+				array_parcial = JSON.parse(localStorage.getItem('lista_parcial'));
+				if(array_lectura!=null){
+					for(var i=0;i<array_lectura.length;i++){
+						turno = knowTurno(array_lectura[i]['turno']);
+						if(array_lectura[i]['nro_maquina']==numero){
+							$('tbody').append("<tr><td>"+array_lectura[i]['nro_maquina']+"</td><td>"+array_lectura[i]['nro_metros']+"</td><td>"+array_lectura[i]['nro_horas']+"</td><td>"+array_lectura[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+array_lectura[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");
+							a = 1;
+						}	
+					}
+				}
+				if(array_parcial!=null){
+					for(var i=0;i<array_parcial.length;i++){
+						turno = knowTurno(array_parcial[i]['turno']);
+						if(array_parcial[i]['nro_maquina']==numero){
+							$('tbody').append("<tr><td>"+array_parcial[i]['nro_maquina']+"</td><td>"+array_parcial[i]['nro_metros']+"</td><td></td><td>"+array_parcial[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+array_parcial[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");
+							a = 1;
+						}	
+					}
+				}
+				if(a==0){
+					$('tbody').append("<tr><td colspan='5' ><h2>EL NUMERO DE MAQUINA NO EXISTE.</h2></td></tr>");
+				}
+				Prueba();
+			});
+
+			if(localStorage.getItem('lista_lectura')!=null){
+				for(var i=0;i<JSON.parse(localStorage.getItem('lista_lectura')).length;i++){
+					turno = knowTurno(JSON.parse(localStorage.getItem('lista_lectura'))[i]['turno']);
+					$('tbody').append("<tr><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_maquina']+"</td><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_metros']+"</td><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_horas']+"</td><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+JSON.parse(localStorage.getItem('lista_lectura'))[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+				}
+				Prueba();
+			}
+			if(localStorage.getItem('lista_parcial')!=null){
+				for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
+					turno = knowTurno(JSON.parse(localStorage.getItem('lista_parcial'))[i]['turno']);
+					$('tbody').append("<tr><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_maquina']+"</td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_metros']+"</td><td></td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+				}
+				Prueba();
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Transferencia de datos</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>
+	<div class="alert alert-danger text-center" style="margin-top:3em;" role="alert">
+		<h3>
+			Error al transferir datos.
+		</h3>
+	</div>
+	<div class="alert alert-success text-center" style="margin-top:3em;" role="alert">
+		<h3>
+			Los datos se bajaron con exito.
+		</h3>
+	</div>
+	<form class="form-horizontal my_form" role="form" action="" method="POST" >
+		<div class="row text-center flechita">
+			<span class="glyphicon glyphicon-download"></span>
+		</div>
+		<div class="row text-center" >
+			<button type="submit" style="font-size:4em;" class="btn btn-primary btn-lg">Bajar Datos</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
+	<script type="text/javascript" src="js/bootstrap.js" ></script>
+	<script>
+
+	$(function(){	
+
+		$('.alert-danger').css('display','none');
+		$('.alert-success').css('display','none');
+
+		var mostrar_maquinas = function(json){
+			maquinas_array = JSON.stringify(json);
+			localStorage.setItem("maquinas", maquinas_array);
+		};
+		var mostrar_turnos = function(json){
+			turnos_array = JSON.stringify(json);
+			localStorage.setItem("turnos", turnos_array);
+		};
+		var mostrar_tipo_procesos = function(json){
+			tipo_procesos_array = JSON.stringify(json);
+			localStorage.setItem("tipo_procesos", tipo_procesos_array);
+		};
+		var mostrar_tipo_torsiones = function(json){
+			tipo_torsiones_array = JSON.stringify(json);
+			localStorage.setItem("tipo_torsiones", tipo_torsiones_array);
+		};
+		var mostrar_lineas = function(json){
+			lineas_array = JSON.stringify(json);
+			localStorage.setItem("lineas", lineas_array);
+		};
+		var mostrar_motivos_paro = function(json){
+			motivos_paro_array = JSON.stringify(json);
+			localStorage.setItem("motivos_paro", motivos_paro_array);
+		};
+		$('form').on('submit',function(evt){
+			evt.preventDefault();
+			$.getJSON('http://10.240.17.49/transferencias/bajar/maquinas/?callback=?', mostrar_maquinas)
+				.done(function() {
+					$('.alert-success').show().delay(5000).fadeOut();
+					console.log('exito');
+			  	})
+			  	.fail(function() {
+			  		$('.alert-danger').show().delay(5000).fadeOut();
+			  		console.log('fallo');
+			  	});				
+
+			$.getJSON('http://10.240.17.49/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});	
+			$.getJSON('http://10.240.17.49/transferencias/bajar/tipoprocesos/?callback=?', mostrar_tipo_procesos)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
+			$.getJSON('http://10.240.17.49/transferencias/bajar/tipotorsiones/?callback=?', mostrar_tipo_torsiones)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
+			$.getJSON('http://10.240.17.49/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
+			$.getJSON('http://10.240.17.49/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
+		});			
+      })
+	</script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Cambios</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+	<!-- Button trigger modal 1 -->
+	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
+	  	Modal
+	</button>
+	<!-- Modal 1 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      <div class="modal-header">
+			        <h4 class="modal-title alert alert-warning" id="myModalLabel">Mensaje</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="alert alert-info" id="mensajes" role="alert">
+
+		      		</div>
+		      </div>
+		      <div class="modal-footer text-left">
+			        <button type="button" data-dismiss="modal" id="conservar" class="btn-lg btn-primary" >Agregar</button>
+			        <button type="button" data-dismiss="modal" id="cancelar" class="btn-lg btn-danger" >Cancelar</button>
+		      </div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Modal 1 -->
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>
+	<form class="form-horizontal my_form" role="form" name="form_cambios" action="" method="POST" >
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="dia" class="control-label label_grande">FECHA</label>
+		   	</div>
+		    <div class="col-sm-4 col-xs-4">
+		      <input type="number" class="form-control input_grande" id="dia" name="dia" autocomplete="off" placeholder="Día" >
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		      <input type="number" class="form-control input_grande" id="mes" name="mes" autocomplete="off" placeholder="Mes" >
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		      <input type="number" class="form-control input_grande" id="annio" name="annio" autocomplete="off" placeholder="Año" >
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		      	<div class="alert alert-danger text-center" id="error-dia" role="alert">
+		      		<h2>ERROR!</h2>
+		      	</div>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		      	<div class="alert alert-danger text-center" id="error-mes" role="alert">
+		      		<h2>ERROR!</h2>
+		      	</div>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		      	<div class="alert alert-danger text-center" id="error-annio" role="alert">
+		      		<h2>ERROR!</h2>
+		      	</div>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="nombre_maquina" class="control-label label_grande">MAQUINA</label>
+		   	</div>
+		   	<div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      <input type="text" class="form-control input_grande" id="nombre_maquina" name="nombre_maquina" autocomplete="off" >
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="unidad" class="control-label label_grande">UNIDAD</label>
+		   	</div>
+		   	<div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      <input type="text" class="form-control input_grande" id="unidad" name="unidad" autocomplete="off">
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="titulo" class="control-label label_grande">CODIGO</label>
+		   	</div>
+		   	<div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      <input type="number" class="form-control input_grande numero" id="titulo" name="titulo" autocomplete="off" >
+		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-titulo" role="alert">
+		      		<h2>COMPLETAR!</h2>
+		      	</div>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="vp" class="control-label label_grande">VP</label>
+		   	</div>
+		   	<div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      <input type="number" class="form-control input_grande numero" id="vp" name="vp" autocomplete="off" >
+		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-vp" role="alert">
+		      		<h2>COMPLETAR!</h2>
+		      	</div>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		    	<label for="linea" class="control-label label_grande">LINEA</label>
+		    </div>
+		    <div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      	<input type="number" class="form-control input_grande numero" id="linea" name="linea" autocomplete="off" >
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="contador" class="control-label label_grande">CONTADOR</label>
+		   	</div>
+		   	<div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      <input type="number" class="form-control input_grande numero" id="contador" name="contador" autocomplete="off" >
+		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-contador" role="alert">
+		      		<h2>COMPLETAR!</h2>
+		      	</div>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="hora" class="control-label label_grande">HORA</label>
+		   	</div>
+		   	<div class="col-sm-1 col-xs-1"></div>
+		    <div class="col-sm-4 col-xs-4">
+		      <input type="number" class="form-control input_grande numero" maxlength="5" id="hora" name="hora" autocomplete="off" placeholder="HH" >		      
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">:</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande numero" maxlength="5" id="minutos" name="minutos" autocomplete="off" placeholder="MM" >
+		    </div>
+		    <div class="col-sm-2 col-xs-2"></div>
+		    <div class="row">
+		    	<div class="col-sm-2 col-xs-2"></div>
+			    <div class="col-sm-4 col-xs-4">
+			    	<div class="alert alert-danger text-center" id="error-hora" role="alert">
+			      		<h2>ERROR!</h2>
+			      	</div>
+			    </div>
+			    <div class="col-sm-2 col-xs-2"></div>
+			    <div class="col-sm-4 col-xs-4">
+			    	<div class="alert alert-danger text-center" id="error-minutos" role="alert">
+			      		<h2>ERROR!</h2>
+			      	</div>
+			    </div>
+		    </div>
+		</div>
+		<div class="form-group">
+		    <div class="col-sm-offset-3">
+		      <a href="cambiomenu.html" class="btn btn-danger boton" >ATRAS</a>
+		      <button type="submit" class="btn btn-primary boton">GUARDAR</button>		      
+		    </div>
+		</div>
+	</form>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script>	
+	var MyJson_cambios;
+	var array = [];
+	// if (localStorage.getItem("lista_cambios")!=null){
+	// 	my_array = JSON.parse(localStorage.getItem("lista_cambios"));
+	// 	array = JSON.parse(localStorage.getItem("lista_cambios"));
+	// }
+	// if(localStorage.getItem('id_cambios')==null){
+	// 	localStorage.setItem('id_cambios',1);
+	// }
+	// FECHA Y HORA
+		var fecha = new Date();
+		dia = fecha.getDate();
+		mes = fecha.getMonth()+1;
+		annio = fecha.getFullYear();
+		if(dia<10) dia = String("0"+dia);
+		if(mes<10) mes = String("0"+mes);		
+		fecha_string = String(annio+"-"+mes+"-"+dia);
+		hora = fecha.getHours();
+		minutos = fecha.getMinutes();
+		if(hora<10)	hora = String("0"+hora);
+		if(minutos<10) minutos = String("0"+minutos);
+		hora_string = String(hora+":"+minutos+":"+"00");
+	// FECHA Y HORA
+
+	$(function(){
+		annio_2 = String(annio).substring(2,4);
+		$('#dia').val(dia);
+		$('#mes').val(mes);
+		$('#annio').val(annio_2);
+		// $('#nombre_maquina').attr('readonly',true);		
+		// $('#cod_maquina').attr('readonly',true);
+		$('.alert-danger').css('display','none');
+
+		$(".numero").keypress(function(evt){
+	        if((evt.charCode < 48 || evt.charCode > 57)){
+	            return false;
+	        } 
+	    }); 
+
+	    $("#hora").keyup(function(event){
+		    if($(this).val().length==2){
+		        $('#minutos').focus();
+		    }
+		});    
+
+		// for(var i=0;i<JSON.parse(localStorage.getItem("tipo_maquinas")).length;i++){
+		// 	if("01" == JSON.parse(localStorage.getItem("tipo_maquinas"))[i].codigo){
+		// 		$('#nombre_maquina').val(JSON.parse(localStorage.getItem("tipo_maquinas"))[i].nombre);
+		// 		$('#cod_maquina').val(JSON.parse(localStorage.getItem("tipo_maquinas"))[i].codigo);
+		// 	}
+		// }
+		// Tipo Torsion
+		// array_tt = JSON.parse(localStorage.getItem("tipo_torsiones"));
+		// for(var i=0;i<array_tt.length;i++){
+		// 	$('#tipo_torsion').append('<option value='+array_tt[i].id+' >'+array_tt[i].descripcion+'</option>');
+		// }
+		// Tipo Procesos
+		// array_tp = JSON.parse(localStorage.getItem("tipo_procesos"));
+		// for(var i=0;i<array_tp.length;i++){
+		// 	$('#tipo_proceso').append('<option value='+array_tp[i].id+' >'+array_tp[i].descripcion+'</option>');
+		// }
+		// Lineas
+		// array_lineas = JSON.parse(localStorage.getItem("lineas"));
+		// for(var i=0;i<array_lineas.length;i++){
+		// 	$('#linea').append('<option value='+array_lineas[i].id+' >'+array_lineas[i].descripcion+'</option>');
+		// }
+
+		// $('#cancelar').on('click',function(){
+		// 	$('#mensajitos').remove();
+		// });
+
+		// $('#conservar').on('click',function(){
+		// 	// debugger;
+		// 	array.push(MyJson_cambios);
+		// 	// debugger;
+		// 	var jsontostring = JSON.stringify(array);
+		// 	localStorage.setItem("lista_cambios", jsontostring);
+		// 	$('.alert-success').show().delay(5000).fadeOut();
+		// 	$('#mensajitos').remove();
+		// 	window.location = 'cambiomenu.html';
+		// });	
+
+		// $('form[name=form_cambios]').on('submit',function(evt){
+		// 	evt.preventDefault();	
+		// 	if(valida()==1){
+		// 		HoraTwoPto = $('#hora').val()+":"+$('#minutos').val();
+		// 		MyJson_cambios = {
+		// 			"id" : localStorage.getItem("id_cambios"),
+		// 			"cod_maquina" : $('#cod_maquina').val(),
+		// 			"nro_maquina" : $('#nro_maquina').val(),
+		// 			"titulo" : $('#titulo').val(),
+		// 			"torsion" : $('#torsion').val(),
+		// 			"tipo_torsion" : $('#tipo_torsion').val(),
+		// 			"hora_cambio" : HoraTwoPto+":00",
+		// 			"tipo_proceso" : $('#tipo_proceso').val(),
+		// 			"linea" : $("#linea").val(),
+		// 			"rpm" : $('#rpm').val(),
+		// 			"contador" : $('#contador').val(),
+		// 			"fecha" : annio+"-"+$('#mes').val()+"-"+$('#dia').val(),
+		// 			"fecha_ingreso":fecha_string,
+		// 			"hora" : hora_string,
+		// 			"estado" :1,
+		// 		}
+		// 		var indicator = 0;
+		// 		var entrada = 0;
+		// 		ac = JSON.parse(localStorage.getItem('lista_cambios'));
+		// 		if (ac!=null) {
+		// 			for (i=0;i<ac.length;i++){
+		// 				if($('#fecha').val() == ac[i]['fecha']){
+		// 					if($('#nro_maquina').val() == ac[i]['nro_maquina']){
+		// 						entrada = 1;
+		// 						if(indicator==0){
+		// 							$('#modalbox').click();
+		// 							indicator = 1;
+		// 							$('#mensajes').append("<div id='mensajitos' ></div>");
+		// 						}						
+		// 						$('#mensajitos').append("<h5 >La maquina "+ac[i]['nro_maquina']+" ya tiene cambio en este día, su hora es: "+ac[i]['hora_cambio']+".</h5>");
+		// 					}
+		// 				}
+		// 			}
+		// 		}
+		// 		if (entrada==0){
+		// 			// debugger;
+		// 			array.push(MyJson_cambios);
+		// 			// debugger;
+		// 			var jsontostring = JSON.stringify(array);
+		// 			// debugger;
+		// 			localStorage.setItem("lista_cambios", jsontostring);
+		// 			id_cambios = parseInt(localStorage.getItem("id_cambios"));
+		// 			localStorage.setItem('id_cambios',id_cambios+1);
+		// 			window.location = "cambiomenu.html";
+		// 		}
+		// 	}
+
+		// 	function valida(){
+		// 		var rpta = 1;
+		// 		if($('#nro_maquina').val()==""){
+		// 			rpta = 0;
+		// 			$('#error-maquina').show().delay(3000).fadeOut();
+		// 		}else{
+		// 			array_maquinas = JSON.parse(localStorage.getItem('maquinas'));
+		// 			var flag = 0;
+		// 			for(var i=0;i<array_maquinas.length;i++){
+		// 				if(array_maquinas[i].nombre==$('#nro_maquina').val()){
+		// 					flag = 1;
+		// 				}
+		// 			}
+		// 			if (flag!=1){
+		// 				$('#error-maquina').show().delay(3000).fadeOut();
+		// 				rpta = 0;
+		// 			}else{
+		// 				rpta = 1;
+		// 			}
+		// 		}
+		// 		if($('#titulo').val()==""){
+		// 			rpta = 0;
+		// 			$('#error-titulo').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#torsion').val()==""){
+		// 			rpta = 0;
+		// 			$('#error-torsion').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#rpm').val()==""){
+		// 			rpta = 0;
+		// 			$('#error-rpm').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#contador').val()==""){
+		// 			rpta = 0;
+		// 			$('#error-contador').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#hora').val().length!=2 || parseInt($('#hora').val())>23){
+		// 			rpta = 0;
+		// 			$('#error-hora').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#minutos').val().length!=2 || parseInt($('#minutos').val())>59){
+		// 			rpta = 0;
+		// 			$('#error-minutos').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
+		// 			rpta = 0;
+		// 			$('#error-dia').show().delay(3000).fadeOut();
+		// 		}
+		// 		if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
+		// 			rpta = 0;
+		// 			$('#error-mes').show().delay(3000).fadeOut();
+		// 		}
+		// 		a = parseInt($('#annio').val())
+		// 		b = parseInt(annio_2)
+		// 		if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
+		// 			rpta = 0;
+		// 			$('#error-annio').show().delay(3000).fadeOut();
+		// 		}
+		// 		return rpta;
+		// 	}
+		// });
+	})
+</script>
+</body>
+</html>

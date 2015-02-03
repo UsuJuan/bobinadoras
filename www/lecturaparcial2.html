@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Ingresar Lectura</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>
+	<div class="alert alert-danger text-center" role="alert">
+		<h3>
+			DEBE LLENAR UN CAMPO.
+		</h3>
+	</div>
+	<form class="form-horizontal my_form" role="form" name="form_lectura" action="" method="POST" >
+		<div class="form-group">
+		   	<div class="text-center">
+		   		<label for="maquina" class="control-label label_grande">MAQUINA</label>
+		   	</div>
+	   		<div class="col-md-4"></div>
+			<div class="col-sm-1 col-md-4">
+			      <input type="number" class="form-control input_grande" id="maquina" name="maquina" autocomplete="off" >
+			</div>
+		</div>
+		<div id="metros">
+			<div class="form-group">
+				<div class="text-center">
+			   		<label for="nro_metros" class="control-label label_grande">NRO METROS</label>
+			   	</div>
+			   	<div class="col-md-4"></div>
+			    <div class="col-sm-1 col-md-4">
+			      <input type="number" class="form-control input_grande" id="nro_metros" name="nro_metros" autocomplete="off" >
+			    </div>
+			</div>
+		</div>
+		<div class="form-group">
+		    <div class="col-xs-offset-1 col-sm-offset-3">
+		      <a href="lecturaparcial1.html" class="btn btn-danger boton" >ATRAS</a>
+		      <button type="submit" class="btn btn-primary boton">GUARDAR</button>
+		    </div>
+		</div>
+	</form>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script>
+	var MyJson_lectura;
+	var array = [];
+	if (localStorage.getItem("lista_parcial")!=null){
+		array = JSON.parse(localStorage.getItem("lista_parcial"));
+		len_lecturas = JSON.parse(localStorage.getItem("lista_parcial")).length;
+	}else{
+		len_lecturas = 0;
+	}
+	if(localStorage.getItem('id')==null){
+		localStorage.setItem('id',1);
+	}
+	if (localStorage.getItem("contador")==null){
+		cont = 0;
+	}else{
+		cont = localStorage.getItem("contador");
+	}
+	// FECHA Y HORA						
+		var fecha = new Date();
+		dia = fecha.getDate();
+		mes = fecha.getMonth()+1;
+		annio = fecha.getFullYear();
+		hora = fecha.getHours();
+		minutos = fecha.getMinutes();	
+		if(dia<10) dia = String("0"+dia);
+		if(mes<10) mes = String("0"+mes);
+		fecha_ingreso = String(annio+"-"+mes+"-"+dia);
+	// FECHA Y HORA
+
+	$(function(){
+		
+	// FECHA Y TURNO
+	    my_array = JSON.parse(localStorage.getItem('turnos'));
+	    hora_turno = my_array[2].hora_inicio;
+	    hora_max = parseInt(hora_turno.substring(0,2));
+    	if((localStorage.getItem('turno_parcial')=="2" || localStorage.getItem('turno_parcial')=="3") && hora < hora_max){
+    		fecha.setDate(fecha.getDate()-1);
+    	}
+    	dia = fecha.getDate();
+		mes = fecha.getMonth()+1;
+		annio = fecha.getFullYear();	
+    	if(dia<10) dia = String("0"+dia);
+		if(mes<10) mes = String("0"+mes);	
+		if(hora<10) hora = String("0"+hora);
+		if(minutos<10) minutos = String("0"+minutos);
+		fecha_lectura = String(annio+"-"+mes+"-"+dia);
+		hora_ingreso = String(hora+":"+minutos+":"+"00");
+    // FECHA Y TURNO
+		$('.alert-danger').css('display','none');
+		var metros="";
+
+		$('form[name=form_lectura]').on('submit',function(evt){
+			evt.preventDefault();			
+			if($('#nro_metros').val()=="" ){
+				$('.alert-danger').css('display','block');
+				$('.alert-danger').show().delay(5000).fadeOut();
+			}else{	
+				if($('#nro_metros').val()!=""){
+					metros = parseFloat($('#nro_metros').val());
+				}				
+				MyJson_lectura = {
+					"id" : localStorage.getItem("id"),
+					"turno" : localStorage.getItem("turno_parcial"),
+					"nro_maquina" : parseInt($('#maquina').val(),10),
+					"nro_horas" : "",
+					"nro_metros" : metros,
+					"fecha" : fecha_lectura,
+					"hora" : hora_ingreso,
+					"tipo_lectura" : "PARCIAL",
+					"fecha_ingreso" : fecha_ingreso,
+				}
+				array.push(MyJson_lectura);
+				var jsontostring = JSON.stringify(array);
+				cont++;
+				id = parseInt(localStorage.getItem("id"));
+				localStorage.setItem('id',id+1);
+				localStorage.setItem("contador", cont);
+				localStorage.setItem("lista_parcial", jsontostring);				
+				window.location = 'lecturaparcial2.html';
+			}			
+			
+		});
+	})
+</script>
+</body>
+</html>

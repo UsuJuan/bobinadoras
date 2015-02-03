@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Transferencia de datos</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+	<!-- Button trigger modal -->
+	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
+	  	Modal
+	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      <div class="modal-header">
+			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="alert alert-danger" id="mensajes" role="alert">
+
+		      		</div>
+		      </div>
+		      <div class="modal-footer">
+			        <a href="index.html" name="ok" class="btn btn-primary btn-lg">Ok</a>
+		      </div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Modal -->
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>	
+	<form class="form-horizontal my_form" role="form" action="" method="POST" >
+		<div id="loading" class="text-center" >
+			<img src="loading.GIF" width="100px" heigth="100px" />
+		</div>
+		<div class="row text-center flechita">
+			<span class="glyphicon glyphicon-upload"></span>
+		</div>
+		<div class="row text-center" >
+			<button type="submit" id="subir" style="font-size:4em;" class="btn btn-primary btn-lg">Subir Datos</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
+	<script type="text/javascript" src="js/bootstrap.js" ></script>
+	<script>
+
+	$(function(){	
+
+		array_paros = JSON.parse(localStorage.getItem('lista_paros_individual'));
+		array_cambios = JSON.parse(localStorage.getItem('lista_cambios'));
+		var cont = 0;
+		var cont1 = 0;
+		$('#mensajitos').remove();		
+		$('#mensajes').append("<div id='mensajitos' ></div>");
+		$('#subir').css('display','none');
+
+		$.getJSON('http://10.240.17.49/transferencias/coneccion/?callback=?')
+		.done(function() {
+			console.log('exito');
+			$('#subir').css('display','inline');
+		})
+		.fail(function() {
+			$('#mensajitos').append("<h3 >Compruebe su coneccion a la red.</h2>");
+			$('#modalbox').click();
+		});
+
+		if (array_cambios!=null){
+			for(i=0;i<array_cambios.length;i++){
+				var repetidor = 0;
+				for(j=0;j<array_cambios.length;j++){
+					if(array_cambios[i].nro_maquina==array_cambios[j].nro_maquina && array_cambios[i].fecha==array_cambios[j].fecha){
+						repetidor++;
+					}
+				}
+				if(repetidor>1){				
+					$('#mensajitos').append("<h3 >Hay cambios repetidos</h3><h2>Eliminar cambios.</h2>");
+					$('#modalbox').click();
+					cont1 = 1;
+					break;
+				}
+			}
+		}
+		// if (cont1==0){
+		// 	if (array_paros!=null){
+		// 		for(i=0;i<array_paros.length;i++){
+		// 			var repetidor = 0;
+		// 			for(j=0;j<array_paros.length;j++){
+		// 				if(array_paros[i].maquina==array_paros[j].maquina && array_paros[i].fecha==array_paros[j].fecha){
+		// 					repetidor++;
+		// 				}
+		// 			}
+		// 			if(repetidor>1){				
+		// 				$('#mensajitos').append("<h3 >Hay paros repetidos</h3><h2>Eliminar paros.</h2>");
+		// 				$('#modalbox').click();
+		// 				cont = 1;
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+		// }
+
+		if (cont==0 && cont1==0){
+			if(localStorage.getItem("lista_lectura")!=null){
+				if((JSON.parse(localStorage.getItem("lista_lectura")).length % JSON.parse(localStorage.getItem("maquinas")).length)!=0){						
+						$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
+						$('#modalbox').click();
+					}
+			}else{
+				if(localStorage.getItem("lista_parcial")==null){					
+					$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
+					$('#modalbox').click();
+				}
+			}
+		}
+		
+		$('form').on('submit',function(evt){
+			evt.preventDefault();
+			terminar();
+		});
+
+		$('#loading').css('display','none');
+
+		function terminar(){
+			
+			$('#loading').css('display','block');
+
+			array01 = JSON.parse(localStorage.getItem('lista_parcial'));
+			if (array01!=null){
+				if (array01.length>0){
+					array02 = JSON.parse(localStorage.getItem('lista_lectura'));
+					if(array02==null){
+						array02 = []
+					}
+					for(i=0;i<array01.length;i++){
+						MyJson_lectura = {
+							"id" : array01[i].id,
+							"turno" : array01[i].turno,
+							"nro_maquina" : array01[i].nro_maquina,
+							"nro_horas"	 : "",
+							"nro_metros" : array01[i].nro_metros,
+							"fecha" : array01[i].fecha,
+							"fecha_ingreso" : array01[i].fecha_ingreso,
+							"hora" : array01[i].hora,
+							"tipo_lectura" : "PARCIAL",
+						}
+						array02.push(MyJson_lectura);						
+					}
+					var jsontostring = JSON.stringify(array02);
+					localStorage.setItem("lista_lectura", jsontostring);	
+				}
+			}
+
+			$.ajax({
+				url: 'http://10.240.17.49/transferencias/subir/',
+				type: 'POST',
+				crossDomain: true,
+				data: {					
+					'lecturas': localStorage.getItem("lista_lectura"),
+					'cambios': localStorage.getItem("lista_cambios"),
+					'paros': localStorage.getItem("lista_paros"),
+				},
+				dataType: 'json',		
+			})
+			.done(function() {
+				console.log("success");
+				$('#loading').css('display','none');
+				$('#mensajes').remove();
+				$(".modal-body").append('<div class="alert alert-success text-center" id="mensajes" role="alert"><h3>Datos subidos con exito.</h3></div>');
+				$('#modalbox').click();
+			})
+			.fail(function() {
+				console.log("error");
+				$('#loading').css('display','none');
+				$('#mensajes').remove();
+				$(".modal-body").append('<div class="alert alert-success text-center" id="mensajes" role="alert"><h3>Datos subidos con exito.</h3></div>');
+				$('#modalbox').click();
+			});
+			localStorage.removeItem('lista_paros');
+			localStorage.removeItem('lista_paros_individual');
+			localStorage.removeItem('lista_cambios');
+			localStorage.removeItem('lista_parcial');
+			localStorage.removeItem('lista_lectura');
+			localStorage.removeItem('id_cambios');
+			localStorage.removeItem('turno');
+			localStorage.removeItem('id');
+			localStorage.removeItem('contador');
+			localStorage.removeItem('turno_parcial');
+			localStorage.removeItem('fecha_parcial');
+			localStorage.removeItem('paro');
+      }
+	})
+	</script>
+</body>
+</html>

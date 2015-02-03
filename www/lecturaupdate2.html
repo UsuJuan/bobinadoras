@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Ingresar datos</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>
+	<div class="alert alert-danger" role="alert">
+		<h3>
+			DEBE LLENAR UN CAMPO.
+		</h3>
+	</div>
+	<div class="alert alert-success" role="alert">
+		<h3>
+			SE MODIFICÓ CON EXITO.
+		</h3>
+	</div>
+	<form class="form-horizontal my_form" role="form" name="form_lectura_update" action="" method="POST" >
+		<input type="hidden" id="tipo_lectura_update"/>
+		<div class="form-group">
+		   	<div class="text-center">
+		   		<label for="maquina_update" class="control-label label_grande">MAQUINA</label>
+		   	</div>
+	   		<div class="col-md-4"></div>
+			<div class="col-sm-1 col-md-4">
+			      <input type="text" class="form-control input_grande" id="maquina_update" name="maquina_update" >
+			</div>
+		</div>
+		<div id="horas">
+			<div class="form-group">
+				<div class="text-center">
+			   		<label for="nro_horas_update" class="control-label label_grande">NRO HORAS</label>
+			   	</div>
+			   	<div class="col-md-4"></div>
+			    <div class="col-sm-1 col-md-4">
+			      	<input type="number" class="form-control input_grande" id="nro_horas_update" name="nro_horas_update" autocomplete="off" >
+			    </div>
+			</div>
+		</div>
+		<div id="metros">
+			<div class="form-group">
+				<div class="text-center">
+			   		<label for="nro_metros_update" class="control-label label_grande">NRO METROS</label>
+			   	</div>
+			   	<div class="col-md-4"></div>
+			    <div class="col-sm-1 col-md-4">
+			      <input type="number" class="form-control input_grande" id="nro_metros_update" name="nro_metros_update" autocomplete="off" >
+			    </div>
+			</div>
+		</div>
+		<div class="form-group">
+		    <div class="col-xs-offset-1 col-sm-offset-3">
+		      <button type="submit" class="btn btn-primary boton">GUARDAR</button>
+		      <a href="lecturaupdate.html" class="btn btn-danger boton" >ATRAS</a>
+		    </div>
+		</div>
+	</form>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script>
+	id = localStorage.getItem('id_lectura_update');
+	$(function(){
+		$('#maquina_update').attr('readonly',true);
+		$('.alert-danger').css('display','none');
+		$('.alert-success').css('display','none');
+		if (localStorage.getItem('lista_lectura')!=null){
+			for(var i=0;i<JSON.parse(localStorage.getItem('lista_lectura')).length;i++){
+				if(JSON.parse(localStorage.getItem('lista_lectura'))[i]['id']==id){
+					$('#tipo_lectura_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['tipo_lectura']);
+					$('#maquina_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_maquina']);
+					if(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_horas']==""){
+						$('#horas').css('display','none');
+						$('#nro_metros_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_metros']);
+					}else{
+						$('#metros').css('display','none');
+						$('#nro_horas_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_horas']);
+					}
+				}
+			}
+		}
+		if (localStorage.getItem('lista_parcial')!=null){
+			for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
+				if(JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']==id){
+					$('#tipo_lectura_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['tipo_lectura']);
+					$('#maquina_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_maquina']);
+					if(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_horas']==""){
+						$('#horas').css('display','none');
+						$('#nro_metros_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_metros']);
+					}else{
+						$('#metros').css('display','none');
+						$('#nro_horas_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_horas']);
+					}
+				}
+			}
+		}
+		$('form[name=form_lectura_update]').on('submit',function(event){
+			event.preventDefault();
+			if($('#nro_horas_update').val() !="" || $('#nro_metros_update').val()!="" ){
+				if($('#tipo_lectura_update').val()!="PARCIAL" && localStorage.getItem('lista_lectura')!=null ){
+					for(var i=0;i<JSON.parse(localStorage.getItem('lista_lectura')).length;i++){
+						if(JSON.parse(localStorage.getItem('lista_lectura'))[i]['id']==id){
+							myjson = JSON.parse(localStorage.getItem('lista_lectura'))
+							if($('#nro_horas_update').val()==""){
+								myjson[i]['nro_metros'] = $('#nro_metros_update').val();
+							}else{
+								myjson[i]['nro_horas'] = parseInt($('#nro_horas_update').val());
+							}
+							myjson_string = JSON.stringify(myjson);
+							localStorage.setItem('lista_lectura',myjson_string);
+							$('.alert-success').show().delay(5000).fadeOut();
+							localStorage.removeItem('id_lectura_update');
+							break;
+						}
+					}
+				}else{
+					for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
+						if(JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']==id){
+							myjson = JSON.parse(localStorage.getItem('lista_parcial'))
+							if($('#nro_horas_update').val()==""){
+								myjson[i]['nro_metros'] = $('#nro_metros_update').val();
+							}else{
+								myjson[i]['nro_horas'] = parseInt($('#nro_horas_update').val());
+							}
+							myjson_string = JSON.stringify(myjson);
+							localStorage.setItem('lista_parcial',myjson_string);
+							$('.alert-success').show().delay(5000).fadeOut();
+							localStorage.removeItem('id_lectura_update');
+							break;
+						}
+					}
+				}
+			}else{
+				$('.alert-danger').show().delay(5000).fadeOut();
+			}
+		});
+
+	})
+</script>
+</body>
+</html>

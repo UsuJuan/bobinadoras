@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Menu Cambios</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/estilos.css" />
+	<style>
+	.item-menu{
+		font-size: 95px;
+	}
+	.item-menu:hover{
+		font-size: 90px;	
+	}
+	</style>
+</head>
+<body>
+	<!-- Button trigger modal -->
+	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
+	  	Modal
+	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      <div class="modal-header">
+			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="alert alert-danger" role="alert">
+		      			<h4>
+		      				Necesita bajar datos para seguir con el proceso.
+		      			</h4>
+		      		</div>
+		      </div>
+		      <div class="modal-footer">
+			        <a href="bajar.html" name="descargar" class="btn btn-success">Ir a bajar</a>
+		      </div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Modal -->
+	<div class="text-right">
+		<a href="index.html" class="icono-menu" >
+			MENU <span class="glyphicon glyphicon-align-justify" ></span>
+		</a>
+	</div>
+	<div class="row cuerpo">
+		<div class="row">
+			<a href="cambios2.html" id="add" class="item-menu" >
+				<p class="items" >
+					INGRESAR
+				</p>
+			</a>
+		</div>
+		<!-- <div class="row">
+			<a href="cambiodelete.html" id="update" class="item-menu" >
+				<p class="items" >
+					ELIMINAR
+				</p>
+			</a>
+		</div> -->
+	</div>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script>
+	$(function(){
+		// $('#add').on('click',function(event){
+		// 	event.preventDefault();
+		// 	if (localStorage.getItem("tipo_maquinas")==null){
+		// 		$('#modalbox').click();
+		// 	}else{
+		// 		window.location = 'cambios2.html';
+		// 	}
+		// });		
+	});
+</script>
+</body>
+</html>
