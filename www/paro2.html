@@ -208,19 +208,21 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-		   	<div class="text-center">	
-		   		<label for="cabeceras" class="control-label label_grande">CABECERAS</label>
-		   	</div>
-		   	<div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande" id="cabeceras" name="cabeceras" autocomplete="off" >
-		    </div>
-		    <div class="row">
-		    <!-- 	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina2" role="alert">
-		      		<h2>ERROR!</h2>
-		      	</div>
-		    </div> -->
+		<div id="husos" >
+			<div class="form-group">
+			   	<div class="text-center">	
+			   		<label for="puestos" class="control-label label_grande">PUESTOS</label>
+			   	</div>
+			   	<div class="col-md-3"></div>
+			    <div class="col-sm-10 col-md-6">
+			      <input type="number" class="form-control input_grande" id="puestos" name="puestos" autocomplete="off" >
+			    </div>
+			    <!-- <div class="row">
+			    <div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina2" role="alert">
+			      		<h2>ERROR!</h2>
+			      	</div>
+			    </div> -->
+			</div>
 		</div>
 		<div class="form-group">
 		    <div class="col-sm-offset-3">
@@ -331,8 +333,10 @@
 
 		if(localStorage.getItem("paro")=="1"){
 			$('#segunda_maquina').css('display', 'block');
+			$('#husos').css('display', 'none');
 		}else{
 			$('#segunda_maquina').css('display', 'none');
+			$('#husos').css('display', 'block');
 		}	
 		// function Agregar_Maquinas(){
 		// 	tp = parseInt(localStorage.getItem("paro"));
