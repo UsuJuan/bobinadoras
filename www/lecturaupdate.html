@@ -67,13 +67,13 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	      	<form class="navbar-form navbar-left" role="search" name="form-buscar">
+	      	<!-- <form class="navbar-form navbar-left" role="search" name="form-buscar">
 		        <div class="form-group">
 		          <label for="search" class="search " >N° Maquina </label>
 		          <input type="number" id="search" class="form-control" autocomplete="off" >
 		        </div>
 		        <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-search" ></span> Buscar</button>
-		    </form>
+		    </form> -->
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -87,8 +87,10 @@
 			<thead>
 				<tr class="alert-info" >
 					<th class="text-center" >MAQUINA</th>
-					<th class="text-center" >N° METROS</th>
-					<th class="text-center" >N° HORAS</th>
+					<th class="text-center" >UNIDAD</th>
+					<th class="text-center" >KGS</th>
+					<th class="text-center" >PURGADOR</th>
+					<th class="text-center" >EMPALME</th>
 					<th class="text-center" >FECHA</th>
 					<th class="text-center" >TURNO</th>
 					<th class="text-center" ></th>
@@ -104,12 +106,12 @@
 	<script>
 		$(function(){
 			
-			function Prueba (){
-				$('a').on('click',function(event){
-					id_lectura = $(this).attr('id');
-					localStorage.setItem('id_lectura_update',id_lectura);
-				});
-			}
+			// function Prueba (){
+			// 	$('a').on('click',function(event){
+			// 		id_lectura = $(this).attr('id');
+			// 		localStorage.setItem('id_lectura_update',id_lectura);
+			// 	});
+			// }
 
 			function knowTurno(myvar){
 				if(myvar==1){
@@ -128,51 +130,52 @@
 			// 	}
 			// });}
 
-			$('form[name=form-buscar]').on('submit', function(event) {
-				var a=0;
-				event.preventDefault();
-				$('tbody').empty();
-				numero = $('#search').val();
-				array_lectura = JSON.parse(localStorage.getItem('lista_lectura'));
-				array_parcial = JSON.parse(localStorage.getItem('lista_parcial'));
-				if(array_lectura!=null){
-					for(var i=0;i<array_lectura.length;i++){
-						turno = knowTurno(array_lectura[i]['turno']);
-						if(array_lectura[i]['nro_maquina']==numero){
-							$('tbody').append("<tr><td>"+array_lectura[i]['nro_maquina']+"</td><td>"+array_lectura[i]['nro_metros']+"</td><td>"+array_lectura[i]['nro_horas']+"</td><td>"+array_lectura[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+array_lectura[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");
-							a = 1;
-						}	
-					}
-				}
-				if(array_parcial!=null){
-					for(var i=0;i<array_parcial.length;i++){
-						turno = knowTurno(array_parcial[i]['turno']);
-						if(array_parcial[i]['nro_maquina']==numero){
-							$('tbody').append("<tr><td>"+array_parcial[i]['nro_maquina']+"</td><td>"+array_parcial[i]['nro_metros']+"</td><td></td><td>"+array_parcial[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+array_parcial[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");
-							a = 1;
-						}	
-					}
-				}
-				if(a==0){
-					$('tbody').append("<tr><td colspan='5' ><h2>EL NUMERO DE MAQUINA NO EXISTE.</h2></td></tr>");
-				}
-				Prueba();
-			});
+			// $('form[name=form-buscar]').on('submit', function(event) {
+			// 	var a=0;
+			// 	event.preventDefault();
+			// 	$('tbody').empty();
+			// 	numero = $('#search').val();
+			// 	lecs_bov = JSON.parse(localStorage.getItem('list_lec_bov'));
+			// 	// array_parcial = JSON.parse(localStorage.getItem('lista_parcial'));
+			// 	if(lecs_bov!=null){
+			// 		for(var i=0;i<lecs_bov.length;i++){
+			// 			turno = knowTurno(lecs_bov[i]['turno']);
+			// 			if(lecs_bov[i]['nro_maquina']==numero){
+			// 				$('tbody').append("<tr><td>"+lecs_bov[i]['nro_maquina']+"</td><td>"+lecs_bov[i]['nro_metros']+"</td><td>"+lecs_bov[i]['nro_horas']+"</td><td>"+lecs_bov[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lecs_bov[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");
+			// 				a = 1;
+			// 			}	
+			// 		}
+			// 	}
+			// 	if(array_parcial!=null){
+			// 		for(var i=0;i<array_parcial.length;i++){
+			// 			turno = knowTurno(array_parcial[i]['turno']);
+			// 			if(array_parcial[i]['nro_maquina']==numero){
+			// 				$('tbody').append("<tr><td>"+array_parcial[i]['nro_maquina']+"</td><td>"+array_parcial[i]['nro_metros']+"</td><td></td><td>"+array_parcial[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+array_parcial[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");
+			// 				a = 1;
+			// 			}	
+			// 		}
+			// 	}
+			// 	if(a==0){
+			// 		$('tbody').append("<tr><td colspan='5' ><h2>EL NUMERO DE MAQUINA NO EXISTE.</h2></td></tr>");
+			// 	}
+			// 	Prueba();
+			// });
 
-			if(localStorage.getItem('lista_lectura')!=null){
-				for(var i=0;i<JSON.parse(localStorage.getItem('lista_lectura')).length;i++){
-					turno = knowTurno(JSON.parse(localStorage.getItem('lista_lectura'))[i]['turno']);
-					$('tbody').append("<tr><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_maquina']+"</td><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_metros']+"</td><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_horas']+"</td><td>"+JSON.parse(localStorage.getItem('lista_lectura'))[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+JSON.parse(localStorage.getItem('lista_lectura'))[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+			if(localStorage.getItem('list_lec_bov')!=null){
+				list_lec_bov = JSON.parse(localStorage.getItem('list_lec_bov'));
+				for(var i=0;i<list_lec_bov.length;i++){
+					turno = knowTurno(list_lec_bov[i]['turno']);
+					$('tbody').append("<tr><td>"+list_lec_bov[i]['maquina']+"</td><td>"+list_lec_bov[i]['unidad']+"</td><td>"+list_lec_bov[i]['kgs']+"</td><td>"+list_lec_bov[i]['purgador']+"</td><td>"+list_lec_bov[i]['empalmes']+"</td><td>"+list_lec_bov[i]['fecha']+"</td><td>"+turno+"</td><td><a href='#' id="+list_lec_bov[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
 				}
-				Prueba();
+				// Prueba();
 			}
-			if(localStorage.getItem('lista_parcial')!=null){
-				for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
-					turno = knowTurno(JSON.parse(localStorage.getItem('lista_parcial'))[i]['turno']);
-					$('tbody').append("<tr><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_maquina']+"</td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_metros']+"</td><td></td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
-				}
-				Prueba();
-			}
+			// if(localStorage.getItem('lista_parcial')!=null){
+			// 	for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
+			// 		turno = knowTurno(JSON.parse(localStorage.getItem('lista_parcial'))[i]['turno']);
+			// 		$('tbody').append("<tr><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_maquina']+"</td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_metros']+"</td><td></td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+			// 	}
+			// 	Prueba();
+			// }
 		})
 	</script>
 </body>

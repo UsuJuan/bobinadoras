@@ -14,35 +14,6 @@
 		</a>
 	</div>
 	<form class="form-horizontal my_form" role="form" name="form_turno" method="POST" >
-		<!-- <div class="form-group">
-			<div class="text-center">
-		   		<label for="dia" class="control-label label_grande">FECHA</label>
-		   	</div>
-		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" id="dia" name="dia" autocomplete="off" placeholder="Día" >
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" id="mes" name="mes" autocomplete="off" placeholder="Mes" >
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" id="annio" name="annio" autocomplete="off" placeholder="Año" >
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      	<div class="alert alert-danger text-center" id="error-dia" role="alert">
-		      		<h2>ERROR!</h2>
-		      	</div>
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      	<div class="alert alert-danger text-center" id="error-mes" role="alert">
-		      		<h2>ERROR!</h2>
-		      	</div>
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      	<div class="alert alert-danger text-center" id="error-annio" role="alert">
-		      		<h2>ERROR!</h2>
-		      	</div>
-		    </div>
-		</div> -->
 		<div class="form-group">
 			<div class="text-center">
 				<label for="dia" class="control-label label_grande">TURNO</label>
@@ -50,9 +21,6 @@
 			<div class="col-sm-offset-3 col-sm-7">
 				<select name="turno" id="turno" class="form-control input_grande" >
 					<option value="">Seleccionar</option>
-					<option value="1">MAÑANA</option>
-					<option value="2">TARDE</option>
-					<option value="3">NOCHE</option>
 				</select>
 			</div>
 			<div class="row">
@@ -96,20 +64,7 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>	
-	// FECHA Y HORA
-		// var fecha = new Date();
-		// dia = fecha.getDate();
-		// mes = fecha.getMonth()+1;
-		// annio = fecha.getFullYear();
-		// if(dia<10) dia = String("0"+dia);
-		// if(mes<10) mes = String("0"+mes);		
-		// fecha_string = String(annio+"-"+mes+"-"+dia);
-	// FECHA Y HORA
 	$(function(){
-		// annio_2 = String(annio).substring(2,4)
-		// $('#dia').val(dia);
-		// $('#mes').val(mes);
-		// $('#annio').val(annio_2);
 		$('.alert-danger').css('display','none');
 
 		// if (localStorage.getItem("lista_parcial")!=null){
@@ -119,27 +74,26 @@
 		// 	$('#modalbox').click();
 		// }
 
-		// if (localStorage.getItem("maquinas")==null){
-		// 	$('#mensajes').append("<div id='mensajitos' ></div>");
-		// 	$('#mensajitos').append("<h2 >Necesita bajar datos.</h2>");
-		// 	$('#modalbox').click();
-		// }
+		if (localStorage.getItem("maquinas_bov")==null){
+			$('#mensajes').append("<div id='mensajitos' ></div>");
+			$('#mensajitos').append("<h2 >Necesita bajar datos.</h2>");
+			$('#modalbox').click();
+		}
 
-		// if(localStorage.getItem('turno')!=null){
-		// 	window.location = 'lectura2.html';
-		// }
-		// array_turnos = JSON.parse(localStorage.getItem("turnos"));
-		// if (array_turnos!=null){
-		// 	for(var i=0;i<array_turnos.length;i++){
-		// 		$('#turno').append('<option value='+array_turnos[i].id+' >'+array_turnos[i].descripcion+'</option>');
-		// 	}
-		// }
+		if(localStorage.getItem('turno_bov')!=null){
+			window.location = 'lectura2.html';
+		}
+		array_turnos = JSON.parse(localStorage.getItem("turnos"));
+		if (array_turnos!=null){
+			for(var i=0;i<array_turnos.length;i++){
+				$('#turno').append('<option value='+array_turnos[i].id+' >'+array_turnos[i].descripcion+'</option>');
+			}
+		}
 
 		$('form[name=form_turno]').on('submit',function(evt){
 			evt.preventDefault();
 			if(valida()==1){
-				localStorage.setItem("turno",$('#turno').val());
-				// localStorage.setItem("fecha_lectura","20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val());
+				localStorage.setItem("turno_bov",$('#turno').val());
 				window.location = 'lectura2.html';
 			}			
 		});
@@ -150,20 +104,6 @@
 				rpta = 0;
 				$('#error-turno').show().delay(3000).fadeOut();
 			}
-			// if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
-			// 	rpta = 0;
-			// 	$('#error-dia').show().delay(3000).fadeOut();
-			// }
-			// if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
-			// 	rpta = 0;
-			// 	$('#error-mes').show().delay(3000).fadeOut();
-			// }
-			// a = parseInt($('#annio').val())
-			// b = parseInt(annio_2)
-			// if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
-			// 	rpta = 0;
-			// 	$('#error-annio').show().delay(3000).fadeOut();
-			// }
 			return rpta;
 		}
 

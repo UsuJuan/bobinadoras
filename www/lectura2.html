@@ -71,12 +71,12 @@
 		      <input type="number" class="form-control input_grande numero" id="kgs" name="kgs" autocomplete="off" >
 		    </div>
 		</div>
-		<!-- <div class="row">
+		<div class="row">
 			<div class="col-md-4"></div>
 	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-kgs" role="alert">
 	      		<h2>COMPLETAR!</h2>
 	      	</div>
-	    </div> -->
+	    </div>
 		<div class="form-group">
 			<div class="text-center">
 		   		<label for="purgador" class="control-label label_grande">CORTE PURGADOR</label>
@@ -86,12 +86,27 @@
 		      <input type="number" class="form-control input_grande numero" id="purgador" name="purgador" autocomplete="off" >
 		    </div>
 		</div>
-		<!-- <div class="row">
+		<div class="row">
 			<div class="col-md-4"></div>
 	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-purgador" role="alert">
 	      		<h2>COMPLETAR!</h2>
 	      	</div>
-	    </div> -->
+	    </div>
+	    <div class="form-group">
+			<div class="text-center">
+		   		<label for="empalmes" class="control-label label_grande">EMPALMES</label>
+		   	</div>
+		   	<div class="col-md-4"></div>
+		    <div class="col-sm-1 col-md-4">
+		      <input type="number" class="form-control input_grande numero" id="empalmes" name="empalmes" autocomplete="off" >
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-empalmes" role="alert">
+	      		<h2>COMPLETAR!</h2>
+	      	</div>
+	    </div>
 		<div class="form-group">
 		    <div class="col-sm-offset-3">
 		      <a href="lecturamenu.html" class="btn btn-danger boton" >ATRAS</a>
@@ -102,136 +117,131 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
-	// var MyJson_lectura;
-	// var array = [];
-	// if (localStorage.getItem("lista_lectura_bovinadora")!=null){
-	// 	array = JSON.parse(localStorage.getItem("lista_lectura_bovinadora"));
-	// 	len_lecturas = JSON.parse(localStorage.getItem("lista_lectura_bovinadora")).length;
-	// }else{
-	// 	len_lecturas = 0;
-	// }
-	// if(localStorage.getItem('id')==null){
-	// 	localStorage.setItem('id',1);
-	// }
-	// if (localStorage.getItem("contador")==null){
-	// 	cont = 0;
-	// }else{
-	// 	cont = localStorage.getItem("contador");
-	// }
-	// // FECHA Y HORA						
-	// 	var fecha = new Date();
-	// 	dia = fecha.getDate();
-	// 	mes = fecha.getMonth()+1;
-	// 	annio = fecha.getFullYear();
-	// 	hora = fecha.getHours();
-	// 	minutos = fecha.getMinutes();	
-	// 	if(dia<10) dia = String("0"+dia);
-	// 	if(mes<10) mes = String("0"+mes);
-	// 	fecha_ingreso = String(annio+"-"+mes+"-"+dia);
-	// // FECHA Y HORA
+	var Json_lec_bov;
+	var array_bov = [];
+	if (localStorage.getItem("list_lec_bov")!=null){
+		array_bov = JSON.parse(localStorage.getItem("list_lec_bov"));
+		len_lecs_bov = JSON.parse(localStorage.getItem("list_lec_bov")).length;
+	}else{
+		len_lecs_bov = 0;
+	}
+	if(localStorage.getItem('id_bov')==null){
+		localStorage.setItem('id_bov',1);
+	}
+	if (localStorage.getItem("contador_bov")==null){
+		cont = 0;
+	}else{
+		cont = localStorage.getItem("contador_bov");
+	}
+	// FECHA Y HORA						
+		var fecha = new Date();
+		dia = fecha.getDate();
+		mes = fecha.getMonth()+1;
+		annio = fecha.getFullYear();
+		hora = fecha.getHours();
+		minutos = fecha.getMinutes();	
+		if(dia<10) dia = String("0"+dia);
+		if(mes<10) mes = String("0"+mes);
+		fecha_ingreso = String(annio+"-"+mes+"-"+dia);
+	// FECHA Y HORA
 
-	// $(function(){
+	$(function(){
 
-	// 	$(".numero").keypress(function(evt){
-	//         if((evt.charCode < 48 || evt.charCode > 57)){
-	//             return false;
-	//         } 
-	//     });
+		$(".numero").keypress(function(evt){
+	        if((evt.charCode < 48 || evt.charCode > 57)){
+	            return false;
+	        } 
+	    });
 
-	//     // FECHA Y TURNO
-	//     my_array = JSON.parse(localStorage.getItem('turnos'));
-	//     hora_turno = my_array[2].hora_inicio;
-	//     hora_max = parseInt(hora_turno.substring(0,2));
- //    	if((localStorage.getItem('turno')=="2" || localStorage.getItem('turno')=="3") && hora < hora_max){
- //    		fecha.setDate(fecha.getDate()-1);
- //    	}
- //    	dia = fecha.getDate();
-	// 	mes = fecha.getMonth()+1;
-	// 	annio = fecha.getFullYear();	
- //    	if(dia<10) dia = String("0"+dia);
-	// 	if(mes<10) mes = String("0"+mes);	
-	// 	if(hora<10) hora = String("0"+hora);
-	// 	if(minutos<10) minutos = String("0"+minutos);
-	// 	fecha_lectura = String(annio+"-"+mes+"-"+dia);
-	// 	hora_ingreso = String(hora+":"+minutos+":"+"00");
-	//     // FECHA Y TURNO
+	    // FECHA Y TURNO
+	    my_array = JSON.parse(localStorage.getItem('turnos'));
+	    hora_turno = my_array[2].hora_inicio;
+	    hora_max = (parseInt(hora_turno.substring(0,2),10)-1);
+    	if((localStorage.getItem('turno_bov')=="2" || localStorage.getItem('turno_bov')=="3") && hora < hora_max){
+    		fecha.setDate(fecha.getDate()-1);
+    	}
+    	dia = fecha.getDate();
+		mes = fecha.getMonth()+1;
+		annio = fecha.getFullYear();	
+    	if(dia<10) dia = String("0"+dia);
+		if(mes<10) mes = String("0"+mes);	
+		if(hora<10) hora = String("0"+hora);
+		if(minutos<10) minutos = String("0"+minutos);
+		fecha_lec_bov = String(annio+"-"+mes+"-"+dia);
+		hora_ing_bov = String(hora+":"+minutos+":"+"00");
+	    // FECHA Y TURNO
 	
-	// 	$('#maquina').attr('readonly',true);
-	// 	$('#error-metros').css('display','none');
-	// 	var metros="";
-	// 	function MyFunction(){
-	// 		$('#maquina').val(JSON.parse(localStorage.getItem("maquinas"))[0].nombre);
-	// 		// if(JSON.parse(localStorage.getItem("maquinas"))[0].tipomaquina==1){
-	// 		// 	$('#horas').css('display', 'none');
-	// 		// }
-	// 	}
-	// 	if(len_lecturas == 0){
-	// 		localStorage.setItem("contador",0);
-	// 		cont=0;
-	// 		MyFunction()			;
-	// 	}else if((len_lecturas % JSON.parse(localStorage.getItem("maquinas")).length)==0){
-	// 		localStorage.setItem("contador",0);		
-	// 		cont = localStorage.getItem("contador");	
-	// 		cont=0;
-	// 		MyFunction();
-	// 	}else{
-	// 		$('#maquina').val(JSON.parse(localStorage.getItem("maquinas"))[cont].nombre);
-	// 		// if(JSON.parse(localStorage.getItem("maquinas"))[cont].tipomaquina==1){
-	// 		// 	$('#horas').css('display', 'none');
-	// 		// }
-	// 	}
+		$('#error-kgs').css('display','none');
+		$('#error-purgador').css('display','none');
+		$('#error-empalmes').css('display','none');
 
-	// 	function Valida(){
-	// 		var rpta=1;
-	// 		var nro_dig = parseInt(JSON.parse(localStorage.getItem("maquinas"))[cont].digitos);
-	// 		$('#digitos').remove();
-	// 		if ($('#nro_metros').val()==""){
-	// 			rpta = 0;
-	// 			$('#error-metros').show().delay(5000).fadeOut();
-	// 		}else if($('#nro_metros').val()!=0){				
-	// 			if(nro_dig!=parseInt($('#nro_metros').val().length)){					
-	// 				rpta=0;
-	// 				$('#error-metros').append('<h2 id="digitos" >'+nro_dig+' digitos</h2>');
-	// 				$('#error-metros').show().delay(5000).fadeOut();
-	// 			}
-	// 		}
-	// 		return rpta;
-	// 	}
+		function MyFunction(){
+			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bov"))[0].nombre);
+			$('#unidad').val(JSON.parse(localStorage.getItem("maquinas_bov"))[0].unidad);
+		}
+		if(len_lecs_bov == 0){
+			localStorage.setItem("contador_bov",0);
+			cont=0;
+			MyFunction();
+		}else if((len_lecs_bov % JSON.parse(localStorage.getItem("maquinas_bov")).length)==0){
+			localStorage.setItem("contador_bov",0);		
+			cont = localStorage.getItem("contador_bov");	
+			cont=0;
+			MyFunction();
+		}else{
+			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bov"))[cont].nombre);
+			$('#unidad').val(JSON.parse(localStorage.getItem("maquinas_bov"))[cont].unidad);
+		}
 
-	// 	$('form[name=form_lectura]').on('submit',function(evt){
-	// 		evt.preventDefault();			
-	// 		if(Valida()==1){
-	// 			metros = $('#nro_metros').val();
-	// 			MyJson_lectura = {
-	// 				"id" : localStorage.getItem("id"),
-	// 				"turno" : localStorage.getItem("turno"),
-	// 				"nro_maquina" : parseInt($('#maquina').val()),
-	// 				"nro_horas"	 : "",
-	// 				"nro_metros" : metros,
-	// 				"fecha" : fecha_lectura,
-	// 				"hora" : hora_ingreso,
-	// 				"tipo_lectura" :"NORMAL",
-	// 				"fecha_ingreso" : fecha_ingreso,
-	// 			}
-	// 			array.push(MyJson_lectura);
-	// 			var jsontostring = JSON.stringify(array);
-	// 			cont++;
-	// 			id = parseInt(localStorage.getItem("id"));
-	// 			localStorage.setItem('id',id+1);
-	// 			localStorage.setItem("contador", cont);
-	// 			localStorage.setItem("lista_lectura_bovinadora", jsontostring);
-	// 			if(((len_lecturas+1) % JSON.parse(localStorage.getItem("maquinas")).length)==0){
-	// 				$('#modalbox').click();
-	// 				localStorage.removeItem('turno');
-	// 			}else{
-	// 				window.location = 'lectura2.html';					
-	// 			}
-	// 		}else{
-	// 			$('#error-metros').show().delay(5000).fadeOut();
-	// 		}
-			
-	// 	});
-	// })
+		function Valida(){
+			var rpta=1;
+			if ($('#kgs').val()==""){
+				rpta = 0;
+				$('#error-kgs').show().delay(5000).fadeOut();
+			}
+			if ($('#purgador').val()==""){
+				rpta = 0;
+				$('#error-purgador').show().delay(5000).fadeOut();
+			}
+			if ($('#empalmes').val()==""){
+				rpta = 0;
+				$('#error-empalmes').show().delay(5000).fadeOut();
+			}
+			return rpta;
+		}
+
+		$('form[name=form_lectura]').on('submit',function(evt){
+			evt.preventDefault();			
+			if(Valida()==1){
+				Json_lec_bov = {
+					"id" : localStorage.getItem("id_bov"),
+					"turno" : localStorage.getItem("turno_bov"),
+					"maquina" : $('#maquina').val(),
+					"unidad" : $('#unidad').val(),
+					"kgs" : $('#kgs').val(),
+					"purgador" : $('#purgador').val(),
+					"empalmes" : $('#empalmes').val(),
+					"fecha" : fecha_lec_bov,
+					"hora" : hora_ing_bov,
+					"tipo_lectura" :"NORMAL",
+					"fecha_ingreso" : fecha_ingreso,
+				}
+				array_bov.push(Json_lec_bov);
+				var jsontostring = JSON.stringify(array_bov);
+				cont++;
+				id = parseInt(localStorage.getItem("id_bov"),10);
+				localStorage.setItem('id_bov',id+1);
+				localStorage.setItem("contador_bov", cont);
+				localStorage.setItem("list_lec_bov", jsontostring);
+				if(((len_lecs_bov+1) % JSON.parse(localStorage.getItem("maquinas_bov")).length)==0){
+					$('#modalbox').click();
+					localStorage.removeItem('turno_bov');
+				}else{
+					window.location = 'lectura2.html';					
+				}
+			}			
+		});
+	})
 </script>
 </body>
 </html>

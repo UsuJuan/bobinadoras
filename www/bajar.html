@@ -28,7 +28,7 @@
 			<span class="glyphicon glyphicon-download"></span>
 		</div>
 		<div class="row text-center" >
-			<button type="submit" style="font-size:4em;" class="btn btn-primary btn-lg">Bajar Datos</button>
+			<button type="submit" style="font-size:4em;" class="btn btn-success btn-lg">Bajar Datos</button>
 		</div>
 	</form>
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
@@ -42,31 +42,15 @@
 
 		var mostrar_maquinas = function(json){
 			maquinas_array = JSON.stringify(json);
-			localStorage.setItem("maquinas", maquinas_array);
+			localStorage.setItem("maquinas_bov", maquinas_array);
 		};
 		var mostrar_turnos = function(json){
 			turnos_array = JSON.stringify(json);
 			localStorage.setItem("turnos", turnos_array);
 		};
-		var mostrar_tipo_procesos = function(json){
-			tipo_procesos_array = JSON.stringify(json);
-			localStorage.setItem("tipo_procesos", tipo_procesos_array);
-		};
-		var mostrar_tipo_torsiones = function(json){
-			tipo_torsiones_array = JSON.stringify(json);
-			localStorage.setItem("tipo_torsiones", tipo_torsiones_array);
-		};
-		var mostrar_lineas = function(json){
-			lineas_array = JSON.stringify(json);
-			localStorage.setItem("lineas", lineas_array);
-		};
-		var mostrar_motivos_paro = function(json){
-			motivos_paro_array = JSON.stringify(json);
-			localStorage.setItem("motivos_paro", motivos_paro_array);
-		};
 		$('form').on('submit',function(evt){
 			evt.preventDefault();
-			$.getJSON('http://10.240.17.49/transferencias/bajar/maquinas/?callback=?', mostrar_maquinas)
+			$.getJSON('http://127.0.0.1:8000/transferencias/bajar/maquinas/bovinadoras/?callback=?', mostrar_maquinas)
 				.done(function() {
 					$('.alert-success').show().delay(5000).fadeOut();
 					console.log('exito');
@@ -76,7 +60,7 @@
 			  		console.log('fallo');
 			  	});				
 
-			$.getJSON('http://10.240.17.49/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
+			$.getJSON('http://127.0.0.1:8000/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -85,42 +69,6 @@
 			    	$('.alert-danger').show().delay(5000).fadeOut();
 			    	console.log('fallo');
 			  	});	
-			$.getJSON('http://10.240.17.49/transferencias/bajar/tipoprocesos/?callback=?', mostrar_tipo_procesos)
-				.done(function() {
-			    	$('.alert-success').show().delay(5000).fadeOut();
-			    	console.log('exito');
-			  	})
-			  	.fail(function() {
-			    	$('.alert-danger').show().delay(5000).fadeOut();
-			    	console.log('fallo');
-			  	});
-			$.getJSON('http://10.240.17.49/transferencias/bajar/tipotorsiones/?callback=?', mostrar_tipo_torsiones)
-				.done(function() {
-			    	$('.alert-success').show().delay(5000).fadeOut();
-			    	console.log('exito');
-			  	})
-			  	.fail(function() {
-			    	$('.alert-danger').show().delay(5000).fadeOut();
-			    	console.log('fallo');
-			  	});
-			$.getJSON('http://10.240.17.49/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
-				.done(function() {
-			    	$('.alert-success').show().delay(5000).fadeOut();
-			    	console.log('exito');
-			  	})
-			  	.fail(function() {
-			    	$('.alert-danger').show().delay(5000).fadeOut();
-			    	console.log('fallo');
-			  	});
-			$.getJSON('http://10.240.17.49/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
-				.done(function() {
-			    	$('.alert-success').show().delay(5000).fadeOut();
-			    	console.log('exito');
-			  	})
-			  	.fail(function() {
-			    	$('.alert-danger').show().delay(5000).fadeOut();
-			    	console.log('fallo');
-			  	});
 		});			
       })
 	</script>

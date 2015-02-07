@@ -49,14 +49,14 @@
 				</p>
 			</a>
 		</div>
-		<!-- <div class="row">
+		<div class="row">
 			<a href="lecturaupdate.html" id="update" class="item-menu" >
 				<p class="items" >
 					MODIFICAR
 				</p>
 			</a>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<a href="lecturaparcial1.html" id="parcial" class="item-menu" >
 				<p class="items" >
 					PARCIAL
@@ -68,12 +68,12 @@
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
 	$(function(){
-		// $('a#add').on('click', function(event) {
-		// 	if(localStorage.getItem('turno')!=null){
-		// 		event.preventDefault();
-		// 		window.location = 'lectura2.html';
-		// 	}
-		// });
+		$('a#add').on('click', function(event) {
+			if(localStorage.getItem('turno_bov')!=null){
+				event.preventDefault();
+				window.location = 'lectura2.html';
+			}
+		});
 	})
 </script>
 </body>
