@@ -67,7 +67,7 @@
 		      		</div>
 		      </div>
 		      <div class="modal-footer text-left">
-			        <a href="bajar.html" class="btn-lg btn-primary" >Bajar</a>
+			        <a href="index.html" class="btn-lg btn-primary" >OK</a>
 		      </div>
 	    	</div>
 	  	</div>
@@ -90,10 +90,10 @@
 		// $('#mes').val(mes);
 		// $('#annio').val(String(annio).substring(2,4));
 		$('.error').css('display','none');
-		if (localStorage.getItem("lista_lectura")!=null){
+		if (localStorage.getItem("lis_lec_bob")!=null){
 			$('#mensajitos').remove();
 			$('#mensajes').append("<div id='mensajitos' ></div>");
-			$('#mensajitos').append("<h2 >Necesita subir lectura normales.</h2>");
+			$('#mensajitos').append("<h2 >Necesita subir lectura normal.</h2>");
 			$('#modalbox').click();
 		}
 
@@ -108,7 +108,7 @@
 		$('form[name=form_turno]').on('submit',function(evt){
 			evt.preventDefault();
 			if($('#turno').val()!="" ){
-				localStorage.setItem("turno_parcial",$('#turno').val());
+				localStorage.setItem("turno_parcial_bob",$('#turno').val());
 				// localStorage.setItem("fecha_parcial","20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val());
 				window.location = 'lecturaparcial2.html';
 			}else{

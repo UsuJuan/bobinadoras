@@ -44,7 +44,7 @@
 			<span class="glyphicon glyphicon-upload"></span>
 		</div>
 		<div class="row text-center" >
-			<button type="submit" id="subir" style="font-size:4em;" class="btn btn-primary btn-lg">Subir Datos</button>
+			<button type="submit" id="subir" style="font-size:4em;" class="btn btn-success btn-lg">Subir Datos</button>
 		</div>
 	</form>
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
@@ -53,10 +53,6 @@
 
 	$(function(){	
 
-		array_paros = JSON.parse(localStorage.getItem('lista_paros_individual'));
-		array_cambios = JSON.parse(localStorage.getItem('lista_cambios'));
-		var cont = 0;
-		var cont1 = 0;
 		$('#mensajitos').remove();		
 		$('#mensajes').append("<div id='mensajitos' ></div>");
 		$('#subir').css('display','none');
@@ -70,53 +66,16 @@
 			$('#mensajitos').append("<h3 >Compruebe su coneccion a la red.</h2>");
 			$('#modalbox').click();
 		});
-
-		if (array_cambios!=null){
-			for(i=0;i<array_cambios.length;i++){
-				var repetidor = 0;
-				for(j=0;j<array_cambios.length;j++){
-					if(array_cambios[i].nro_maquina==array_cambios[j].nro_maquina && array_cambios[i].fecha==array_cambios[j].fecha){
-						repetidor++;
-					}
-				}
-				if(repetidor>1){				
-					$('#mensajitos').append("<h3 >Hay cambios repetidos</h3><h2>Eliminar cambios.</h2>");
-					$('#modalbox').click();
-					cont1 = 1;
-					break;
-				}
-			}
-		}
-		// if (cont1==0){
-		// 	if (array_paros!=null){
-		// 		for(i=0;i<array_paros.length;i++){
-		// 			var repetidor = 0;
-		// 			for(j=0;j<array_paros.length;j++){
-		// 				if(array_paros[i].maquina==array_paros[j].maquina && array_paros[i].fecha==array_paros[j].fecha){
-		// 					repetidor++;
-		// 				}
-		// 			}
-		// 			if(repetidor>1){				
-		// 				$('#mensajitos').append("<h3 >Hay paros repetidos</h3><h2>Eliminar paros.</h2>");
-		// 				$('#modalbox').click();
-		// 				cont = 1;
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-		if (cont==0 && cont1==0){
-			if(localStorage.getItem("lista_lectura")!=null){
-				if((JSON.parse(localStorage.getItem("lista_lectura")).length % JSON.parse(localStorage.getItem("maquinas")).length)!=0){						
-						$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
-						$('#modalbox').click();
-					}
-			}else{
-				if(localStorage.getItem("lista_parcial")==null){					
+	
+		if(localStorage.getItem("lis_lec_bob")!=null){
+			if((JSON.parse(localStorage.getItem("lis_lec_bob")).length % JSON.parse(localStorage.getItem("maquinas_bob")).length)!=0){
 					$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
 					$('#modalbox').click();
 				}
+		}else{
+			if(localStorage.getItem("lis_parcial_bob")==null){					
+				$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
+				$('#modalbox').click();
 			}
 		}
 		
@@ -131,10 +90,10 @@
 			
 			$('#loading').css('display','block');
 
-			array01 = JSON.parse(localStorage.getItem('lista_parcial'));
+			array01 = JSON.parse(localStorage.getItem('lis_parcial_bob'));
 			if (array01!=null){
 				if (array01.length>0){
-					array02 = JSON.parse(localStorage.getItem('lista_lectura'));
+					array02 = JSON.parse(localStorage.getItem('lis_lec_bob'));
 					if(array02==null){
 						array02 = []
 					}
@@ -142,9 +101,11 @@
 						MyJson_lectura = {
 							"id" : array01[i].id,
 							"turno" : array01[i].turno,
-							"nro_maquina" : array01[i].nro_maquina,
-							"nro_horas"	 : "",
-							"nro_metros" : array01[i].nro_metros,
+							"maquina" : array01[i].maquina,
+							"unidad" : array01[i].unidad,
+							"kgs" : array01[i].kgs,
+							"purgador" : array01[i].purgador,
+							"empalmes" : array01[i].empalmes,
 							"fecha" : array01[i].fecha,
 							"fecha_ingreso" : array01[i].fecha_ingreso,
 							"hora" : array01[i].hora,
@@ -153,18 +114,18 @@
 						array02.push(MyJson_lectura);						
 					}
 					var jsontostring = JSON.stringify(array02);
-					localStorage.setItem("lista_lectura", jsontostring);	
+					localStorage.setItem("lis_lec_bob", jsontostring);	
 				}
 			}
 
 			$.ajax({
-				url: 'http://10.240.17.49/transferencias/subir/',
+				url: 'http://10.240.17.49/transferencias/subir/bobinadoras/',
 				type: 'POST',
 				crossDomain: true,
 				data: {					
-					'lecturas': localStorage.getItem("lista_lectura"),
-					'cambios': localStorage.getItem("lista_cambios"),
-					'paros': localStorage.getItem("lista_paros"),
+					'lecturas': localStorage.getItem("lis_lec_bob"),
+					'cambios': localStorage.getItem("lis_cambios_bob"),
+					'paros': localStorage.getItem("lis_paros_bob"),
 				},
 				dataType: 'json',		
 			})
@@ -182,18 +143,18 @@
 				$(".modal-body").append('<div class="alert alert-success text-center" id="mensajes" role="alert"><h3>Datos subidos con exito.</h3></div>');
 				$('#modalbox').click();
 			});
-			localStorage.removeItem('lista_paros');
-			localStorage.removeItem('lista_paros_individual');
-			localStorage.removeItem('lista_cambios');
-			localStorage.removeItem('lista_parcial');
-			localStorage.removeItem('lista_lectura');
-			localStorage.removeItem('id_cambios');
-			localStorage.removeItem('turno');
-			localStorage.removeItem('id');
-			localStorage.removeItem('contador');
-			localStorage.removeItem('turno_parcial');
-			localStorage.removeItem('fecha_parcial');
-			localStorage.removeItem('paro');
+			// localStorage.removeItem('lis_paros_bob');
+			// localStorage.removeItem('lis_paros_ind_bob');
+			// localStorage.removeItem('lis_cambios_bob');
+			// // localStorage.removeItem('lis_parcial_bob');
+			// localStorage.removeItem('lis_lec_bob');
+			// localStorage.removeItem('id_cam_bob');
+			// localStorage.removeItem('turno_bob');
+			// localStorage.removeItem('id_bob');
+			// localStorage.removeItem('contador_bob');
+			// // localStorage.removeItem('turno_parcial');
+			// // localStorage.removeItem('fecha_parcial');
+			// localStorage.removeItem('paro_bob');
       }
 	})
 	</script>

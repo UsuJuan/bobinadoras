@@ -72,13 +72,13 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	      	<form class="navbar-form navbar-left" role="search" name="form-buscar">
+	      	<!-- <form class="navbar-form navbar-left" role="search" name="form-buscar">
 		        <div class="form-group">
 		          <label for="search" class="search " >Fecha </label>
 		          <input type="date" id="search" class="form-control" autocomplete="off" >
 		        </div>
 		        <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-search" ></span> Buscar</button>
-		    </form>
+		    </form> -->
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -143,27 +143,27 @@
 			});
 
 			$('#si').on('click',function(){
-				var id = localStorage.getItem('id_paro_update');
-				new_array = JSON.parse(localStorage.getItem('lista_paros'));
-				array_individual = JSON.parse(localStorage.getItem('lista_paros_individual'));
+				var id = localStorage.getItem('id_paro_delete');
+				new_array = JSON.parse(localStorage.getItem('lis_paros_bob'));
+				array_individual = JSON.parse(localStorage.getItem('lis_paros_ind_bob'));
 				for (i=0;i<new_array.length;i++){
 					if (new_array[i]['id']==id){
 						new_array.splice(i,1);						
 					}
 				}
 				var jsontostring = JSON.stringify(new_array);
-				localStorage.setItem("lista_paros", jsontostring);
+				localStorage.setItem("lis_paros_bob", jsontostring);
 				for (i=0;i<array_individual.length;i++){
 					if (array_individual[i]['id']==id){
-						i=-1;
 						array_individual.splice(i,1);						
+						i=-1;
 					}
 				}
 				var jsontostring = JSON.stringify(array_individual);
-				localStorage.setItem("lista_paros_individual", jsontostring);
+				localStorage.setItem("lis_paros_ind_bob", jsontostring);
 				if(new_array.length==0){
-					localStorage.removeItem('lista_paros_individual');
-					localStorage.removeItem('lista_paros');
+					localStorage.removeItem('lis_paros_ind_bob');
+					localStorage.removeItem('lis_paros_bob');
 				}				
 				window.location = 'parodelete.html';
 			});
@@ -172,33 +172,37 @@
 				$('a').on('click',function(event){
 					event.preventDefault();
 					id_paro = $(this).attr('id');
-					localStorage.setItem('id_paro_update',id_paro);
+					localStorage.setItem('id_paro_delete',id_paro);
 					$('#modalbox').click();
 				});
 			}
 
-			$('form[name=form-buscar]').on('submit', function(event) {
-				var a=0;
-				event.preventDefault();
-				$('tbody').empty();
-				fecha_search = $('#search').val();
-				ap1 = JSON.parse(localStorage.getItem('lista_paros'));
-				for(var i=0;i<ap1.length;i++){					
-					if(ap1[i]['fecha']==fecha_search){
-						$('tbody').append("<tr><td>"+ap[i]['nro_maquina_uno']+" - "+ap[i]['nro_maquina_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
-						a = 1;
-					}	
-				}
-				if(a==0){
-					$('tbody').append("<tr><td colspan='4' ><h2>0 REGISTROS ENCONTRADOS.</h2></td></tr>");
-				}
-				Prueba();
-			});
+			// $('form[name=form-buscar]').on('submit', function(event) {
+			// 	var a=0;
+			// 	event.preventDefault();
+			// 	$('tbody').empty();
+			// 	fecha_search = $('#search').val();
+			// 	ap1 = JSON.parse(localStorage.getItem('lis_paros_bob'));
+			// 	for(var i=0;i<ap1.length;i++){					
+			// 		if(ap1[i]['fecha']==fecha_search){
+			// 			$('tbody').append("<tr><td>"+ap[i]['nro_maquina_uno']+" - "+ap[i]['nro_maquina_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+			// 			a = 1;
+			// 		}	
+			// 	}
+			// 	if(a==0){
+			// 		$('tbody').append("<tr><td colspan='4' ><h2>0 REGISTROS ENCONTRADOS.</h2></td></tr>");
+			// 	}
+			// 	Prueba();
+			// });
 
-			if(localStorage.getItem('lista_paros')!=null){
-				ap = JSON.parse(localStorage.getItem('lista_paros'));
+			if(localStorage.getItem('lis_paros_bob')!=null){
+				ap = JSON.parse(localStorage.getItem('lis_paros_bob'));
 				for(var i=0;i<ap.length;i++){
-					$('tbody').append("<tr><td>"+ap[i]['nro_maquina_uno']+" - "+ap[i]['nro_maquina_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");		
+					if(ap[i]['tipo_paro']=="2"){
+						$('tbody').append("<tr><td>"+ap[i]['maquina_uno']+" "+ap[i]['unidad_uno']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+					}else{
+						$('tbody').append("<tr><td>"+ap[i]['maquina_uno']+" "+ap[i]['unidad_uno']+" - "+ap[i]['maquina_dos']+" "+ap[i]['unidad_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+					}
 				}
 				Prueba();
 			}

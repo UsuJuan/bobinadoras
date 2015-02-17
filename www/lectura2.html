@@ -117,21 +117,21 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
-	var Json_lec_bov;
-	var array_bov = [];
-	if (localStorage.getItem("list_lec_bov")!=null){
-		array_bov = JSON.parse(localStorage.getItem("list_lec_bov"));
-		len_lecs_bov = JSON.parse(localStorage.getItem("list_lec_bov")).length;
+	var Json_lec_bob;
+	var array_bob = [];
+	if (localStorage.getItem("lis_lec_bob")!=null){
+		array_bob = JSON.parse(localStorage.getItem("lis_lec_bob"));
+		len_lecs_bob = JSON.parse(localStorage.getItem("lis_lec_bob")).length;
 	}else{
-		len_lecs_bov = 0;
+		len_lecs_bob = 0;
 	}
-	if(localStorage.getItem('id_bov')==null){
-		localStorage.setItem('id_bov',1);
+	if(localStorage.getItem('id_bob')==null){
+		localStorage.setItem('id_bob',1);
 	}
-	if (localStorage.getItem("contador_bov")==null){
+	if (localStorage.getItem("contador_bob")==null){
 		cont = 0;
 	}else{
-		cont = localStorage.getItem("contador_bov");
+		cont = localStorage.getItem("contador_bob");
 	}
 	// FECHA Y HORA						
 		var fecha = new Date();
@@ -157,7 +157,7 @@
 	    my_array = JSON.parse(localStorage.getItem('turnos'));
 	    hora_turno = my_array[2].hora_inicio;
 	    hora_max = (parseInt(hora_turno.substring(0,2),10)-1);
-    	if((localStorage.getItem('turno_bov')=="2" || localStorage.getItem('turno_bov')=="3") && hora < hora_max){
+    	if((localStorage.getItem('turno_bob')=="2" || localStorage.getItem('turno_bob')=="3") && hora < hora_max){
     		fecha.setDate(fecha.getDate()-1);
     	}
     	dia = fecha.getDate();
@@ -167,8 +167,8 @@
 		if(mes<10) mes = String("0"+mes);	
 		if(hora<10) hora = String("0"+hora);
 		if(minutos<10) minutos = String("0"+minutos);
-		fecha_lec_bov = String(annio+"-"+mes+"-"+dia);
-		hora_ing_bov = String(hora+":"+minutos+":"+"00");
+		fecha_lec_bob = String(annio+"-"+mes+"-"+dia);
+		hora_ing_bob = String(hora+":"+minutos+":"+"00");
 	    // FECHA Y TURNO
 	
 		$('#error-kgs').css('display','none');
@@ -176,21 +176,21 @@
 		$('#error-empalmes').css('display','none');
 
 		function MyFunction(){
-			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bov"))[0].nombre);
-			$('#unidad').val(JSON.parse(localStorage.getItem("maquinas_bov"))[0].unidad);
+			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bob"))[0].nombre);
+			$('#unidad').val(JSON.parse(localStorage.getItem("maquinas_bob"))[0].unidad);
 		}
-		if(len_lecs_bov == 0){
-			localStorage.setItem("contador_bov",0);
+		if(len_lecs_bob == 0){
+			localStorage.setItem("contador_bob",0);
 			cont=0;
 			MyFunction();
-		}else if((len_lecs_bov % JSON.parse(localStorage.getItem("maquinas_bov")).length)==0){
-			localStorage.setItem("contador_bov",0);		
-			cont = localStorage.getItem("contador_bov");	
+		}else if((len_lecs_bob % JSON.parse(localStorage.getItem("maquinas_bob")).length)==0){
+			localStorage.setItem("contador_bob",0);		
+			cont = localStorage.getItem("contador_bob");	
 			cont=0;
 			MyFunction();
 		}else{
-			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bov"))[cont].nombre);
-			$('#unidad').val(JSON.parse(localStorage.getItem("maquinas_bov"))[cont].unidad);
+			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bob"))[cont].nombre);
+			$('#unidad').val(JSON.parse(localStorage.getItem("maquinas_bob"))[cont].unidad);
 		}
 
 		function Valida(){
@@ -213,29 +213,29 @@
 		$('form[name=form_lectura]').on('submit',function(evt){
 			evt.preventDefault();			
 			if(Valida()==1){
-				Json_lec_bov = {
-					"id" : localStorage.getItem("id_bov"),
-					"turno" : localStorage.getItem("turno_bov"),
+				Json_lec_bob = {
+					"id" : localStorage.getItem("id_bob"),
+					"turno" : localStorage.getItem("turno_bob"),
 					"maquina" : $('#maquina').val(),
 					"unidad" : $('#unidad').val(),
 					"kgs" : $('#kgs').val(),
 					"purgador" : $('#purgador').val(),
 					"empalmes" : $('#empalmes').val(),
-					"fecha" : fecha_lec_bov,
-					"hora" : hora_ing_bov,
+					"fecha" : fecha_lec_bob,
+					"hora" : hora_ing_bob,
 					"tipo_lectura" :"NORMAL",
 					"fecha_ingreso" : fecha_ingreso,
 				}
-				array_bov.push(Json_lec_bov);
-				var jsontostring = JSON.stringify(array_bov);
+				array_bob.push(Json_lec_bob);
+				var jsontostring = JSON.stringify(array_bob);
 				cont++;
-				id = parseInt(localStorage.getItem("id_bov"),10);
-				localStorage.setItem('id_bov',id+1);
-				localStorage.setItem("contador_bov", cont);
-				localStorage.setItem("list_lec_bov", jsontostring);
-				if(((len_lecs_bov+1) % JSON.parse(localStorage.getItem("maquinas_bov")).length)==0){
+				id = parseInt(localStorage.getItem("id_bob"),10);
+				localStorage.setItem('id_bob',id+1);
+				localStorage.setItem("contador_bob", cont);
+				localStorage.setItem("lis_lec_bob", jsontostring);
+				if(((len_lecs_bob+1) % JSON.parse(localStorage.getItem("maquinas_bob")).length)==0){
 					$('#modalbox').click();
-					localStorage.removeItem('turno_bov');
+					localStorage.removeItem('turno_bob');
 				}else{
 					window.location = 'lectura2.html';					
 				}

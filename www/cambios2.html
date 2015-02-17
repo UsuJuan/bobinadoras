@@ -69,11 +69,20 @@
 		</div>
 		<div class="form-group">
 			<div class="text-center">
-		   		<label for="nombre_maquina" class="control-label label_grande">MAQUINA</label>
+		   		<label for="maquina" class="control-label label_grande">MAQUINA</label>
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="text" class="form-control input_grande" id="nombre_maquina" name="nombre_maquina" autocomplete="off" >
+		    	<select name="maquina" id="maquina" class="form-control input_grande" required="required" >
+					<option value="AC">AC</option>
+					<option value="ACV">ACV</option>
+					<option value="SA">SA</option>
+				</select>		      
+		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina" role="alert">
+		      		<h2>SELECCIONAR!</h2>
+		      	</div>
 		    </div>
 		</div>
 		<div class="form-group">
@@ -82,7 +91,12 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="text" class="form-control input_grande" id="unidad" name="unidad" autocomplete="off">
+				<input type="text" class="form-control input_grande" id="unidad" name="unidad" autocomplete="off" >
+		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad" role="alert">
+		      		<h2>ERROR!</h2>
+		      	</div>
 		    </div>
 		</div>
 		<div class="form-group">
@@ -93,17 +107,22 @@
 		    <div class="col-sm-10 col-md-6">
 		      <input type="text" class="form-control input_grande" id="titulo" name="titulo" autocomplete="off" >
 		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-titulo" role="alert">
+		      		<h2>COMPLETAR!</h2>
+		      	</div>
+		    </div>
 		</div>
 		<div class="form-group">
 			<div class="text-center">
-		   		<label for="titulo" class="control-label label_grande">CODIGO</label>
+		   		<label for="codigo" class="control-label label_grande">CODIGO</label>
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="titulo" name="titulo" autocomplete="off" >
+		      <input type="number" class="form-control input_grande numero" id="codigo" name="codigo" autocomplete="off" >
 		    </div>
 		    <div class="row">
-		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-titulo" role="alert">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-codigo" role="alert">
 		      		<h2>COMPLETAR!</h2>
 		      	</div>
 		    </div>
@@ -128,7 +147,8 @@
 		    </div>
 		    <div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      	<input type="number" class="form-control input_grande numero" id="linea" name="linea" autocomplete="off" >
+		      	<select name="linea" id="linea" class="form-control input_grande" required="required" >
+				</select>
 		    </div>
 		</div>
 		<div class="form-group">
@@ -213,15 +233,15 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>	
-	var MyJson_cambios;
+	var Json_cambios_bob;
 	var array = [];
-	// if (localStorage.getItem("lista_cambios")!=null){
-	// 	my_array = JSON.parse(localStorage.getItem("lista_cambios"));
-	// 	array = JSON.parse(localStorage.getItem("lista_cambios"));
-	// }
-	// if(localStorage.getItem('id_cambios')==null){
-	// 	localStorage.setItem('id_cambios',1);
-	// }
+	if (localStorage.getItem("lis_cambios_bob")!=null){
+		my_array = JSON.parse(localStorage.getItem("lis_cambios_bob"));
+		array = JSON.parse(localStorage.getItem("lis_cambios_bob"));
+	}
+	if(localStorage.getItem('id_cam_bob')==null){
+		localStorage.setItem('id_cam_bob',1);
+	}
 	// FECHA Y HORA
 		var fecha = new Date();
 		dia = fecha.getDate();
@@ -242,8 +262,6 @@
 		$('#dia').val(dia);
 		$('#mes').val(mes);
 		$('#annio').val(annio_2);
-		// $('#nombre_maquina').attr('readonly',true);		
-		// $('#cod_maquina').attr('readonly',true);
 		$('.alert-danger').css('display','none');
 
 		$(".numero").keypress(function(evt){
@@ -256,158 +274,159 @@
 		    if($(this).val().length==2){
 		        $('#minutos').focus();
 		    }
-		});    
+		});
 
-		// for(var i=0;i<JSON.parse(localStorage.getItem("tipo_maquinas")).length;i++){
-		// 	if("01" == JSON.parse(localStorage.getItem("tipo_maquinas"))[i].codigo){
-		// 		$('#nombre_maquina').val(JSON.parse(localStorage.getItem("tipo_maquinas"))[i].nombre);
-		// 		$('#cod_maquina').val(JSON.parse(localStorage.getItem("tipo_maquinas"))[i].codigo);
-		// 	}
-		// }
-		// Tipo Torsion
-		// array_tt = JSON.parse(localStorage.getItem("tipo_torsiones"));
-		// for(var i=0;i<array_tt.length;i++){
-		// 	$('#tipo_torsion').append('<option value='+array_tt[i].id+' >'+array_tt[i].descripcion+'</option>');
-		// }
-		// Tipo Procesos
-		// array_tp = JSON.parse(localStorage.getItem("tipo_procesos"));
-		// for(var i=0;i<array_tp.length;i++){
-		// 	$('#tipo_proceso').append('<option value='+array_tp[i].id+' >'+array_tp[i].descripcion+'</option>');
-		// }
 		// Lineas
-		// array_lineas = JSON.parse(localStorage.getItem("lineas"));
-		// for(var i=0;i<array_lineas.length;i++){
-		// 	$('#linea').append('<option value='+array_lineas[i].id+' >'+array_lineas[i].descripcion+'</option>');
-		// }
+		array_lineas = JSON.parse(localStorage.getItem("lineas"));
+		for(var i=0;i<array_lineas.length;i++){
+			$('#linea').append('<option value='+array_lineas[i].id+' >'+array_lineas[i].descripcion+'</option>');
+		}
 
-		// $('#cancelar').on('click',function(){
-		// 	$('#mensajitos').remove();
-		// });
+		$('#cancelar').on('click',function(){
+			$('#mensajitos').remove();
+		});
 
-		// $('#conservar').on('click',function(){
-		// 	// debugger;
-		// 	array.push(MyJson_cambios);
-		// 	// debugger;
-		// 	var jsontostring = JSON.stringify(array);
-		// 	localStorage.setItem("lista_cambios", jsontostring);
-		// 	$('.alert-success').show().delay(5000).fadeOut();
-		// 	$('#mensajitos').remove();
-		// 	window.location = 'cambiomenu.html';
-		// });	
+		$('#conservar').on('click',function(){
+			// debugger;
+			array.push(Json_cambios_bob);
+			// debugger;
+			var jsontostring = JSON.stringify(array);
+			localStorage.setItem("lis_cambios_bob", jsontostring);
+			$('.alert-success').show().delay(5000).fadeOut();
+			$('#mensajitos').remove();
+			window.location = 'cambiomenu.html';
+		});	
 
-		// $('form[name=form_cambios]').on('submit',function(evt){
-		// 	evt.preventDefault();	
-		// 	if(valida()==1){
-		// 		HoraTwoPto = $('#hora').val()+":"+$('#minutos').val();
-		// 		MyJson_cambios = {
-		// 			"id" : localStorage.getItem("id_cambios"),
-		// 			"cod_maquina" : $('#cod_maquina').val(),
-		// 			"nro_maquina" : $('#nro_maquina').val(),
-		// 			"titulo" : $('#titulo').val(),
-		// 			"torsion" : $('#torsion').val(),
-		// 			"tipo_torsion" : $('#tipo_torsion').val(),
-		// 			"hora_cambio" : HoraTwoPto+":00",
-		// 			"tipo_proceso" : $('#tipo_proceso').val(),
-		// 			"linea" : $("#linea").val(),
-		// 			"rpm" : $('#rpm').val(),
-		// 			"contador" : $('#contador').val(),
-		// 			"fecha" : annio+"-"+$('#mes').val()+"-"+$('#dia').val(),
-		// 			"fecha_ingreso":fecha_string,
-		// 			"hora" : hora_string,
-		// 			"estado" :1,
-		// 		}
-		// 		var indicator = 0;
-		// 		var entrada = 0;
-		// 		ac = JSON.parse(localStorage.getItem('lista_cambios'));
-		// 		if (ac!=null) {
-		// 			for (i=0;i<ac.length;i++){
-		// 				if($('#fecha').val() == ac[i]['fecha']){
-		// 					if($('#nro_maquina').val() == ac[i]['nro_maquina']){
-		// 						entrada = 1;
-		// 						if(indicator==0){
-		// 							$('#modalbox').click();
-		// 							indicator = 1;
-		// 							$('#mensajes').append("<div id='mensajitos' ></div>");
-		// 						}						
-		// 						$('#mensajitos').append("<h5 >La maquina "+ac[i]['nro_maquina']+" ya tiene cambio en este día, su hora es: "+ac[i]['hora_cambio']+".</h5>");
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 		if (entrada==0){
-		// 			// debugger;
-		// 			array.push(MyJson_cambios);
-		// 			// debugger;
-		// 			var jsontostring = JSON.stringify(array);
-		// 			// debugger;
-		// 			localStorage.setItem("lista_cambios", jsontostring);
-		// 			id_cambios = parseInt(localStorage.getItem("id_cambios"));
-		// 			localStorage.setItem('id_cambios',id_cambios+1);
-		// 			window.location = "cambiomenu.html";
-		// 		}
-		// 	}
+		$('form[name=form_cambios]').on('submit',function(evt){
+			evt.preventDefault();	
+			tam = $('#unidad').val().length;
+			p1 = $('#unidad').val().substring(0,tam-1);
+			p2 = $('#unidad').val().substring(tam-1,tam);
+			unidad = p1+"."+p2
+			if(valida(unidad)==1){
+				HoraTwoPto = $('#hora').val()+":"+$('#minutos').val();
+				fec = annio+"-"+$('#mes').val()+"-"+$('#dia').val();
+				Json_cambios_bob = {
+					"id" : localStorage.getItem("id_cam_bob"),
+					"maquina" : $('#maquina').val(),
+					"unidad" : unidad,
+					"titulo" : $('#titulo').val(),
+					"codigo" : $('#codigo').val(),
+					"vp" : $('#vp').val(),
+					"linea" : $("#linea").val(),
+					"kgs" : $("#kgs").val(),
+					"purgador" : $('#purgador').val(),
+					"empalmes" : $('#empalmes').val(),
+					"hora_cambio" : HoraTwoPto+":00",
+					"fecha" : fec,
+					"fecha_ingreso":fecha_string,
+					"hora" : hora_string,
+					"estado" :1,
+				}
+				var indicator = 0;
+				var entrada = 0;
+				ac = JSON.parse(localStorage.getItem('lis_cambios_bob'));
+				if (ac!=null) {
+					for (i=0;i<ac.length;i++){
+						if(fec == ac[i]['fecha']){
+							if($('#maquina').val() == ac[i]['maquina'] && unidad == ac[i]['unidad']){
+								entrada = 1;
+								if(indicator==0){
+									$('#modalbox').click();
+									indicator = 1;
+									$('#mensajes').append("<div id='mensajitos' ></div>");
+								}						
+								$('#mensajitos').append("<h5 >La maquina "+ac[i]['maquina']+" ya tiene cambio en este día, su hora es: "+ac[i]['hora_cambio']+".</h5>");
+							}
+						}
+					}
+				}
+				if (entrada==0){
+					// debugger;
+					array.push(Json_cambios_bob);
+					// debugger;
+					var jsontostring = JSON.stringify(array);
+					// debugger;
+					localStorage.setItem("lis_cambios_bob", jsontostring);
+					id_cam_bob = parseInt(localStorage.getItem("id_cam_bob"));
+					localStorage.setItem('id_cam_bob',id_cam_bob+1);
+					window.location = "cambiomenu.html";
+				}
+			}
 
-		// 	function valida(){
-		// 		var rpta = 1;
-		// 		if($('#nro_maquina').val()==""){
-		// 			rpta = 0;
-		// 			$('#error-maquina').show().delay(3000).fadeOut();
-		// 		}else{
-		// 			array_maquinas = JSON.parse(localStorage.getItem('maquinas'));
-		// 			var flag = 0;
-		// 			for(var i=0;i<array_maquinas.length;i++){
-		// 				if(array_maquinas[i].nombre==$('#nro_maquina').val()){
-		// 					flag = 1;
-		// 				}
-		// 			}
-		// 			if (flag!=1){
-		// 				$('#error-maquina').show().delay(3000).fadeOut();
-		// 				rpta = 0;
-		// 			}else{
-		// 				rpta = 1;
-		// 			}
-		// 		}
-		// 		if($('#titulo').val()==""){
-		// 			rpta = 0;
-		// 			$('#error-titulo').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#torsion').val()==""){
-		// 			rpta = 0;
-		// 			$('#error-torsion').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#rpm').val()==""){
-		// 			rpta = 0;
-		// 			$('#error-rpm').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#contador').val()==""){
-		// 			rpta = 0;
-		// 			$('#error-contador').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#hora').val().length!=2 || parseInt($('#hora').val())>23){
-		// 			rpta = 0;
-		// 			$('#error-hora').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#minutos').val().length!=2 || parseInt($('#minutos').val())>59){
-		// 			rpta = 0;
-		// 			$('#error-minutos').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
-		// 			rpta = 0;
-		// 			$('#error-dia').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
-		// 			rpta = 0;
-		// 			$('#error-mes').show().delay(3000).fadeOut();
-		// 		}
-		// 		a = parseInt($('#annio').val())
-		// 		b = parseInt(annio_2)
-		// 		if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
-		// 			rpta = 0;
-		// 			$('#error-annio').show().delay(3000).fadeOut();
-		// 		}
-		// 		return rpta;
-		// 	}
-		// });
+			function valida(unidad){
+				var rpta = 1;				
+				if($('#unidad').val()==""){
+					rpta = 0;
+					$('#error-unidad').show().delay(5000).fadeOut();
+				}else{
+					array_maquinas = JSON.parse(localStorage.getItem('maquinas_bob'));
+					var flag = 0;
+					for(var i=0;i<array_maquinas.length;i++){
+						if(array_maquinas[i].nombre==$('#maquina').val() && array_maquinas[i].unidad==unidad){
+							flag = 1;
+						}
+					}
+					if (flag!=1){
+						$('#error-unidad').show().delay(5000).fadeOut();
+						rpta = 0;
+					}else{
+						rpta = 1;
+					}
+				}
+				if($('#titulo').val()==""){
+					rpta = 0;
+					$('#error-titulo').show().delay(5000).fadeOut();
+				}
+				if($('#codigo').val()==""){
+					rpta = 0;
+					$('#error-codigo').show().delay(5000).fadeOut();
+				}
+				if($('#vp').val()==""){
+					rpta = 0;
+					$('#error-vp').show().delay(5000).fadeOut();
+				}
+				if($('#linea').val()==""){
+					rpta = 0;
+					$('#error-linea').show().delay(5000).fadeOut();
+				}
+				if($('#kgs').val()==""){
+					rpta = 0;
+					$('#error-kgs').show().delay(5000).fadeOut();
+				}
+				if($('#purgador').val()==""){
+					rpta = 0;
+					$('#error-purgador').show().delay(5000).fadeOut();
+				}
+				if($('#empalmes').val()==""){
+					rpta = 0;
+					$('#error-empalmes').show().delay(5000).fadeOut();
+				}
+				if($('#hora').val().length!=2 || parseInt($('#hora').val())>23){
+					rpta = 0;
+					$('#error-hora').show().delay(5000).fadeOut();
+				}
+				if($('#minutos').val().length!=2 || parseInt($('#minutos').val())>59){
+					rpta = 0;
+					$('#error-minutos').show().delay(5000).fadeOut();
+				}
+				if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
+					rpta = 0;
+					$('#error-dia').show().delay(5000).fadeOut();
+				}
+				if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
+					rpta = 0;
+					$('#error-mes').show().delay(5000).fadeOut();
+				}
+				a = parseInt($('#annio').val())
+				b = parseInt(annio_2)
+				if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
+					rpta = 0;
+					$('#error-annio').show().delay(5000).fadeOut();
+				}
+				return rpta;
+			}
+		});
 	})
 </script>
 </body>

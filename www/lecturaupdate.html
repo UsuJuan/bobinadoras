@@ -106,12 +106,12 @@
 	<script>
 		$(function(){
 			
-			// function Prueba (){
-			// 	$('a').on('click',function(event){
-			// 		id_lectura = $(this).attr('id');
-			// 		localStorage.setItem('id_lectura_update',id_lectura);
-			// 	});
-			// }
+			function Prueba (){
+				$('a').on('click',function(event){
+					id_bob = $(this).attr('id');
+					localStorage.setItem('id_bob_upd',id_bob);
+				});
+			}
 
 			function knowTurno(myvar){
 				if(myvar==1){
@@ -135,7 +135,7 @@
 			// 	event.preventDefault();
 			// 	$('tbody').empty();
 			// 	numero = $('#search').val();
-			// 	lecs_bov = JSON.parse(localStorage.getItem('list_lec_bov'));
+			// 	lecs_bov = JSON.parse(localStorage.getItem('lis_lec_bob'));
 			// 	// array_parcial = JSON.parse(localStorage.getItem('lista_parcial'));
 			// 	if(lecs_bov!=null){
 			// 		for(var i=0;i<lecs_bov.length;i++){
@@ -161,21 +161,22 @@
 			// 	Prueba();
 			// });
 
-			if(localStorage.getItem('list_lec_bov')!=null){
-				list_lec_bov = JSON.parse(localStorage.getItem('list_lec_bov'));
-				for(var i=0;i<list_lec_bov.length;i++){
-					turno = knowTurno(list_lec_bov[i]['turno']);
-					$('tbody').append("<tr><td>"+list_lec_bov[i]['maquina']+"</td><td>"+list_lec_bov[i]['unidad']+"</td><td>"+list_lec_bov[i]['kgs']+"</td><td>"+list_lec_bov[i]['purgador']+"</td><td>"+list_lec_bov[i]['empalmes']+"</td><td>"+list_lec_bov[i]['fecha']+"</td><td>"+turno+"</td><td><a href='#' id="+list_lec_bov[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+			if(localStorage.getItem('lis_lec_bob')!=null){
+				lb = JSON.parse(localStorage.getItem('lis_lec_bob'));
+				for(var i=0;i<lb.length;i++){
+					turno = knowTurno(lb[i]['turno']);
+					$('tbody').append("<tr><td>"+lb[i]['maquina']+"</td><td>"+lb[i]['unidad']+"</td><td>"+lb[i]['kgs']+"</td><td>"+lb[i]['purgador']+"</td><td>"+lb[i]['empalmes']+"</td><td>"+lb[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lb[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
 				}
-				// Prueba();
+				Prueba();
 			}
-			// if(localStorage.getItem('lista_parcial')!=null){
-			// 	for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
-			// 		turno = knowTurno(JSON.parse(localStorage.getItem('lista_parcial'))[i]['turno']);
-			// 		$('tbody').append("<tr><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_maquina']+"</td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_metros']+"</td><td></td><td>"+JSON.parse(localStorage.getItem('lista_parcial'))[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
-			// 	}
-			// 	Prueba();
-			// }
+			if(localStorage.getItem('lis_parcial_bob')!=null){
+				lp = JSON.parse(localStorage.getItem('lis_parcial_bob'));
+				for(var i=0;i<lp.length;i++){
+					turno = knowTurno(lp[i]['turno']);
+					$('tbody').append("<tr><td>"+lp[i]['maquina']+"</td><td>"+lp[i]['unidad']+"</td><td>"+lp[i]['kgs']+"</td><td>"+lp[i]['purgador']+"</td><td>"+lp[i]['empalmes']+"</td><td>"+lp[i]['fecha']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lp[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+				}
+				Prueba();
+			}
 		})
 	</script>
 </body>

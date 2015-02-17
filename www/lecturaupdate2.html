@@ -13,11 +13,6 @@
 			MENU <span class="glyphicon glyphicon-align-justify" ></span>
 		</a>
 	</div>
-	<div class="alert alert-danger" role="alert">
-		<h3>
-			DEBE LLENAR UN CAMPO.
-		</h3>
-	</div>
 	<div class="alert alert-success" role="alert">
 		<h3>
 			SE MODIFICÓ CON EXITO.
@@ -27,35 +22,67 @@
 		<input type="hidden" id="tipo_lectura_update"/>
 		<div class="form-group">
 		   	<div class="text-center">
-		   		<label for="maquina_update" class="control-label label_grande">MAQUINA</label>
+		   		<label for="maquina_upd" class="control-label label_grande">MAQUINA</label>
 		   	</div>
 	   		<div class="col-md-4"></div>
 			<div class="col-sm-1 col-md-4">
-			      <input type="text" class="form-control input_grande" id="maquina_update" name="maquina_update" >
+			      <input type="text" class="form-control input_grande" id="maquina_upd" name="maquina_upd" disabled >
 			</div>
 		</div>
-		<div id="horas">
-			<div class="form-group">
-				<div class="text-center">
-			   		<label for="nro_horas_update" class="control-label label_grande">NRO HORAS</label>
-			   	</div>
-			   	<div class="col-md-4"></div>
-			    <div class="col-sm-1 col-md-4">
-			      	<input type="number" class="form-control input_grande" id="nro_horas_update" name="nro_horas_update" autocomplete="off" >
-			    </div>
+		<div class="form-group">
+		   	<div class="text-center">
+		   		<label for="unidad_upd" class="control-label label_grande">UNIDAD</label>
+		   	</div>
+	   		<div class="col-md-4"></div>
+			<div class="col-sm-1 col-md-4">
+			      <input type="text" class="form-control input_grande" id="unidad_upd" name="unidad_upd" disabled >
 			</div>
 		</div>
-		<div id="metros">
-			<div class="form-group">
-				<div class="text-center">
-			   		<label for="nro_metros_update" class="control-label label_grande">NRO METROS</label>
-			   	</div>
-			   	<div class="col-md-4"></div>
-			    <div class="col-sm-1 col-md-4">
-			      <input type="number" class="form-control input_grande" id="nro_metros_update" name="nro_metros_update" autocomplete="off" >
-			    </div>
-			</div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="kgs_upd" class="control-label label_grande">KGS</label>
+		   	</div>
+		   	<div class="col-md-4"></div>
+		    <div class="col-sm-1 col-md-4">
+		      	<input type="number" class="form-control input_grande" id="kgs_upd" name="kgs_upd" autocomplete="off" >
+		    </div>
 		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-kgs" role="alert">
+	      		<h2>COMPLETAR!</h2>
+	      	</div>
+	    </div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="purgador_upd" class="control-label label_grande">CORTES PURGADOR</label>
+		   	</div>
+		   	<div class="col-md-4"></div>
+		    <div class="col-sm-1 col-md-4">
+		      	<input type="number" class="form-control input_grande" id="purgador_upd" name="purgador_upd" autocomplete="off" >
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-purgador" role="alert">
+	      		<h2>COMPLETAR!</h2>
+	      	</div>
+	    </div>
+		<div class="form-group">
+			<div class="text-center">
+		   		<label for="empalmes_upd" class="control-label label_grande">EMPALMES</label>
+		   	</div>
+		   	<div class="col-md-4"></div>
+		    <div class="col-sm-1 col-md-4">
+		      <input type="number" class="form-control input_grande" id="empalmes_upd" name="empalmes_upd" autocomplete="off" >
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-empalmes" role="alert">
+	      		<h2>COMPLETAR!</h2>
+	      	</div>
+	    </div>
 		<div class="form-group">
 		    <div class="col-xs-offset-1 col-sm-offset-3">
 		      <button type="submit" class="btn btn-primary boton">GUARDAR</button>
@@ -66,81 +93,89 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
-	id = localStorage.getItem('id_lectura_update');
+	id = localStorage.getItem('id_bob_upd');
 	$(function(){
-		$('#maquina_update').attr('readonly',true);
 		$('.alert-danger').css('display','none');
 		$('.alert-success').css('display','none');
-		if (localStorage.getItem('lista_lectura')!=null){
-			for(var i=0;i<JSON.parse(localStorage.getItem('lista_lectura')).length;i++){
-				if(JSON.parse(localStorage.getItem('lista_lectura'))[i]['id']==id){
-					$('#tipo_lectura_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['tipo_lectura']);
-					$('#maquina_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_maquina']);
-					if(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_horas']==""){
-						$('#horas').css('display','none');
-						$('#nro_metros_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_metros']);
-					}else{
-						$('#metros').css('display','none');
-						$('#nro_horas_update').val(JSON.parse(localStorage.getItem('lista_lectura'))[i]['nro_horas']);
-					}
+		if (localStorage.getItem('lis_lec_bob')!=null){
+			bob_upd = JSON.parse(localStorage.getItem('lis_lec_bob'));
+			for(var i=0;i<bob_upd.length;i++){
+				if(bob_upd[i]['id']==id){
+					$('#tipo_lectura_update').val(bob_upd[i]['tipo_lectura']);
+					$('#maquina_upd').val(bob_upd[i]['maquina']);
+					$('#unidad_upd').val(bob_upd[i]['unidad']);
+					$('#kgs_upd').val(bob_upd[i]['kgs']);
+					$('#purgador_upd').val(bob_upd[i]['purgador']);
+					$('#empalmes_upd').val(bob_upd[i]['empalmes']);
 				}
 			}
 		}
-		if (localStorage.getItem('lista_parcial')!=null){
-			for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
-				if(JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']==id){
-					$('#tipo_lectura_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['tipo_lectura']);
-					$('#maquina_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_maquina']);
-					if(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_horas']==""){
-						$('#horas').css('display','none');
-						$('#nro_metros_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_metros']);
-					}else{
-						$('#metros').css('display','none');
-						$('#nro_horas_update').val(JSON.parse(localStorage.getItem('lista_parcial'))[i]['nro_horas']);
-					}
+
+		if (localStorage.getItem('lis_parcial_bob')!=null){
+			lp = JSON.parse(localStorage.getItem('lis_parcial_bob'));
+			for(var i=0;i<lp.length;i++){
+				if(lp[i]['id']==id){
+					$('#tipo_lectura_update').val(lp[i]['tipo_lectura']);
+					$('#maquina_upd').val(lp[i]['maquina']);
+					$('#unidad_upd').val(lp[i]['unidad']);
+					$('#kgs_upd').val(lp[i]['kgs']);
+					$('#purgador_upd').val(lp[i]['purgador']);
+					$('#empalmes_upd').val(lp[i]['empalmes']);
 				}
 			}
 		}
+
 		$('form[name=form_lectura_update]').on('submit',function(event){
 			event.preventDefault();
-			if($('#nro_horas_update').val() !="" || $('#nro_metros_update').val()!="" ){
-				if($('#tipo_lectura_update').val()!="PARCIAL" && localStorage.getItem('lista_lectura')!=null ){
-					for(var i=0;i<JSON.parse(localStorage.getItem('lista_lectura')).length;i++){
-						if(JSON.parse(localStorage.getItem('lista_lectura'))[i]['id']==id){
-							myjson = JSON.parse(localStorage.getItem('lista_lectura'))
-							if($('#nro_horas_update').val()==""){
-								myjson[i]['nro_metros'] = $('#nro_metros_update').val();
-							}else{
-								myjson[i]['nro_horas'] = parseInt($('#nro_horas_update').val());
-							}
-							myjson_string = JSON.stringify(myjson);
-							localStorage.setItem('lista_lectura',myjson_string);
+			if(Valida() == 0 ){
+				if($('#tipo_lectura_update').val()!="PARCIAL" && localStorage.getItem('lis_lec_bob')!=null ){
+					lis_bob = JSON.parse(localStorage.getItem('lis_lec_bob'));
+					for(var i=0;i<lis_bob.length;i++){
+						if(lis_bob[i]['id']==id){
+							lis_bob[i]['kgs'] = $('#kgs_upd').val();
+							lis_bob[i]['purgador'] = $('#purgador_upd').val();
+							lis_bob[i]['empalmes'] = $('#empalmes_upd').val();
+							myjson_string = JSON.stringify(lis_bob);
+							localStorage.setItem('lis_lec_bob',myjson_string);
 							$('.alert-success').show().delay(5000).fadeOut();
-							localStorage.removeItem('id_lectura_update');
+							localStorage.removeItem('id_bob_upd');
 							break;
 						}
 					}
 				}else{
-					for(var i=0;i<JSON.parse(localStorage.getItem('lista_parcial')).length;i++){
-						if(JSON.parse(localStorage.getItem('lista_parcial'))[i]['id']==id){
-							myjson = JSON.parse(localStorage.getItem('lista_parcial'))
-							if($('#nro_horas_update').val()==""){
-								myjson[i]['nro_metros'] = $('#nro_metros_update').val();
-							}else{
-								myjson[i]['nro_horas'] = parseInt($('#nro_horas_update').val());
-							}
-							myjson_string = JSON.stringify(myjson);
-							localStorage.setItem('lista_parcial',myjson_string);
+					lp = JSON.parse(localStorage.getItem('lis_parcial_bob'));
+					for(var i=0;i<lp.length;i++){
+						if(lp[i]['id']==id){
+							lp[i]['kgs'] = $('#kgs_upd').val();
+							lp[i]['purgador'] = $('#purgador_upd').val();
+							lp[i]['empalmes'] = $('#empalmes_upd').val();
+							myjson_string = JSON.stringify(lp);
+							localStorage.setItem('lis_parcial_bob',myjson_string);
 							$('.alert-success').show().delay(5000).fadeOut();
-							localStorage.removeItem('id_lectura_update');
+							localStorage.removeItem('id_bob_upd');
 							break;
 						}
 					}
 				}
-			}else{
-				$('.alert-danger').show().delay(5000).fadeOut();
 			}
 		});
+
+		function Valida(){
+			var rpta=0;
+			if ($('#kgs_upd').val()==""){
+				rpta = 1;
+				$('#error-kgs').show().delay(5000).fadeOut();
+			}
+			if ($('#purgador_upd').val()==""){
+				rpta = 1;
+				$('#error-purgador').show().delay(5000).fadeOut();
+			}
+			if ($('#empalmes_upd').val()==""){
+				rpta = 1;
+				$('#error-empalmes').show().delay(5000).fadeOut();
+			}
+			return rpta;
+		}
 
 	})
 </script>

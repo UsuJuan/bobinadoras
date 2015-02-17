@@ -118,9 +118,10 @@
 			<thead>
 				<tr class="alert-info" >
 					<th class="text-center" >MAQUINA</th>
-					<th class="text-center" >NE</th>
+					<th class="text-center" >UNIDAD</th>
+					<th class="text-center" >TITULO</th>
+					<th class="text-center" >CODIGO</th>
 					<th class="text-center" >HORA</th>
-					<th class="text-center" >CONTADOR</th>
 					<th class="text-center" >FECHA</th>
 					<th class="text-center" ></th>
 				</tr>
@@ -144,17 +145,17 @@
 			});
 
 			$('#si').on('click',function(){
-				var id = localStorage.getItem('id_cambio_delete');
-				new_array = JSON.parse(localStorage.getItem('lista_cambios'));
+				var id = localStorage.getItem('bob_id_cam_del');
+				new_array = JSON.parse(localStorage.getItem('lis_cambios_bob'));
 				for (i=0;i<new_array.length;i++){
 					if (new_array[i]['id']==id){
 						new_array.splice(i,1);
 						var jsontostring = JSON.stringify(new_array);
-						localStorage.setItem("lista_cambios", jsontostring);
+						localStorage.setItem("lis_cambios_bob", jsontostring);
 					}
 				}
 				if(new_array.length==0){
-					localStorage.removeItem('lista_cambios');
+					localStorage.removeItem('lis_cambios_bob');
 				}
 				window.location = 'cambiodelete.html';
 			});
@@ -163,33 +164,33 @@
 				$('a').on('click',function(event){
 					event.preventDefault();
 					id_cambio = $(this).attr('id');
-					localStorage.setItem('id_cambio_delete',id_cambio);
+					localStorage.setItem('bob_id_cam_del',id_cambio);
 					$('#modalbox').click();
 				});
 			}
 
-			$('form[name=form-buscar]').on('submit', function(event) {
-				var a=0;
-				event.preventDefault();
-				$('tbody').empty();
-				fecha_search = $('#search').val();
-				ap1 = JSON.parse(localStorage.getItem('lista_cambios'));
-				for(var i=0;i<ap1.length;i++){					
-					if(ap1[i]['fecha']==fecha_search){
-						$('tbody').append("<tr><td>"+ap[i]['nro_maquina']+"</td><td>"+ap[i]['titulo']+"</td><td>"+ap[i]['hora']+"</td><td>"+ap[i]['contador']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
-						a = 1;
-					}	
-				}
-				if(a==0){
-					$('tbody').append("<tr><td colspan='5' ><h2>0 REGISTROS ENCONTRADOS.</h2></td></tr>");
-				}
-				Prueba();
-			});
+			// $('form[name=form-buscar]').on('submit', function(event) {
+			// 	var a=0;
+			// 	event.preventDefault();
+			// 	$('tbody').empty();
+			// 	fecha_search = $('#search').val();
+			// 	ap1 = JSON.parse(localStorage.getItem('lis_cambios_bob'));
+			// 	for(var i=0;i<ap1.length;i++){					
+			// 		if(ap1[i]['fecha']==fecha_search){
+			// 			$('tbody').append("<tr><td>"+ap[i]['nro_maquina']+"</td><td>"+ap[i]['titulo']+"</td><td>"+ap[i]['hora']+"</td><td>"+ap[i]['contador']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+			// 			a = 1;
+			// 		}	
+			// 	}
+			// 	if(a==0){
+			// 		$('tbody').append("<tr><td colspan='5' ><h2>0 REGISTROS ENCONTRADOS.</h2></td></tr>");
+			// 	}
+			// 	Prueba();
+			// });
 
-			if(localStorage.getItem('lista_cambios')!=null){
-				ap = JSON.parse(localStorage.getItem('lista_cambios'));
+			if(localStorage.getItem('lis_cambios_bob')!=null){
+				ap = JSON.parse(localStorage.getItem('lis_cambios_bob'));
 				for(var i=0;i<ap.length;i++){
-					$('tbody').append("<<tr><td>"+ap[i]['nro_maquina']+"</td><td>"+ap[i]['titulo']+"</td><td>"+ap[i]['hora_cambio']+"</td><td>"+ap[i]['contador']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");		
+					$('tbody').append("<<tr><td>"+ap[i]['maquina']+"</td><td>"+ap[i]['unidad']+"</td><td>"+ap[i]['titulo']+"</td><td>"+ap[i]['codigo']+"</td><td>"+ap[i]['hora_cambio']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");		
 				}
 				Prueba();
 			}

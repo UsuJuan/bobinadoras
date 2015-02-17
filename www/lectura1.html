@@ -74,13 +74,13 @@
 		// 	$('#modalbox').click();
 		// }
 
-		if (localStorage.getItem("maquinas_bov")==null){
+		if (localStorage.getItem("maquinas_bob")==null){
 			$('#mensajes').append("<div id='mensajitos' ></div>");
 			$('#mensajitos').append("<h2 >Necesita bajar datos.</h2>");
 			$('#modalbox').click();
 		}
 
-		if(localStorage.getItem('turno_bov')!=null){
+		if(localStorage.getItem('turno_bob')!=null){
 			window.location = 'lectura2.html';
 		}
 		array_turnos = JSON.parse(localStorage.getItem("turnos"));
@@ -93,7 +93,7 @@
 		$('form[name=form_turno]').on('submit',function(evt){
 			evt.preventDefault();
 			if(valida()==1){
-				localStorage.setItem("turno_bov",$('#turno').val());
+				localStorage.setItem("turno_bob",$('#turno').val());
 				window.location = 'lectura2.html';
 			}			
 		});

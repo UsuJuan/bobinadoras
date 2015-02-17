@@ -53,26 +53,26 @@
 				</p>
 			</a>
 		</div>
-		<!-- <div class="row">
+		<div class="row">
 			<a href="cambiodelete.html" id="update" class="item-menu" >
 				<p class="items" >
 					ELIMINAR
 				</p>
 			</a>
-		</div> -->
+		</div>
 	</div>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
 	$(function(){
-		// $('#add').on('click',function(event){
-		// 	event.preventDefault();
-		// 	if (localStorage.getItem("tipo_maquinas")==null){
-		// 		$('#modalbox').click();
-		// 	}else{
-		// 		window.location = 'cambios2.html';
-		// 	}
-		// });		
+		$('#add').on('click',function(event){
+			event.preventDefault();
+			if (localStorage.getItem("lineas")==null){
+				$('#modalbox').click();
+			}else{
+				window.location = 'cambios2.html';
+			}
+		});		
 	});
 </script>
 </body>

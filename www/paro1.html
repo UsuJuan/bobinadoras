@@ -66,14 +66,17 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
-	$(function(){		
+	$(function(){				
 		$('.error').css('display','none');
+		if (localStorage.getItem("motivos_paro")==null){
+			$("#modalbox").click();
+		};
 		$('form[name=form_paro]').on('submit',function(evt){
 			evt.preventDefault();
 			if($('#paro').val()==""){
 				$('.alert-danger').show().delay(3500).fadeOut();
 			}else{				
-				localStorage.setItem("paro",$('#paro').val());
+				localStorage.setItem("paro_bob",$('#paro').val());
 				window.location = 'paro2.html';
 			}
 		});

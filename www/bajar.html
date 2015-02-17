@@ -42,15 +42,23 @@
 
 		var mostrar_maquinas = function(json){
 			maquinas_array = JSON.stringify(json);
-			localStorage.setItem("maquinas_bov", maquinas_array);
+			localStorage.setItem("maquinas_bob", maquinas_array);
 		};
 		var mostrar_turnos = function(json){
 			turnos_array = JSON.stringify(json);
 			localStorage.setItem("turnos", turnos_array);
 		};
+		var mostrar_lineas = function(json){
+			lineas_array = JSON.stringify(json);
+			localStorage.setItem("lineas", lineas_array);
+		};
+		var mostrar_motivos_paro = function(json){
+			motivos_paro_array = JSON.stringify(json);
+			localStorage.setItem("motivos_paro", motivos_paro_array);
+		};
 		$('form').on('submit',function(evt){
 			evt.preventDefault();
-			$.getJSON('http://10.240.17.49/transferencias/bajar/maquinas/bovinadoras/?callback=?', mostrar_maquinas)
+			$.getJSON('http://10.240.17.49/transferencias/bajar/maquinas/bobinadoras/?callback=?', mostrar_maquinas)
 				.done(function() {
 					$('.alert-success').show().delay(5000).fadeOut();
 					console.log('exito');
@@ -69,6 +77,26 @@
 			    	$('.alert-danger').show().delay(5000).fadeOut();
 			    	console.log('fallo');
 			  	});	
+
+			$.getJSON('http://10.240.17.49/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
+
+			$.getJSON('http://10.240.17.49/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
 		});			
       })
 	</script>

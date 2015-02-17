@@ -69,40 +69,48 @@
 		</div>
 		<div class="form-group">
 		   	<div class="text-center">	
-		   		<label for="nro_maquina_uno" class="control-label label_grande">MAQUINA</label>
+		   		<label for="maquina_uno" class="control-label label_grande">MAQUINA</label>
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="nro_maquina_uno" name="nro_maquina_uno" autocomplete="off" >
+		      	<select name="maquina_uno" id="maquina_uno" class="form-control input_grande" required="required" >
+					<option value="AC">AC</option>
+					<option value="ACV">ACV</option>
+					<option value="SA">SA</option>
+				</select>
 		    </div>
-		    <!-- <div class="row">
+		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina1" role="alert">
 		      		<h2>ERROR!</h2>
 		      	</div>
-		    </div> -->
+		    </div>
 		</div>
 		<div class="form-group">
 		   	<div class="text-center">	
-		   		<label for="nro_unidad_uno" class="control-label label_grande">UNIDAD</label>
+		   		<label for="unidad_uno" class="control-label label_grande">UNIDAD</label>
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="nro_unidad_uno" name="nro_unidad_uno" autocomplete="off" >
+		      <input type="number" class="form-control input_grande numero" id="unidad_uno" name="unidad_uno" autocomplete="off" >
 		    </div>
-		   <!--  <div class="row">
-		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina1" role="alert">
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad1" role="alert">
 		      		<h2>ERROR!</h2>
 		      	</div>
-		    </div> -->
+		    </div>
 		</div>
 		<div id="segunda_maquina">
 			<div class="form-group">
 			   	<div class="text-center">	
-			   		<label for="nro_maquina_dos" class="control-label label_grande">MAQUINA</label>
+			   		<label for="maquina_dos" class="control-label label_grande">MAQUINA</label>
 			   	</div>
 			   	<div class="col-md-3"></div>
 			    <div class="col-sm-10 col-md-6">
-			      <input type="number" class="form-control input_grande" id="nro_maquina_dos" name="nro_maquina_dos" autocomplete="off" >
+			      	<select name="maquina_dos" id="maquina_dos" class="form-control input_grande" required="required" >
+						<option value="AC">AC</option>
+						<option value="ACV">ACV</option>
+						<option value="SA">SA</option>
+					</select>
 			    </div>
 			    <div class="row">
 			    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina2" role="alert">
@@ -112,17 +120,17 @@
 			</div>
 			<div class="form-group">
 			   	<div class="text-center">	
-			   		<label for="nro_unidad_dos" class="control-label label_grande">UNIDAD</label>
+			   		<label for="unidad_dos" class="control-label label_grande">UNIDAD</label>
 			   	</div>
 			   	<div class="col-md-3"></div>
 			    <div class="col-sm-10 col-md-6">
-			      <input type="number" class="form-control input_grande numero" id="nro_unidad_dos" name="nro_unidad_dos" autocomplete="off" >
+			      <input type="number" class="form-control input_grande numero" id="unidad_dos" name="unidad_dos" autocomplete="off" >
 			    </div>
-			   <!--  <div class="row">
-			    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina1" role="alert">
+			    <div class="row">
+			    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad2" role="alert">
 			      		<h2>ERROR!</h2>
 			      	</div>
-			    </div> -->
+			    </div>
 			</div>
 		</div>
 		<div class="form-group">
@@ -131,13 +139,13 @@
 		   	</div>
 		   	<div class="col-sm-1 col-xs-1"></div>
 		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" maxlength="5" id="hora_inicio" name="hora_inicio" autocomplete="off" placeholder="HH" >		      
+		      <input type="number" class="form-control input_grande" maxlength="2" id="hora_inicio" name="hora_inicio" autocomplete="off" placeholder="HH" >		      
 		    </div>
 		    <div class="col-sm-1 col-xs-1">
 		    	<label class="control-label label_grande">:</label>
 		    </div>
 		    <div class="col-sm-4 col-xs-4">
-		    	<input type="number" class="form-control input_grande" maxlength="5" id="minutos_inicio" name="minutos_inicio" autocomplete="off" placeholder="MM" >
+		    	<input type="number" class="form-control input_grande" maxlength="2" id="minutos_inicio" name="minutos_inicio" autocomplete="off" placeholder="MM" >
 		    </div>
 		    <div class="row">
 		    	<div class="col-sm-2 col-xs-2"></div>
@@ -160,13 +168,13 @@
 		   	</div>
 		   	<div class="col-sm-1 col-xs-1"></div>
 		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" maxlength="5" id="hora_fin" name="hora_fin" autocomplete="off" placeholder="HH" >		      
+		      <input type="number" class="form-control input_grande" maxlength="2" id="hora_fin" name="hora_fin" autocomplete="off" placeholder="HH" >		      
 		    </div>
 		    <div class="col-sm-1 col-xs-1">
 		    	<label class="control-label label_grande">:</label>
 		    </div>
 		    <div class="col-sm-4 col-xs-4">
-		    	<input type="number" class="form-control input_grande" maxlength="5" id="minutos_fin" name="minutos_fin" autocomplete="off" placeholder="MM" >
+		    	<input type="number" class="form-control input_grande" maxlength="2" id="minutos_fin" name="minutos_fin" autocomplete="off" placeholder="MM" >
 		    </div>
 		    <div class="row">
 		    	<div class="col-sm-2 col-xs-2"></div>
@@ -183,31 +191,6 @@
 			    </div>
 		    </div>
 		</div>
-		<div class="form-group">
-		    <div class="text-center">	
-		    	<label for="motivo_paro" class="control-label label_grande">MOTIVO DE PARO</label>
-		    </div>
-		    <div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-		      	<select name="motivo_paro" id="motivo_paro" class="form-control input_grande">
-					<option value="" >Seleccionar</option>
-					<option value="1" >APAGON</option>
-					<option value="2" >FALTA MATERIAL</option>
-					<option value="3" >FALLA ELECTRICA</option>
-					<option value="4" >RESCTRCCION ENERGIA</option>
-					<option value="5" >PROGRAMADO</option>
-					<option value="6" >FALLA MECANICA</option>
-					<option value="7" >OTROS</option>
-				</select>
-		    </div>
-		    <div class="row">
-				<div class="col-sm-10 col-md-6">
-					<div class="alert alert-danger text-center" id="error-motivo">
-			      		<h2>COMPLETAR!</h2>
-			      	</div>
-				</div>
-			</div>
-		</div>
 		<div id="husos" >
 			<div class="form-group">
 			   	<div class="text-center">	
@@ -217,11 +200,29 @@
 			    <div class="col-sm-10 col-md-6">
 			      <input type="number" class="form-control input_grande" id="puestos" name="puestos" autocomplete="off" >
 			    </div>
-			    <!-- <div class="row">
-			    <div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-maquina2" role="alert">
+			    <div class="row">
+			    <div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-puestos" role="alert">
 			      		<h2>ERROR!</h2>
 			      	</div>
-			    </div> -->
+			    </div>
+			</div>
+		</div>
+		<div class="form-group">
+		    <div class="text-center">	
+		    	<label for="motivo_paro" class="control-label label_grande">MOTIVO DE PARO</label>
+		    </div>
+		    <div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      	<select name="motivo_paro" id="motivo_paro" class="form-control input_grande">
+		      		<option value="" >Seleccionar</option>
+				</select>
+		    </div>
+		    <div class="row">
+				<div class="col-sm-10 col-md-6">
+					<div class="alert alert-danger text-center" id="error-motivo">
+			      		<h2>COMPLETAR!</h2>
+			      	</div>
+				</div>
 			</div>
 		</div>
 		<div class="form-group">
@@ -237,11 +238,13 @@
 	var MyJson_paros;
 	var array_paros = [];
 	var array02 = [];
-	// if (localStorage.getItem("lista_paros")!=null){
-	// 	array_paros = JSON.parse(localStorage.getItem("lista_paros"));
-	// }else{
-	// 	array_paros = [];
-	// }
+	var orden1 = 0;
+	var orden2 = 0;
+	if (localStorage.getItem("lis_paros_bob")!=null){
+		array_paros = JSON.parse(localStorage.getItem("lis_paros_bob"));
+	}else{
+		array_paros = [];
+	}
 	// FECHA Y HORA
 		var fecha = new Date();
 		dia = fecha.getDate();
@@ -254,24 +257,23 @@
 		minutos = fecha.getMinutes();
 		if(hora<10)	hora = String("0"+hora);
 		if(minutos<10) minutos = String("0"+minutos);
-		hora_string = String(hora+":"+minutos+":"+"55");
+		hora_string = String(hora+":"+minutos+":55");
 	// FECHA Y HORA
 	// ID
-	if(localStorage.getItem('id')==null){
-		localStorage.setItem('id',1);
+	if(localStorage.getItem('id_paro_bob')==null){
+		localStorage.setItem('id_paro_bob',1);
 	}else{
-		id = parseInt(localStorage.getItem("id"));
-		localStorage.setItem('id',id+1);
+		id = parseInt(localStorage.getItem("id_paro_bob"));
+		localStorage.setItem('id_paro_bob',id+1);
 	}
 	// ID
 
 	$(function(){
 		// Motivos Paro
-		// array_tt = JSON.parse(localStorage.getItem("motivos_paro"));
-		// for(var i=0;i<array_tt.length;i++){
-		// 	$('#motivo_paro').append('<option value='+array_tt[i].id+' >'+array_tt[i].descripcion+'</option>');
-		// }
-		// Motivos Paro
+		array_tt = JSON.parse(localStorage.getItem("motivos_paro"));
+		for(var i=0;i<array_tt.length;i++){
+			$('#motivo_paro').append('<option value='+array_tt[i].id+' >'+array_tt[i].descripcion+'</option>');
+		}
 		annio_2 = String(annio).substring(2,4);
 		$('#dia').val(dia);
 		$('#mes').val(mes);
@@ -282,219 +284,259 @@
 	        } 
 	    });
 	    $('.alert-danger').css('display','none');
-		////////////////
-		// function SacarMaquinas(maq1,maq2,hi,hf,fecha){
-		// 	array01 = JSON.parse(localStorage.getItem('maquinas'));
-		// 	var array_p = [];
-		// 	if(localStorage.getItem("lista_paros_individual")!=null){
-		// 		array_p = JSON.parse(localStorage.getItem("lista_paros_individual"));
-		// 	}
-		// 	for (i=0;i<array01.length;i++){
-		// 		if(array01[i].nombre >= maq1 && array01[i].nombre <= maq2){
-		// 			json_individual = {
-		// 				"id" : localStorage.getItem("id"),
-		// 				"maquina" : array01[i].nombre,
-		// 				"hora_inicio" : hi,
-		// 				"hora_fin" : hf,
-		// 				"fecha" : fecha,
-		// 				"tipo" : 1,
-		// 			};
-		// 			array_p.push(json_individual);
-		// 		}
-		// 	}
-		// 	localStorage.setItem("lista_paros_individual",JSON.stringify(array_p));
-		// }
-		// ////////////////
+		// PARO EN BLOQUE
+		function SacarMaquinas(o1,o2,hi,hf,fecha){
+			array01 = JSON.parse(localStorage.getItem('maquinas_bob'));
+			var array_p = [];
+			if(localStorage.getItem("lis_paros_ind_bob")!=null){
+				array_p = JSON.parse(localStorage.getItem("lis_paros_ind_bob"));
+			}
+			for (i=0;i<array01.length;i++){
+				if(array01[i].orden_paro >= o1 && array01[i].orden_paro <= o2){
+					json_individual = {
+						"id" : localStorage.getItem("id_paro_bob"),
+						"maquina" : array01[i].nombre,
+						"unidad" : array01[i].unidad,
+						"hora_inicio" : hi,
+						"hora_fin" : hf,
+						"fecha" : fecha,
+						"tipo" : 1,
+					};
+					array_p.push(json_individual);
+				}
+			}
+			localStorage.setItem("lis_paros_ind_bob",JSON.stringify(array_p));
+		}
+		// PARO EN BLOQUE
 
-		// $('#cod_maquina').attr('readonly',true);
+		$('#cancelar').on('click',function(){
+			$('#mensajitos').remove();
+			MyJson_paros = {};
+		});
 
-		// $('#cancelar').on('click',function(){
-		// 	$('#mensajitos').remove();
-		// 	MyJson_paros = {};
-		// });
+		$("#hora_inicio").keyup(function(event){
+		    if($(this).val().length==2){
+		        $('#minutos_inicio').focus();
+		    }
+		});
 
-		// $("#hora_inicio").keyup(function(event){
-		//     if($(this).val().length==2){
-		//         $('#minutos_inicio').focus();
-		//     }
-		// });
+		$("#minutos_inicio").keyup(function(event){
+		    if($(this).val().length==2){
+		        $('#hora_fin').focus();
+		    }
+		});
 
-		// $("#minutos_inicio").keyup(function(event){
-		//     if($(this).val().length==2){
-		//         $('#hora_fin').focus();
-		//     }
-		// });
+		$("#hora_fin").keyup(function(event){
+		    if($(this).val().length==2){
+		        $('#minutos_fin').focus();
+		    }
+		});
 
-		// $("#hora_fin").keyup(function(event){
-		//     if($(this).val().length==2){
-		//         $('#minutos_fin').focus();
-		//     }
-		// });
-
-		if(localStorage.getItem("paro")=="1"){
+		if(localStorage.getItem("paro_bob")=="1"){
 			$('#segunda_maquina').css('display', 'block');
 			$('#husos').css('display', 'none');
 		}else{
 			$('#segunda_maquina').css('display', 'none');
 			$('#husos').css('display', 'block');
-		}	
-		// function Agregar_Maquinas(){
-		// 	tp = parseInt(localStorage.getItem("paro"));
-		// 	if (tp==1) {
-		// 		ini = HoraIniTwoPto+":00";
-		// 		fin = HoraFinTwoPto+":00"
-		// 		SacarMaquinas($('#nro_maquina_uno').val(),$('#nro_maquina_dos').val(),
-		// 			ini,fin,"20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val());
-		// 	}else{
-		// 		if(localStorage.getItem("lista_paros_individual")!=null){
-		// 			array02 = JSON.parse(localStorage.getItem("lista_paros_individual"));
-		// 		}
-		// 		json_individual = {
-		// 			"id" : localStorage.getItem("id"),
-		// 			"maquina" : parseInt($('#nro_maquina_uno').val()),
-		// 			"hora_inicio" : HoraIniTwoPto+":00",
-		// 			"hora_fin" : HoraFinTwoPto+":00",
-		// 			"fecha" : "20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val(),
-		// 			"tipo" : 2,
-		// 		}					
-		// 		array02.push(json_individual);
-		// 		localStorage.setItem("lista_paros_individual",JSON.stringify(array02));
-		// 	};
-		// }
-		// $('#conservar').on('click',function(){
-		// 	array_paros.push(MyJson_paros);
-		// 	Agregar_Maquinas();
-		// 	var jsontostring = JSON.stringify(array_paros);
-		// 	localStorage.setItem("lista_paros", jsontostring);
-		// 	$('.alert-success').show().delay(5000).fadeOut();
-		// 	$('#mensajitos').remove();
-		// 	window.location = 'paro1.html';
-		// });		
-		// $('form[name=form_paros]').on('submit',function(evt){	
-		// 	evt.preventDefault();
-		// 	bloque = 1
-		// 	if(localStorage.getItem("paro")==1){
-		// 		if($('#nro_maquina_dos').val()!=""){
-		// 			bloque = 1;
-		// 		}else{
-		// 			bloque = 0;
-		// 		}
-		// 	}
-		// 	if(valida()==1){
-		// 		HoraIniTwoPto = $('#hora_inicio').val()+":"+$('#minutos_inicio').val();				
-		// 		HoraFinTwoPto = $('#hora_fin').val()+":"+$('#minutos_fin').val();
-		// 		MyJson_paros = {
-		// 			"id" : localStorage.getItem("id"),
-		// 			"cod_maquina" : "01",
-		// 			"tipo_paro" : localStorage.getItem("paro"),
-		// 			"nro_maquina_uno" : $('#nro_maquina_uno').val(),
-		// 			"nro_maquina_dos" : $('#nro_maquina_dos').val(),
-		// 			"hora_inicio" : HoraIniTwoPto+":00",
-		// 			"hora_fin" : HoraFinTwoPto+":00",
-		// 			"motivo_paro" : $('#motivo_paro').val(),
-		// 			"fecha" : "20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val(),
-		// 			"hora" : hora_string,
-		// 			"fecha_ingreso" : fecha_string,
-		// 			"estado" : 1,
-		// 		}
-		// 		b = JSON.parse(localStorage.getItem('lista_paros_individual'));
-		// 		tp = parseInt(localStorage.getItem("paro"));
-		// 		var indicator = 0;
-		// 		var entrada = 0;
-		// 		fechita = "20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val();
-		// 		if (tp==2 && b!=null) {
-		// 			for (i=0;i<b.length;i++){						
-		// 				if(fechita == b[i]['fecha']){
-		// 					if($('#nro_maquina_uno').val() == b[i]['maquina']){
-		// 						entrada = 1;
-		// 						if(indicator==0){
-		// 							$('#modalbox').click();
-		// 							indicator = 1;
-		// 							$('#mensajes').append("<div id='mensajitos' ></div>");
-		// 						}						
-		// 						$('#mensajitos').append("<h5 >La maquina "+b[i]['maquina']+" ya tiene paro en este día, su hora de inicio es: "+b[i]['hora_inicio']+" y su hora fin es: "+b[i]['hora_fin']+"</h5>");
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 		if (tp==1 && b!=null) {
-		// 			for (i=0;i<b.length;i++){
-		// 				if((parseInt($('#nro_maquina_uno').val()) == b[i]['maquina'] || parseInt($('#nro_maquina_dos').val()) == b[i]['maquina']) && fechita == b[i]['fecha']){
-		// 					entrada = 1;
-		// 					if(indicator==0){
-		// 						$('#modalbox').click();
-		// 						indicator = 1;
-		// 						$('#mensajes').append("<div id='mensajitos' ></div>");
-		// 					}						
-		// 					$('#mensajitos').append("<h5 >La maquina "+b[i]['maquina']+" ya tiene paro en bloque en este día, su hora de inicio es: "+b[i]['hora_inicio']+" y su hora fin es: "+b[i]['hora_fin']+"</h5>");
-		// 				}
-		// 			}
-		// 		}
-		// 		if (entrada==0){
-		// 			array_paros.push(MyJson_paros);
-		// 			Agregar_Maquinas();
-		// 			var jsontostring = JSON.stringify(array_paros);
-		// 			localStorage.setItem("lista_paros", jsontostring);				
-		// 			$('.alert-success').show().delay(5000).fadeOut();
-		// 			$('#mensajitos').remove();
-		// 			window.location = 'paro1.html';
-		// 		}	
-		// 	}
-		// 	function valida(){
-		// 		var rpta = 1;
-		// 		if(localStorage.getItem("paro")==1){
-		// 			if($('#nro_maquina_dos').val()==""){
-		// 				rpta = 0;
-		// 				$('#error-maquina2').show().delay(3000).fadeOut();
-		// 			}else{
-		// 				if((parseInt($('#nro_maquina_dos').val())<parseInt($('#nro_maquina_uno').val())) || parseInt($('#nro_maquina_dos').val())>174 || parseInt($('#nro_maquina_uno').val())>174) {
-		// 					rpta = 0;
-		// 					$('#error-maquina2').show().delay(3000).fadeOut();
-		// 				}
-		// 			}
-		// 		}else{
-		// 			if(parseInt($('#nro_maquina_uno').val())>174){
-		// 				rpta = 0;
-		// 				$('#error-maquina1').show().delay(3000).fadeOut();
-		// 			}
-		// 		}
-		// 		if($('#motivo_paro').val()==""){
-		// 			rpta = 0;
-		// 			$('#error-motivo').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
-		// 			rpta = 0;
-		// 			$('#error-dia').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
-		// 			rpta = 0;
-		// 			$('#error-mes').show().delay(3000).fadeOut();
-		// 		}
-		// 		a = parseInt($('#annio').val())
-		// 		b = parseInt(annio_2)
-		// 		if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
-		// 			rpta = 0;
-		// 			$('#error-annio').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#hora_inicio').val().length!=2 || parseInt($('#hora_inicio').val())>23){
-		// 			rpta = 0;
-		// 			$('#error-hora-inicio').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#minutos_inicio').val().length!=2 || parseInt($('#minutos_inicio').val())>59){
-		// 			rpta = 0;
-		// 			$('#error-minutos-inicio').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#hora_fin').val().length!=2 || parseInt($('#hora_fin').val())>23){
-		// 			rpta = 0;
-		// 			$('#error-hora-fin').show().delay(3000).fadeOut();
-		// 		}
-		// 		if($('#minutos_fin').val().length!=2 || parseInt($('#minutos_fin').val())>59){
-		// 			rpta = 0;
-		// 			$('#error-minutos-fin').show().delay(3000).fadeOut();
-		// 		}
-		// 		return rpta;
-		// 	}
-		// });		
+		}
+		function Agregar_Maquinas(){
+			tp = parseInt(localStorage.getItem("paro_bob"));
+			if (tp==1) {
+				ini = HoraIniTwoPto+":00";
+				fin = HoraFinTwoPto+":00";
+				SacarMaquinas(orden1,orden2,ini,fin,fecha_paro);
+			}else{
+				if(localStorage.getItem("lis_paros_ind_bob")!=null){
+					array02 = JSON.parse(localStorage.getItem("lis_paros_ind_bob"));
+				}
+				json_individual = {
+					"id" : localStorage.getItem("id_paro_bob"),
+					"maquina" : $('#maquina_uno').val(),
+					"unidad" : unidad,
+					"hora_inicio" : HoraIniTwoPto+":00",
+					"hora_fin" : HoraFinTwoPto+":00",
+					"fecha" : fecha_paro,
+					"tipo" : 2,
+				}					
+				array02.push(json_individual);
+				localStorage.setItem("lis_paros_ind_bob",JSON.stringify(array02));
+			};
+		}
+		$('#conservar').on('click',function(){
+			array_paros.push(MyJson_paros);
+			Agregar_Maquinas();
+			var jsontostring = JSON.stringify(array_paros);
+			localStorage.setItem("lis_paros_bob", jsontostring);
+			$('.alert-success').show().delay(5000).fadeOut();
+			$('#mensajitos').remove();
+			window.location = 'paro1.html';
+		});		
+		$('form[name=form_paros]').on('submit',function(evt){	
+			evt.preventDefault();
+			tam = $('#unidad_uno').val().length;
+			p1 = $('#unidad_uno').val().substring(0,tam-1);
+			p2 = $('#unidad_uno').val().substring(tam-1,tam);
+			unidad = p1+"."+p2;
+			tam2 = $('#unidad_dos').val().length;
+			u1 = $('#unidad_dos').val().substring(0,tam2-1);
+			u2 = $('#unidad_dos').val().substring(tam2-1,tam2);
+			unidad2 = u1+"."+u2;
+			bloque = 1;
+			if(localStorage.getItem("paro_bob")==1){
+				if($('#unidad_dos').val()!=""){
+					bloque = 1;
+				}else{
+					bloque = 0;
+				}
+			}
+			if(valida(unidad,unidad2)==1 && bloque==1){
+				fecha_paro = "20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val();
+				HoraIniTwoPto = $('#hora_inicio').val()+":"+$('#minutos_inicio').val();				
+				HoraFinTwoPto = $('#hora_fin').val()+":"+$('#minutos_fin').val();
+				MyJson_paros = {
+					"id" : localStorage.getItem("id_paro_bob"),
+					"tipo_paro" : localStorage.getItem("paro_bob"),
+					"maquina_uno" : $('#maquina_uno').val(),
+					"unidad_uno" : unidad,
+					"maquina_dos" : $('#maquina_dos').val(),
+					"unidad_dos" : unidad2,
+					"hora_inicio" : HoraIniTwoPto+":00",
+					"hora_fin" : HoraFinTwoPto+":00",
+					"puestos" : $('#puestos').val(),
+					"motivo_paro" : $('#motivo_paro').val(),
+					"fecha" : fecha_paro,
+					"hora" : hora_string,
+					"fecha_ingreso" : fecha_string,
+					"estado" : 1,
+				}
+				b = JSON.parse(localStorage.getItem('lis_paros_ind_bob'));
+				tp = parseInt(localStorage.getItem("paro_bob"));
+				var indicator = 0;
+				var entrada = 0;				
+				if (tp==2 && b!=null) {
+					for (i=0;i<b.length;i++){
+						if(fecha_paro == b[i]['fecha']){
+							if($('#maquina_uno').val() == b[i]['maquina'] && unidad == b[i]['unidad'] ){
+								entrada = 1;
+								if(indicator==0){
+									$('#modalbox').click();
+									indicator = 1;
+									$('#mensajes').append("<div id='mensajitos' ></div>");
+								}						
+								$('#mensajitos').append("<h5 >La maquina "+b[i]['maquina']+" "+b[i]['unidad']+" ya tiene paro en este día, su hora de inicio es: "+b[i]['hora_inicio']+" y su hora fin es: "+b[i]['hora_fin']+"</h5>");
+							}
+						}
+					}
+				}
+				// EN BLOQUE
+				if (tp==1 && b!=null) {
+					for (i=0;i<b.length;i++){
+						if($('#maquina_uno').val() == b[i]['maquina'] && unidad == b[i]['unidad'] || $('#maquina_dos').val() == b[i]['maquina'] && unidad2 == b[i]['unidad'] && fecha_paro == b[i]['fecha']){
+							entrada = 1;
+							if(indicator==0){
+								$('#modalbox').click();
+								indicator = 1;
+								$('#mensajes').append("<div id='mensajitos' ></div>");
+							}						
+							$('#mensajitos').append("<h5 >La maquina "+b[i]['maquina']+" "+b[i]['unidad']+" ya tiene paro en bloque en este día, su hora de inicio es: "+b[i]['hora_inicio']+" y su hora fin es: "+b[i]['hora_fin']+"</h5>");
+						}
+					}
+				}
+				// EN BLOQUE
+
+				if (entrada==0){
+					array_paros.push(MyJson_paros);
+					Agregar_Maquinas();
+					var jsontostring = JSON.stringify(array_paros);
+					localStorage.setItem("lis_paros_bob", jsontostring);
+					$('.alert-success').show().delay(5000).fadeOut();
+					$('#mensajitos').remove();
+					window.location = 'paro1.html';
+				}	
+			}
+			function valida(unidad,u2){
+				var rpta = 1;
+				array_maquinas = JSON.parse(localStorage.getItem('maquinas_bob'));
+				if(localStorage.getItem("paro_bob")==1){
+					if($('#unidad_uno').val()=="" || $('#unidad_dos').val()==""){
+						rpta = 0;
+						$('#error-unidad1').show().delay(5000).fadeOut();
+						$('#error-unidad2').show().delay(5000).fadeOut();
+					}else{						
+						for(var i=0;i<array_maquinas.length;i++){
+							if(array_maquinas[i].nombre==$('#maquina_uno').val() && array_maquinas[i].unidad==unidad){
+								orden1 = array_maquinas[i].orden_paro;
+							}
+							if(array_maquinas[i].nombre==$('#maquina_dos').val() && array_maquinas[i].unidad==u2){
+								orden2 = array_maquinas[i].orden_paro;
+							}
+						}
+						if (orden1 == 0){
+							rpta = 0;
+							$('#error-unidad1').show().delay(5000).fadeOut();
+						}else if (orden2 == 0){
+							rpta = 0;
+							$('#error-unidad2').show().delay(5000).fadeOut();
+						}else if(orden2 <= orden1){
+							rpta = 0;
+							$('#error-unidad2').show().delay(5000).fadeOut();
+						}
+					}
+				}else{
+					if($('#puestos').val()==""){
+						rpta = 0;
+						$('#error-puestos').show().delay(5000).fadeOut();
+					}
+					var flag = 0;
+					for(var i=0;i<array_maquinas.length;i++){
+						if(array_maquinas[i].nombre==$('#maquina_uno').val() && array_maquinas[i].unidad==unidad){
+							flag = 1;
+						}
+					}
+					if (flag!=1){
+						$('#error-unidad1').show().delay(5000).fadeOut();
+						rpta = 0;
+					}else{
+						rpta = 1;
+					}
+				}
+				if($('#motivo_paro').val()==""){
+					rpta = 0;
+					$('#error-motivo').show().delay(5000).fadeOut();
+				}
+				if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
+					rpta = 0;
+					$('#error-dia').show().delay(5000).fadeOut();
+				}
+				if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
+					rpta = 0;
+					$('#error-mes').show().delay(5000).fadeOut();
+				}
+				a = parseInt($('#annio').val())
+				b = parseInt(annio_2)
+				if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
+					rpta = 0;
+					$('#error-annio').show().delay(5000).fadeOut();
+				}
+				if($('#hora_inicio').val().length!=2 || parseInt($('#hora_inicio').val())>23){
+					rpta = 0;
+					$('#error-hora-inicio').show().delay(5000).fadeOut();
+				}
+				if($('#minutos_inicio').val().length!=2 || parseInt($('#minutos_inicio').val())>59){
+					rpta = 0;
+					$('#error-minutos-inicio').show().delay(5000).fadeOut();
+				}
+				if($('#hora_fin').val().length!=2 || parseInt($('#hora_fin').val())>23){
+					rpta = 0;
+					$('#error-hora-fin').show().delay(5000).fadeOut();
+				}
+				if($('#minutos_fin').val().length!=2 || parseInt($('#minutos_fin').val())>59){
+					rpta = 0;
+					$('#error-minutos-fin').show().delay(5000).fadeOut();
+				}
+				return rpta;
+			}
+		});		
 	});
 </script>
 </body>
