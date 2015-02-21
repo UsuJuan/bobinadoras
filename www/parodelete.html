@@ -134,6 +134,17 @@
 	<script>
 		$(function(){
 
+			function knowNombre(myname){
+				tipos = JSON.parse(localStorage.getItem('tipo_bobinadoras'));
+				nombre = "";
+				for(var i=0;i<tipos.length;i++){
+					if(tipos[i]['id']==myname){
+						nombre = tipos[i]['descripcion'];
+					}
+				}
+				return nombre;
+			}
+
 			$('#menu').on('click',function(){
 				window.location = 'index.html';
 			});
@@ -199,9 +210,9 @@
 				ap = JSON.parse(localStorage.getItem('lis_paros_bob'));
 				for(var i=0;i<ap.length;i++){
 					if(ap[i]['tipo_paro']=="2"){
-						$('tbody').append("<tr><td>"+ap[i]['maquina_uno']+" "+ap[i]['unidad_uno']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+						$('tbody').append("<tr><td>"+knowNombre(ap[i]['maquina_uno'])+" "+ap[i]['unidad_uno']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
 					}else{
-						$('tbody').append("<tr><td>"+ap[i]['maquina_uno']+" "+ap[i]['unidad_uno']+" - "+ap[i]['maquina_dos']+" "+ap[i]['unidad_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
+						$('tbody').append("<tr><td>"+knowNombre(ap[i]['maquina_uno'])+" "+ap[i]['unidad_uno']+" - "+knowNombre(ap[i]['maquina_dos'])+" "+ap[i]['unidad_dos']+"</td><td>"+ap[i]['hora_inicio']+"</td><td>"+ap[i]['hora_fin']+"</td><td>"+ap[i]['fecha']+"</td><td><a href='#' id="+ap[i]['id']+" class='btn btn-danger' ><span class='glyphicon glyphicon-remove' ></span></a></td></tr>");
 					}
 				}
 				Prueba();

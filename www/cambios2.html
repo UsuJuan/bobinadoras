@@ -74,9 +74,6 @@
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
 		    	<select name="maquina" id="maquina" class="form-control input_grande" required="required" >
-					<option value="AC">AC</option>
-					<option value="ACV">ACV</option>
-					<option value="SA">SA</option>
 				</select>		      
 		    </div>
 		    <div class="row">
@@ -258,6 +255,11 @@
 	// FECHA Y HORA
 
 	$(function(){
+		// Tipo bobinadoras
+		array_tb = JSON.parse(localStorage.getItem("tipo_bobinadoras"));
+		for(var i=0;i<array_tb.length;i++){
+			$('#maquina').append('<option value='+array_tb[i].id+' >'+array_tb[i].descripcion+'</option>');
+		}
 		annio_2 = String(annio).substring(2,4);
 		$('#dia').val(dia);
 		$('#mes').val(mes);

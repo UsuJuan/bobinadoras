@@ -50,7 +50,9 @@
 		   	</div>
 	   		<div class="col-md-4"></div>
 			<div class="col-sm-1 col-md-4">
-			      <input type="text" class="form-control input_grande" id="maquina" name="maquina" disabled>
+			    <select name="maquina" id="maquina" class="form-control input_grande" disabled>
+		      		<option value="" >Seleccionar</option>
+				</select>
 			</div>			
 		</div>
 		<div class="form-group">
@@ -152,6 +154,12 @@
 	            return false;
 	        } 
 	    });
+
+	    // Tipo bobinadoras
+		array_tb = JSON.parse(localStorage.getItem("tipo_bobinadoras"));
+		for(var i=0;i<array_tb.length;i++){
+			$('#maquina').append('<option value='+array_tb[i].id+' >'+array_tb[i].descripcion+'</option>');
+		}
 
 	    // FECHA Y TURNO
 	    my_array = JSON.parse(localStorage.getItem('turnos'));

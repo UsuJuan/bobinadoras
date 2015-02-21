@@ -56,6 +56,10 @@
 			motivos_paro_array = JSON.stringify(json);
 			localStorage.setItem("motivos_paro", motivos_paro_array);
 		};
+		var mostrar_tipo_bobinadoras = function(json){
+			tipo_bobinadoras_array = JSON.stringify(json);
+			localStorage.setItem("tipo_bobinadoras", tipo_bobinadoras_array);
+		};
 		$('form').on('submit',function(evt){
 			evt.preventDefault();
 			$.getJSON('http://10.240.17.49/transferencias/bajar/maquinas/bobinadoras/?callback=?', mostrar_maquinas)
@@ -69,6 +73,16 @@
 			  	});				
 
 			$.getJSON('http://10.240.17.49/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});	
+
+			$.getJSON('http://10.240.17.49/transferencias/bajar/tipobobinadoras/?callback=?', mostrar_tipo_bobinadoras)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
