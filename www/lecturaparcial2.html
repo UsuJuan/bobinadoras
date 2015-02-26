@@ -16,6 +16,31 @@
 	<div class="alert alert-danger text-center" id="maquina-repeat" >
 		<h2>MAQUINA REPETIDA</h2>
 	</div>
+	<!-- Button trigger modal -->
+	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
+	  	Modal
+	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      <div class="modal-header">
+			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="alert alert-warning" id="mensajes" role="alert">
+		      			<div id='mensajitos' >
+		      				<h2 >Necesita subir lectura normales.</h2>
+		      			</div>
+		      		</div>
+		      </div>
+		      <div class="modal-footer">
+			        <a href="subir.html" name="ok" class="btn btn-primary btn-lg">Ok</a>
+		      </div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Modal -->
 	<form class="form-horizontal my_form" role="form" name="form_lectura" action="" method="POST" >
 		<div class="form-group">
 		   	<div class="text-center">	
@@ -126,6 +151,10 @@
 	// FECHA Y HORA
 
 	$(function(){
+
+		if (localStorage.getItem("lis_lec_bob")!=null){
+			$('#modalbox').click();
+		}
 		// Tipo bobinadoras
 		array_tb = JSON.parse(localStorage.getItem("tipo_bobinadoras"));
 		for(var i=0;i<array_tb.length;i++){

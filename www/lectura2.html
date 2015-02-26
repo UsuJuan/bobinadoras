@@ -30,11 +30,7 @@
 			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
 		      </div>
 		      <div class="modal-body">
-		      		<div class="alert alert-success" role="alert">
-		      			<h4>
-		      				La ruta ha terminado. Los datos han sido guardados con exito.
-		      			</h4>
-		      		</div>
+		      		<div class="alert alert-warning" id="mensajes" role="alert"></div>
 		      </div>
 		      <div class="modal-footer">
 			        <a href="index.html" name="ok" class="btn btn-primary btn-lg">Ok</a>
@@ -155,6 +151,13 @@
 	        } 
 	    });
 
+	    if (localStorage.getItem("lis_parcial_bob")!=null){
+			$('#mensajitos').remove();
+			$('#mensajes').append("<div id='mensajitos' ></div>");
+			$('#mensajitos').append("<h2 >Necesita subir lectura parcial.</h2>");
+			$('#modalbox').click();
+		}
+
 	    // Tipo bobinadoras
 		array_tb = JSON.parse(localStorage.getItem("tipo_bobinadoras"));
 		for(var i=0;i<array_tb.length;i++){
@@ -242,6 +245,9 @@
 				localStorage.setItem("contador_bob", cont);
 				localStorage.setItem("lis_lec_bob", jsontostring);
 				if(((len_lecs_bob+1) % JSON.parse(localStorage.getItem("maquinas_bob")).length)==0){
+					$('#mensajitos').remove();
+					$('#mensajes').append("<div id='mensajitos' ></div>");
+					$('#mensajitos').append("<h2 >La ruta ha terminado.</h2>");
 					$('#modalbox').click();
 					localStorage.removeItem('turno_bob');
 				}else{

@@ -19,20 +19,6 @@
 		</h3>
 	</div>
 	<form class="form-horizontal my_form" role="form" name="form_turno" method="POST" >
-		<!-- <div class="form-group">
-			<div class="text-center">
-		   		<label for="dia" class="control-label label_grande">FECHA</label>
-		   	</div>
-		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" id="dia" name="dia" autocomplete="off" placeholder="Día" >
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" id="mes" name="mes" autocomplete="off" placeholder="Mes" >
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande" id="annio" name="annio" autocomplete="off" placeholder="Año" >
-		    </div>
-		</div> -->
 		<div class="form-group">
 			<div class="text-center">
 				<label for="dia" class="control-label label_grande">TURNO</label>
@@ -76,19 +62,7 @@
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>	
-	// FECHA Y HORA
-		// var fecha = new Date();
-		// dia = fecha.getDate();
-		// mes = fecha.getMonth()+1;
-		// annio = fecha.getFullYear();
-		// if(dia<10) dia = String("0"+dia);
-		// if(mes<10) mes = String("0"+mes);		
-		// fecha_string = String(annio+"-"+mes+"-"+dia);
-	// FECHA Y HORA
 	$(function(){
-		// $('#dia').val(dia);
-		// $('#mes').val(mes);
-		// $('#annio').val(String(annio).substring(2,4));
 		$('.error').css('display','none');
 		if (localStorage.getItem("lis_lec_bob")!=null){
 			$('#mensajitos').remove();
@@ -109,7 +83,6 @@
 			evt.preventDefault();
 			if($('#turno').val()!="" ){
 				localStorage.setItem("turno_parcial_bob",$('#turno').val());
-				// localStorage.setItem("fecha_parcial","20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val());
 				window.location = 'lecturaparcial2.html';
 			}else{
 				$('.alert-danger').show().delay(5000).fadeOut();

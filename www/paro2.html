@@ -241,13 +241,16 @@
 	}
 	// FECHA Y HORA
 		var fecha = new Date();
+		hora = fecha.getHours();
+		// if (hora<=6){
+		// 	fecha.setDate(fecha.getDate()-1);
+		// }
 		dia = fecha.getDate();
 		mes = fecha.getMonth()+1;
 		annio = fecha.getFullYear();
 		if(dia<10) dia = String("0"+dia);
 		if(mes<10) mes = String("0"+mes);		
 		fecha_string = String(annio+"-"+mes+"-"+dia);
-		hora = fecha.getHours();
 		minutos = fecha.getMinutes();
 		if(hora<10)	hora = String("0"+hora);
 		if(minutos<10) minutos = String("0"+minutos);

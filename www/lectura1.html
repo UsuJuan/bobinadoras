@@ -51,11 +51,13 @@
 		      </div>
 		      <div class="modal-body">
 		      		<div class="alert alert-info" id="mensajes" role="alert">
-
+						<div id='mensajitos' >
+							<h2 >Necesita bajar datos.</h2>
+						</div>
 		      		</div>
 		      </div>
 		      <div class="modal-footer text-left">
-			        <a href="index.html" class="btn-lg btn-primary" >Ok</a>
+			        <a href="bajar.html" class="btn-lg btn-primary" >Ok</a>
 		      </div>
 	    	</div>
 	  	</div>
@@ -67,16 +69,7 @@
 	$(function(){
 		$('.alert-danger').css('display','none');
 
-		// if (localStorage.getItem("lista_parcial")!=null){
-		// 	$('#mensajitos').remove();
-		// 	$('#mensajes').append("<div id='mensajitos' ></div>");
-		// 	$('#mensajitos').append("<h2 >Necesita subir lectura parcial.</h2>");
-		// 	$('#modalbox').click();
-		// }
-
-		if (localStorage.getItem("maquinas_bob")==null){
-			$('#mensajes').append("<div id='mensajitos' ></div>");
-			$('#mensajitos').append("<h2 >Necesita bajar datos.</h2>");
+		if (localStorage.getItem("maquinas_bob")==null || localStorage.getItem("turnos")==null){
 			$('#modalbox').click();
 		}
 
