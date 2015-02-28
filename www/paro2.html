@@ -467,10 +467,10 @@
 						$('#error-unidad2').show().delay(5000).fadeOut();
 					}else{						
 						for(var i=0;i<array_maquinas.length;i++){
-							if(array_maquinas[i].nombre==$('#maquina_uno').val() && array_maquinas[i].unidad==unidad){
+							if(array_maquinas[i].nombre==parseInt($('#maquina_uno').val(),10) && array_maquinas[i].unidad==unidad){
 								orden1 = array_maquinas[i].orden_paro;
 							}
-							if(array_maquinas[i].nombre==$('#maquina_dos').val() && array_maquinas[i].unidad==u2){
+							if(array_maquinas[i].nombre==parseInt($('#maquina_dos').val(),10) && array_maquinas[i].unidad==u2){
 								orden2 = array_maquinas[i].orden_paro;
 							}
 						}
