@@ -62,7 +62,7 @@
 		};
 		$('form').on('submit',function(evt){
 			evt.preventDefault();
-			$.getJSON('http://10.240.17.49/transferencias/bajar/maquinas/bobinadoras/?callback=?', mostrar_maquinas)
+			$.getJSON('http://192.168.1.34/transferencias/bajar/maquinas/bobinadoras/?callback=?', mostrar_maquinas)
 				.done(function() {
 					$('.alert-success').show().delay(5000).fadeOut();
 					console.log('exito');
@@ -72,7 +72,7 @@
 			  		console.log('fallo');
 			  	});				
 
-			$.getJSON('http://10.240.17.49/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
+			$.getJSON('http://192.168.1.34/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -82,7 +82,7 @@
 			    	console.log('fallo');
 			  	});	
 
-			$.getJSON('http://10.240.17.49/transferencias/bajar/tipobobinadoras/?callback=?', mostrar_tipo_bobinadoras)
+			$.getJSON('http://192.168.1.34/transferencias/bajar/tipobobinadoras/?callback=?', mostrar_tipo_bobinadoras)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -92,7 +92,7 @@
 			    	console.log('fallo');
 			  	});	
 
-			$.getJSON('http://10.240.17.49/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
+			$.getJSON('http://192.168.1.34/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -102,7 +102,7 @@
 			    	console.log('fallo');
 			  	});
 
-			$.getJSON('http://10.240.17.49/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
+			$.getJSON('http://192.168.1.34/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
