@@ -57,7 +57,7 @@
 		$('#mensajes').append("<div id='mensajitos' ></div>");
 		$('#subir').css('display','none');
 
-		$.getJSON('http://10.240.17.56/transferencias/coneccion/continuas/?callback=?')
+		$.getJSON('http://192.168.1.44/transferencias/coneccion/continuas/?callback=?')
 		.done(function() {
 			console.log('exito');
 			$('#subir').css('display','inline');
@@ -119,7 +119,7 @@
 			}
 
 			$.ajax({
-				url: 'http://10.240.17.56/transferencias/subir/bobinadoras/',
+				url: 'http://192.168.1.44/transferencias/subir/bobinadoras/',
 				type: 'POST',
 				crossDomain: true,
 				data: {					
