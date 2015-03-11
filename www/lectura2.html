@@ -160,7 +160,11 @@
 			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
 	            return false;
 	        }
-
+	        if($(this).val().indexOf('.')!=-1){
+				if($(this).val().split(".")[1].length > 1){
+	                return false;
+	            }
+	    	}
 	    }); 
 
 	    if (localStorage.getItem("lis_parcial_bob")!=null){
