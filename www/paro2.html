@@ -88,7 +88,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="unidad_uno" name="unidad_uno" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="unidad_uno" name="unidad_uno" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad1" role="alert">
@@ -118,7 +118,7 @@
 			   	</div>
 			   	<div class="col-md-3"></div>
 			    <div class="col-sm-10 col-md-6">
-			      <input type="number" class="form-control input_grande numero" id="unidad_dos" name="unidad_dos" autocomplete="off" >
+			      <input type="tel" class="form-control input_grande decimal" id="unidad_dos" name="unidad_dos" autocomplete="off" >
 			    </div>
 			    <div class="row">
 			    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad2" role="alert">
@@ -281,11 +281,26 @@
 		$('#dia').val(dia);
 		$('#mes').val(mes);
 		$('#annio').val(annio_2);
-		$(".numero").keypress(function(evt){
-	        if((evt.charCode < 48 || evt.charCode > 57)){
+		
+		$(".decimal").keypress(function(evt){
+			$('#codigo').val(event.keyCode);
+			if($(this).val().length==0){
+				if (event.keyCode==46) {
+					return false;
+				}
+			}else{
+				if (event.keyCode==46) {
+					if($(this).val().indexOf('.')!=-1){						
+						return false;
+					}
+				}
+			}	    
+			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
 	            return false;
-	        } 
-	    });
+	        }
+
+	    }); 
+
 	    $('.alert-danger').css('display','none');
 		// PARO EN BLOQUE
 		function SacarMaquinas(o1,o2,hi,hf,fecha){

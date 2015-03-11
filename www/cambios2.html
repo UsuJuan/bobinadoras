@@ -88,7 +88,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-				<input type="number" pattern="\d+(\.\d*)?" class="form-control input_grande" id="unidad" name="unidad" autocomplete="off" >
+				<input type="tel" class="form-control input_grande decimal" id="unidad" name="unidad" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad" role="alert">
@@ -102,7 +102,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" step="0.01" class="form-control input_grande" id="titulo" name="titulo" autocomplete="off" >
+		      <input type="number" class="form-control input_grande" id="titulo" name="titulo" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-titulo" role="alert">
@@ -116,7 +116,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" pattern="\d+(\.\d*)?" class="form-control input_grande numero" id="codigo" name="codigo" autocomplete="off" >
+		      <input type="number" class="form-control input_grande" id="codigo" name="codigo" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-codigo" role="alert">
@@ -130,7 +130,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="tel" class="form-control input_grande numero" id="vp" name="vp" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="vp" name="vp" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-vp" role="alert">
@@ -154,7 +154,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="kgs" name="kgs" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="kgs" name="kgs" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-kgs" role="alert">
@@ -168,7 +168,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="purgador" name="purgador" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="purgador" name="purgador" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-purgador" role="alert">
@@ -182,7 +182,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="number" class="form-control input_grande numero" id="empalmes" name="empalmes" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="empalmes" name="empalmes" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-empalmes" role="alert">
@@ -196,13 +196,13 @@
 		   	</div>
 		   	<div class="col-sm-1 col-xs-1"></div>
 		    <div class="col-sm-4 col-xs-4">
-		      <input type="number" class="form-control input_grande numero" maxlength="5" id="hora" name="hora" autocomplete="off" placeholder="HH" >		      
+		      <input type="number" class="form-control input_grande" maxlength="5" id="hora" name="hora" autocomplete="off" placeholder="HH" >		      
 		    </div>
 		    <div class="col-sm-1 col-xs-1">
 		    	<label class="control-label label_grande">:</label>
 		    </div>
 		    <div class="col-sm-4 col-xs-4">
-		    	<input type="number" class="form-control input_grande numero" maxlength="5" id="minutos" name="minutos" autocomplete="off" placeholder="MM" >
+		    	<input type="number" class="form-control input_grande" maxlength="5" id="minutos" name="minutos" autocomplete="off" placeholder="MM" >
 		    </div>
 		    <div class="col-sm-2 col-xs-2"></div>
 		    <div class="row">
@@ -269,10 +269,23 @@
 		$('#annio').val(annio_2);
 		$('.alert-danger').css('display','none');
 
-		$(".numero").keypress(function(evt){
-	        if((evt.charCode < 48 || evt.charCode > 57)){
+		$(".decimal").keypress(function(evt){
+			$('#codigo').val(event.keyCode);
+			if($(this).val().length==0){
+				if (event.keyCode==46) {
+					return false;
+				}
+			}else{
+				if (event.keyCode==46) {
+					if($(this).val().indexOf('.')!=-1){						
+						return false;
+					}
+				}
+			}	    
+			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
 	            return false;
-	        } 
+	        }
+
 	    }); 
 
 	    $("#hora").keyup(function(event){
@@ -304,10 +317,7 @@
 
 		$('form[name=form_cambios]').on('submit',function(evt){
 			evt.preventDefault();	
-			tam = $('#unidad').val().length;
-			p1 = $('#unidad').val().substring(0,tam-1);
-			p2 = $('#unidad').val().substring(tam-1,tam);
-			unidad = p1+"."+p2
+			unidad = $('#unidad').val();		
 			if(valida(unidad)==1){
 				HoraTwoPto = $('#hora').val()+":"+$('#minutos').val();
 				fec = annio+"-"+$('#mes').val()+"-"+$('#dia').val();
@@ -347,11 +357,8 @@
 					}
 				}
 				if (entrada==0){
-					// debugger;
 					array.push(Json_cambios_bob);
-					// debugger;
 					var jsontostring = JSON.stringify(array);
-					// debugger;
 					localStorage.setItem("lis_cambios_bob", jsontostring);
 					id_cam_bob = parseInt(localStorage.getItem("id_cam_bob"));
 					localStorage.setItem('id_cam_bob',id_cam_bob+1);
