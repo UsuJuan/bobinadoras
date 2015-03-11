@@ -283,7 +283,6 @@
 		$('#annio').val(annio_2);
 		
 		$(".decimal").keypress(function(evt){
-			$('#codigo').val(event.keyCode);
 			if($(this).val().length==0){
 				if (event.keyCode==46) {
 					return false;
@@ -391,14 +390,8 @@
 		});		
 		$('form[name=form_paros]').on('submit',function(evt){	
 			evt.preventDefault();
-			tam = $('#unidad_uno').val().length;
-			p1 = $('#unidad_uno').val().substring(0,tam-1);
-			p2 = $('#unidad_uno').val().substring(tam-1,tam);
-			unidad = p1+"."+p2;
-			tam2 = $('#unidad_dos').val().length;
-			u1 = $('#unidad_dos').val().substring(0,tam2-1);
-			u2 = $('#unidad_dos').val().substring(tam2-1,tam2);
-			unidad2 = u1+"."+u2;
+			unidad = $('#unidad_uno').val();
+			unidad2 = $('#unidad_dos').val();
 			bloque = 1;
 			if(localStorage.getItem("paro_bob")==1){
 				if($('#unidad_dos').val()!=""){
@@ -501,14 +494,12 @@
 						}
 					}
 				}else{
-					if($('#puestos').val()==""){
-						rpta = 0;
-						$('#error-puestos').show().delay(5000).fadeOut();
-					}
 					var flag = 0;
+					var puestos = 0;
 					for(var i=0;i<array_maquinas.length;i++){
 						if(array_maquinas[i].nombre==$('#maquina_uno').val() && array_maquinas[i].unidad==unidad){
 							flag = 1;
+							puestos = array_maquinas[i].n_husos; 
 						}
 					}
 					if (flag!=1){
@@ -516,6 +507,10 @@
 						rpta = 0;
 					}else{
 						rpta = 1;
+					}
+					if($('#puestos').val()=="" || parseInt($('#puestos').val(),10)>puestos){
+						rpta = 0;
+						$('#error-puestos').show().delay(5000).fadeOut();
 					}
 				}
 				if($('#motivo_paro').val()==""){

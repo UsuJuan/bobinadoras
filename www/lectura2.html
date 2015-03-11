@@ -66,7 +66,7 @@
 		   	</div>
 		   	<div class="col-md-4"></div>
 		    <div class="col-sm-1 col-md-4">
-		      <input type="number" class="form-control input_grande numero" id="kgs" name="kgs" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="kgs" name="kgs" autocomplete="off" >
 		    </div>
 		</div>
 		<div class="row">
@@ -81,7 +81,7 @@
 		   	</div>
 		   	<div class="col-md-4"></div>
 		    <div class="col-sm-1 col-md-4">
-		      <input type="number" class="form-control input_grande numero" id="purgador" name="purgador" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="purgador" name="purgador" autocomplete="off" >
 		    </div>
 		</div>
 		<div class="row">
@@ -96,7 +96,7 @@
 		   	</div>
 		   	<div class="col-md-4"></div>
 		    <div class="col-sm-1 col-md-4">
-		      <input type="number" class="form-control input_grande numero" id="empalmes" name="empalmes" autocomplete="off" >
+		      <input type="tel" class="form-control input_grande decimal" id="empalmes" name="empalmes" autocomplete="off" >
 		    </div>
 		</div>
 		<div class="row">
@@ -145,11 +145,23 @@
 
 	$(function(){
 
-		$(".numero").keypress(function(evt){
-	        if((evt.charCode < 48 || evt.charCode > 57)){
+		$(".decimal").keypress(function(evt){
+			if($(this).val().length==0){
+				if (event.keyCode==46) {
+					return false;
+				}
+			}else{
+				if (event.keyCode==46) {
+					if($(this).val().indexOf('.')!=-1){						
+						return false;
+					}
+				}
+			}	    
+			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
 	            return false;
-	        } 
-	    });
+	        }
+
+	    }); 
 
 	    if (localStorage.getItem("lis_parcial_bob")!=null){
 			$('#mensajitos').remove();
