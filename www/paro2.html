@@ -86,9 +86,14 @@
 		   	<div class="text-center">	
 		   		<label for="unidad_uno" class="control-label label_grande">UNIDAD</label>
 		   	</div>
-		   	<div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-		      <input type="tel" class="form-control input_grande decimal" id="unidad_uno" name="unidad_uno" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="unidad_uno_1" name="unidad_uno_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande dunidad" id="unidad_uno_2" name="unidad_uno_2" value="1" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad1" role="alert">
@@ -116,9 +121,14 @@
 			   	<div class="text-center">	
 			   		<label for="unidad_dos" class="control-label label_grande">UNIDAD</label>
 			   	</div>
-			   	<div class="col-md-3"></div>
-			    <div class="col-sm-10 col-md-6">
-			      <input type="tel" class="form-control input_grande decimal" id="unidad_dos" name="unidad_dos" autocomplete="off" >
+			   	<div class="col-sm-7 col-xs-7">
+			      	<input type="number" class="form-control input_grande dunidad" id="unidad_dos_1" name="unidad_dos_1" >
+			    </div>
+			    <div class="col-sm-1 col-xs-1">
+			    	<label class="control-label label_grande">.</label>
+			    </div>
+			    <div class="col-sm-4 col-xs-4">
+			    	<input type="number" class="form-control input_grande" id="unidad_dos_2" name="unidad_dos_2" value="1" >
 			    </div>
 			    <div class="row">
 			    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad2" role="alert">
@@ -281,28 +291,18 @@
 		$('#dia').val(dia);
 		$('#mes').val(mes);
 		$('#annio').val(annio_2);
-		
+
 		$(".decimal").keypress(function(evt){
-			if($(this).val().length==0){
-				if (event.keyCode==46) {
-					return false;
-				}
-			}else{
-				if (event.keyCode==46) {
-					if($(this).val().indexOf('.')!=-1){						
-						return false;
-					}
-				}
-			}	    
-			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
-	            return false;
-	        }
-	        if($(this).val().indexOf('.')!=-1){
-				if($(this).val().split(".")[1].length > 1){
-	                return false;
-	            }
-	    	}
-	    }); 
+			if($(this).val().length==2){
+		        return false;
+		    }
+	    });
+
+		$(".dunidad").keypress(function(evt){
+			if($(this).val().length==1){
+		        return false;
+		    }
+	    });
 
 	    $('.alert-danger').css('display','none');
 		// PARO EN BLOQUE
@@ -394,8 +394,8 @@
 		});		
 		$('form[name=form_paros]').on('submit',function(evt){	
 			evt.preventDefault();
-			unidad = $('#unidad_uno').val();
-			unidad2 = $('#unidad_dos').val();
+			unidad = $('#unidad_uno_1').val()+"."+$('#unidad_uno_2').val();
+			unidad2 = $('#unidad_dos_1').val()+"."+$('#unidad_dos_2').val();
 			bloque = 1;
 			if(localStorage.getItem("paro_bob")==1){
 				if($('#unidad_dos').val()!=""){
@@ -473,7 +473,7 @@
 				var rpta = 1;
 				array_maquinas = JSON.parse(localStorage.getItem('maquinas_bob'));
 				if(localStorage.getItem("paro_bob")==1){
-					if($('#unidad_uno').val()=="" || $('#unidad_dos').val()==""){
+					if($('#unidad_uno_1').val()=="" || $('#unidad_dos_1').val()==""){
 						rpta = 0;
 						$('#error-unidad1').show().delay(5000).fadeOut();
 						$('#error-unidad2').show().delay(5000).fadeOut();

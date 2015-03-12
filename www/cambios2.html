@@ -86,9 +86,14 @@
 			<div class="text-center">
 		   		<label for="unidad" class="control-label label_grande">UNIDAD</label>
 		   	</div>
-		   	<div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-				<input type="tel" class="form-control input_grande decimal" id="unidad" name="unidad" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="unidad_1" name="unidad_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande dunidad" id="unidad_2" name="unidad_2" value="1" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-unidad" role="alert">
@@ -130,7 +135,7 @@
 		   	</div>
 		   	<div class="col-md-3"></div>
 		    <div class="col-sm-10 col-md-6">
-		      <input type="tel" class="form-control input_grande decimal" id="vp" name="vp" autocomplete="off" >
+		      <input type="number" class="form-control input_grande" id="vp" name="vp" autocomplete="off" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-vp" role="alert">
@@ -152,9 +157,14 @@
 			<div class="text-center">
 		   		<label for="kgs" class="control-label label_grande">KGS</label>
 		   	</div>
-		   	<div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-		      <input type="tel" class="form-control input_grande decimal" id="kgs" name="kgs" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="kgs_1" name="kgs_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="kgs_2" name="kgs_2" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-kgs" role="alert">
@@ -166,9 +176,14 @@
 			<div class="text-center">
 		   		<label for="purgador" class="control-label label_grande">PURGADOR</label>
 		   	</div>
-		   	<div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-		      <input type="tel" class="form-control input_grande decimal" id="purgador" name="purgador" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="purgador_1" name="purgador_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="purgador_2" name="purgador_2" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-purgador" role="alert">
@@ -180,9 +195,14 @@
 			<div class="text-center">
 		   		<label for="empalmes" class="control-label label_grande">EMPALMES</label>
 		   	</div>
-		   	<div class="col-md-3"></div>
-		    <div class="col-sm-10 col-md-6">
-		      <input type="tel" class="form-control input_grande decimal" id="empalmes" name="empalmes" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="empalmes_1" name="empalmes_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="empalmes_2" name="empalmes_2" >
 		    </div>
 		    <div class="row">
 		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-empalmes" role="alert">
@@ -270,26 +290,16 @@
 		$('.alert-danger').css('display','none');
 
 		$(".decimal").keypress(function(evt){
-			if($(this).val().length==0){
-				if (event.keyCode==46) {
-					return false;
-				}
-			}else{
-				if (event.keyCode==46) {
-					if($(this).val().indexOf('.')!=-1){						
-						return false;
-					}
-				}
-			}	    
-			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
-	            return false;
-	        }
-	        if($(this).val().indexOf('.')!=-1){
-				if($(this).val().split(".")[1].length > 1){
-	                return false;
-	            }
-	    	}
+			if($(this).val().length==2){
+		        return false;
+		    }
 	    }); 
+
+	    $(".dunidad").keypress(function(evt){
+			if($(this).val().length==1){
+		        return false;
+		    }
+	    });
 
 	    $("#hora").keyup(function(event){
 		    if($(this).val().length==2){
@@ -320,8 +330,23 @@
 
 		$('form[name=form_cambios]').on('submit',function(evt){
 			evt.preventDefault();	
-			unidad = $('#unidad').val();		
+			unidad = $('#unidad_1').val()+"."+$('#unidad_2').val();		
 			if(valida(unidad)==1){
+				if($('#kgs_2').val()==""){
+					kgs = $('#kgs_1').val()+".0";
+				}else{
+					kgs = $('#kgs_1').val()+"."+$('#kgs_2').val();
+				}
+				if($('#purgador_2').val()==""){
+					purgador = $('#purgador_1').val()+".0";
+				}else{
+					purgador = $('#purgador_1').val()+"."+$('#purgador_2').val();
+				}
+				if($('#empalmes_2').val()==""){
+					empalmes = $('#empalmes_1').val()+".0";
+				}else{
+					empalmes = $('#empalmes_1').val()+"."+$('#empalmes_2').val();
+				}
 				HoraTwoPto = $('#hora').val()+":"+$('#minutos').val();
 				fec = annio+"-"+$('#mes').val()+"-"+$('#dia').val();
 				Json_cambios_bob = {
@@ -332,9 +357,9 @@
 					"codigo" : $('#codigo').val(),
 					"vp" : $('#vp').val(),
 					"linea" : $("#linea").val(),
-					"kgs" : $("#kgs").val(),
-					"purgador" : $('#purgador').val(),
-					"empalmes" : $('#empalmes').val(),
+					"kgs" : kgs,
+					"purgador" : purgador,
+					"empalmes" : empalmes,
 					"hora_cambio" : HoraTwoPto+":00",
 					"fecha" : fec,
 					"fecha_ingreso":fecha_string,
@@ -371,7 +396,7 @@
 
 			function valida(unidad){
 				var rpta = 1;				
-				if($('#unidad').val()==""){
+				if($('#unidad_1').val()==""){
 					rpta = 0;
 					$('#error-unidad').show().delay(5000).fadeOut();
 				}else{
@@ -405,15 +430,15 @@
 					rpta = 0;
 					$('#error-linea').show().delay(5000).fadeOut();
 				}
-				if($('#kgs').val()==""){
+				if($('#kgs_1').val()==""){
 					rpta = 0;
 					$('#error-kgs').show().delay(5000).fadeOut();
 				}
-				if($('#purgador').val()==""){
+				if($('#purgador_1').val()==""){
 					rpta = 0;
 					$('#error-purgador').show().delay(5000).fadeOut();
 				}
-				if($('#empalmes').val()==""){
+				if($('#empalmes_1').val()==""){
 					rpta = 0;
 					$('#error-empalmes').show().delay(5000).fadeOut();
 				}

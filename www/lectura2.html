@@ -64,9 +64,14 @@
 			<div class="text-center">
 		   		<label for="kgs" class="control-label label_grande">KGS</label>
 		   	</div>
-		   	<div class="col-md-4"></div>
-		    <div class="col-sm-1 col-md-4">
-		      <input type="tel" class="form-control input_grande decimal" id="kgs" name="kgs" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="kgs_1" name="kgs_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="kgs_2" name="kgs_2" >
 		    </div>
 		</div>
 		<div class="row">
@@ -79,9 +84,14 @@
 			<div class="text-center">
 		   		<label for="purgador" class="control-label label_grande">CORTE PURGADOR</label>
 		   	</div>
-		   	<div class="col-md-4"></div>
-		    <div class="col-sm-1 col-md-4">
-		      <input type="tel" class="form-control input_grande decimal" id="purgador" name="purgador" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="purgador_1" name="purgador_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="purgador_2" name="purgador_2" >
 		    </div>
 		</div>
 		<div class="row">
@@ -94,9 +104,14 @@
 			<div class="text-center">
 		   		<label for="empalmes" class="control-label label_grande">EMPALMES</label>
 		   	</div>
-		   	<div class="col-md-4"></div>
-		    <div class="col-sm-1 col-md-4">
-		      <input type="tel" class="form-control input_grande decimal" id="empalmes" name="empalmes" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="empalmes_1" name="empalmes_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="empalmes_2" name="empalmes_2" >
 		    </div>
 		</div>
 		<div class="row">
@@ -145,27 +160,33 @@
 
 	$(function(){
 
-		$(".decimal").keypress(function(evt){
-			if($(this).val().length==0){
-				if (event.keyCode==46) {
-					return false;
-				}
-			}else{
-				if (event.keyCode==46) {
-					if($(this).val().indexOf('.')!=-1){						
-						return false;
-					}
-				}
-			}	    
-			if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
-	            return false;
-	        }
-	        if($(this).val().indexOf('.')!=-1){
-				if($(this).val().split(".")[1].length > 1){
-	                return false;
-	            }
-	    	}
-	    }); 
+		// $(".decimal").keypress(function(evt){
+		// 	if($(this).val().length==0){
+		// 		if (event.keyCode==46) {
+		// 			return false;
+		// 		}
+		// 	}else{
+		// 		if (event.keyCode==46) {
+		// 			if($(this).val().indexOf('.')!=-1){						
+		// 				return false;
+		// 			}
+		// 		}
+		// 	}	    
+		// 	if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
+	 //            return false;
+	 //        }
+	 //        if($(this).val().indexOf('.')!=-1){
+		// 		if($(this).val().split(".")[1].length > 1){
+	 //                return false;
+	 //            }
+	 //    	}
+	 //    }); 
+		
+	    $(".decimal").keypress(function(evt){
+			if($(this).val().length==2){
+		        return false;
+		    }
+	    });
 
 	    if (localStorage.getItem("lis_parcial_bob")!=null){
 			$('#mensajitos').remove();
@@ -222,15 +243,15 @@
 
 		function Valida(){
 			var rpta=1;
-			if ($('#kgs').val()==""){
+			if ($('#kgs_1').val()==""){
 				rpta = 0;
 				$('#error-kgs').show().delay(5000).fadeOut();
 			}
-			if ($('#purgador').val()==""){
+			if ($('#purgador_1').val()==""){
 				rpta = 0;
 				$('#error-purgador').show().delay(5000).fadeOut();
 			}
-			if ($('#empalmes').val()==""){
+			if ($('#empalmes_1').val()==""){
 				rpta = 0;
 				$('#error-empalmes').show().delay(5000).fadeOut();
 			}
@@ -240,14 +261,29 @@
 		$('form[name=form_lectura]').on('submit',function(evt){
 			evt.preventDefault();			
 			if(Valida()==1){
+				if($('#kgs_2').val()==""){
+					kgs = $('#kgs_1').val()+".0";
+				}else{
+					kgs = $('#kgs_1').val()+"."+$('#kgs_2').val();
+				}
+				if($('#purgador_2').val()==""){
+					purgador = $('#purgador_1').val()+".0";
+				}else{
+					purgador = $('#purgador_1').val()+"."+$('#purgador_2').val();
+				}
+				if($('#empalmes_2').val()==""){
+					empalmes = $('#empalmes_1').val()+".0";
+				}else{
+					empalmes = $('#empalmes_1').val()+"."+$('#empalmes_2').val();
+				}
 				Json_lec_bob = {
 					"id" : localStorage.getItem("id_bob"),
 					"turno" : localStorage.getItem("turno_bob"),
 					"maquina" : $('#maquina').val(),
 					"unidad" : $('#unidad').val(),
-					"kgs" : $('#kgs').val(),
-					"purgador" : $('#purgador').val(),
-					"empalmes" : $('#empalmes').val(),
+					"kgs" : kgs,
+					"purgador" : purgador,
+					"empalmes" : empalmes,
 					"fecha" : fecha_lec_bob,
 					"hora" : hora_ing_bob,
 					"tipo_lectura" :"NORMAL",
