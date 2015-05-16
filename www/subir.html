@@ -57,7 +57,7 @@
 		$('#mensajes').append("<div id='mensajitos' ></div>");
 		$('#subir').css('display','none');
 
-		$.getJSON('http://10.240.17.56/transferencias/coneccion/continuas/?callback=?')
+		$.getJSON('http://10.240.17.56/transferencias/coneccion/bobinado/?callback=?')
 		.done(function() {
 			console.log('exito');
 			$('#subir').css('display','inline');
@@ -73,7 +73,7 @@
 					$('#modalbox').click();
 				}
 		}else{
-			if(localStorage.getItem("lis_parcial_bob")==null){					
+			if(localStorage.getItem("lis_parcial_bob")==null){
 				$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
 				$('#modalbox').click();
 			}
@@ -143,17 +143,18 @@
 				$(".modal-body").append('<div class="alert alert-success text-center" id="mensajes" role="alert"><h3>Datos subidos con exito.</h3></div>');
 				$('#modalbox').click();
 			});
-			localStorage.removeItem('lis_paros_bob');InvalidOperation:
+			localStorage.removeItem('lis_paros_bob');
 			localStorage.removeItem('lis_paros_ind_bob');
 			localStorage.removeItem('lis_cambios_bob');
 			localStorage.removeItem('lis_parcial_bob');
 			localStorage.removeItem('lis_lec_bob');
 			localStorage.removeItem('id_cam_bob');
-			localStorage.removeItem('turno_bob');
 			localStorage.removeItem('id_bob');
 			localStorage.removeItem('contador_bob');
-			localStorage.removeItem('turno_parcial_bob');
 			localStorage.removeItem('paro_bob');
+			localStorage.removeItem('tipo_lec_1_bob');
+			localStorage.removeItem('tipo_lec_2_bob');
+			localStorage.removeItem('turno_bob');
       }
 	})
 	</script>

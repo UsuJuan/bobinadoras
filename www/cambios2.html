@@ -51,21 +51,11 @@
 		    <div class="col-sm-4 col-xs-4">
 		      <input type="number" class="form-control input_grande" id="annio" name="annio" autocomplete="off" placeholder="Año" >
 		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      	<div class="alert alert-danger text-center" id="error-dia" role="alert">
+		     <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-fecha" role="alert">
 		      		<h2>ERROR!</h2>
 		      	</div>
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      	<div class="alert alert-danger text-center" id="error-mes" role="alert">
-		      		<h2>ERROR!</h2>
-		      	</div>
-		    </div>
-		    <div class="col-sm-4 col-xs-4">
-		      	<div class="alert alert-danger text-center" id="error-annio" role="alert">
-		      		<h2>ERROR!</h2>
-		      	</div>
-		    </div>
+		    </div
 		</div>
 		<div class="form-group">
 			<div class="text-center">
@@ -330,8 +320,9 @@
 
 		$('form[name=form_cambios]').on('submit',function(evt){
 			evt.preventDefault();	
+			fec = "20"+$('#annio').val()+"-"+$('#mes').val()+"-"+$('#dia').val();
 			unidad = $('#unidad_1').val()+"."+$('#unidad_2').val();		
-			if(valida(unidad)==1){
+			if(valida(unidad,fec)==1){
 				if($('#kgs_2').val()==""){
 					kgs = $('#kgs_1').val()+".0";
 				}else{
@@ -348,7 +339,6 @@
 					empalmes = $('#empalmes_1').val()+"."+$('#empalmes_2').val();
 				}
 				HoraTwoPto = $('#hora').val()+":"+$('#minutos').val();
-				fec = annio+"-"+$('#mes').val()+"-"+$('#dia').val();
 				Json_cambios_bob = {
 					"id" : localStorage.getItem("id_cam_bob"),
 					"maquina" : $('#maquina').val(),
@@ -394,7 +384,7 @@
 				}
 			}
 
-			function valida(unidad){
+			function valida(unidad,fec){
 				var rpta = 1;				
 				if($('#unidad_1').val()==""){
 					rpta = 0;
@@ -450,19 +440,19 @@
 					rpta = 0;
 					$('#error-minutos').show().delay(5000).fadeOut();
 				}
-				if($('#dia').val().length!=2 || parseInt($('#dia').val())>31){
+				var d = new Date();
+				d.setFullYear(fec.substring(0,4),fec.substring(5,7)-1,fec.substring(8,10));
+				if(d.getMonth() != fec.substring(5,7)-1 || d.getDate() != fec.substring(8,10)){
 					rpta = 0;
-					$('#error-dia').show().delay(5000).fadeOut();
-				}
-				if($('#mes').val().length!=2 || parseInt($('#mes').val())>12){
-					rpta = 0;
-					$('#error-mes').show().delay(5000).fadeOut();
-				}
-				a = parseInt($('#annio').val())
-				b = parseInt(annio_2)
-				if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
-					rpta = 0;
-					$('#error-annio').show().delay(5000).fadeOut();
+					console.log("Fecha no válida.");
+					$('#error-fecha').show().delay(5000).fadeOut();
+				}else{
+					a = parseInt($('#annio').val(),10)
+					b = parseInt(annio_2,10)
+					if($('#annio').val().length!=2 || (a!=b-1 && a!=b && a!=b+1)){
+						rpta = 0;
+						$('#error-annio').show().delay(5000).fadeOut();
+					}
 				}
 				return rpta;
 			}

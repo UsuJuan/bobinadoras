@@ -112,8 +112,8 @@
 				});
 			}
 
+			turnos = JSON.parse(localStorage.getItem('turnos'));
 			function knowTurno(myvar){
-				turnos = JSON.parse(localStorage.getItem('turnos'));
 				turno = "";
 				for(var i=0;i<turnos.length;i++){
 					if(turnos[i]['id']==myvar){

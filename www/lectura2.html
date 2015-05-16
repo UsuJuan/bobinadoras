@@ -13,11 +13,6 @@
 			MENU <span class="glyphicon glyphicon-align-justify" ></span>
 		</a>
 	</div>
-	<!-- <div class="alert alert-danger text-center" role="alert">
-		<h3>
-			DEBE LLENAR UN CAMPO.
-		</h3>
-	</div> -->
 	<!-- Button trigger modal -->
 	<button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
 	  	Modal
@@ -158,29 +153,11 @@
 		fecha_ingreso = String(annio+"-"+mes+"-"+dia);
 	// FECHA Y HORA
 
-	$(function(){
+	$(function(){	
 
-		// $(".decimal").keypress(function(evt){
-		// 	if($(this).val().length==0){
-		// 		if (event.keyCode==46) {
-		// 			return false;
-		// 		}
-		// 	}else{
-		// 		if (event.keyCode==46) {
-		// 			if($(this).val().indexOf('.')!=-1){						
-		// 				return false;
-		// 			}
-		// 		}
-		// 	}	    
-		// 	if((evt.charCode < 48 || evt.charCode > 57) && evt.charCode != 46){
-	 //            return false;
-	 //        }
-	 //        if($(this).val().indexOf('.')!=-1){
-		// 		if($(this).val().split(".")[1].length > 1){
-	 //                return false;
-	 //            }
-	 //    	}
-	 //    }); 
+		if(localStorage.getItem('turno_bob')==null){
+			window.location = 'lecturamenu.html';
+		}
 		
 	    $(".decimal").keypress(function(evt){
 			if($(this).val().length==2){
@@ -188,7 +165,7 @@
 		    }
 	    });
 
-	    if (localStorage.getItem("lis_parcial_bob")!=null){
+	    if (localStorage.getItem("lis_parcial_bob")!=null || localStorage.getItem("tipo_lec_2_bob")=="parcial"){
 			$('#mensajitos').remove();
 			$('#mensajes').append("<div id='mensajitos' ></div>");
 			$('#mensajitos').append("<h2 >Necesita subir lectura parcial.</h2>");

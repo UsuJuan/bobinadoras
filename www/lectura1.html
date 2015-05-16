@@ -67,19 +67,38 @@
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>	
 	$(function(){
+
 		$('.alert-danger').css('display','none');
 
-		if (localStorage.getItem("maquinas_bob")==null || localStorage.getItem("turnos")==null){
+		if(localStorage.getItem('tipo_lec_1_bob')==null){
+			window.location = 'lecturamenu.html';
+		}
+
+		if (localStorage.getItem("maquinas_bob")==null || localStorage.getItem("turnos")==null || localStorage.getItem("turno_val_bob")==null){
 			$('#modalbox').click();
 		}
 
 		if(localStorage.getItem('turno_bob')!=null){
-			window.location = 'lectura2.html';
+			if (localStorage.getItem('tipo_lec_2_bob')=="normal"){
+				window.location = 'lectura2.html';
+			}else if (localStorage.getItem('tipo_lec_2_bob')=="parcial"){
+				window.location = 'lecturaparcial2.html';
+			}
 		}
 		array_turnos = JSON.parse(localStorage.getItem("turnos"));
 		if (array_turnos!=null){
+			max_turno = localStorage.getItem('turno_val_bob');
+			if (max_turno == 3){
+				max_turno = 1;
+			}else{
+				max_turno = parseInt(max_turno,10) + 1;
+			}
 			for(var i=0;i<array_turnos.length;i++){
-				$('#turno').append('<option value='+array_turnos[i].id+' >'+array_turnos[i].descripcion+'</option>');
+				if (array_turnos[i].id == max_turno){
+					$('#turno').append('<option value='+array_turnos[i].id+' >'+array_turnos[i].descripcion+'</option>');
+				}else{
+					$('#turno').append('<option value='+array_turnos[i].id+' disabled >'+array_turnos[i].descripcion+'</option>');
+				}
 			}
 		}
 
@@ -87,7 +106,15 @@
 			evt.preventDefault();
 			if(valida()==1){
 				localStorage.setItem("turno_bob",$('#turno').val());
-				window.location = 'lectura2.html';
+				turno = parseInt($('#turno').val(),10);
+				localStorage.setItem('turno_val_bob',turno);
+				if(localStorage.getItem('tipo_lec_1_bob')==0){
+					localStorage.setItem('tipo_lec_2_bob',"normal");
+					window.location = 'lectura2.html';					
+				}else if (localStorage.getItem('tipo_lec_1_bob')==1){
+					localStorage.setItem('tipo_lec_2_bob',"parcial");
+					window.location = 'lecturaparcial2.html';
+				}
 			}			
 		});
 

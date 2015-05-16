@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Ingresar datos</title>
+	<title>Ingresar Datos</title>
 	<link rel="stylesheet" href="css/bootstrap.css" />
 	<link rel="stylesheet" href="css/estilos.css" />
 </head>
@@ -40,11 +40,16 @@
 		</div>
 		<div class="form-group">
 			<div class="text-center">
-		   		<label for="kgs_upd" class="control-label label_grande">KGS</label>
+		   		<label for="kgs" class="control-label label_grande">KGS</label>
 		   	</div>
-		   	<div class="col-md-4"></div>
-		    <div class="col-sm-1 col-md-4">
-		      	<input type="number" class="form-control input_grande" id="kgs_upd" name="kgs_upd" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="kgs_1" name="kgs_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande twodigits" id="kgs_2" name="kgs_2" >
 		    </div>
 		</div>
 		<div class="row">
@@ -55,11 +60,16 @@
 	    </div>
 		<div class="form-group">
 			<div class="text-center">
-		   		<label for="purgador_upd" class="control-label label_grande">CORTES PURGADOR</label>
+		   		<label for="purgador" class="control-label label_grande">CORTE PURGADOR</label>
 		   	</div>
-		   	<div class="col-md-4"></div>
-		    <div class="col-sm-1 col-md-4">
-		      	<input type="number" class="form-control input_grande" id="purgador_upd" name="purgador_upd" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="purgador_1" name="purgador_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande twodigits" id="purgador_2" name="purgador_2" >
 		    </div>
 		</div>
 		<div class="row">
@@ -68,13 +78,18 @@
 	      		<h2>COMPLETAR!</h2>
 	      	</div>
 	    </div>
-		<div class="form-group">
+	    <div class="form-group">
 			<div class="text-center">
-		   		<label for="empalmes_upd" class="control-label label_grande">EMPALMES</label>
+		   		<label for="empalmes" class="control-label label_grande">EMPALMES</label>
 		   	</div>
-		   	<div class="col-md-4"></div>
-		    <div class="col-sm-1 col-md-4">
-		      <input type="number" class="form-control input_grande" id="empalmes_upd" name="empalmes_upd" autocomplete="off" >
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="empalmes_1" name="empalmes_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande twodigits" id="empalmes_2" name="empalmes_2" >
 		    </div>
 		</div>
 		<div class="row">
@@ -95,6 +110,11 @@
 <script>
 	id = localStorage.getItem('id_bob_upd');
 	$(function(){
+		$(".twodigits").keypress(function(evt){
+			if($(this).val().length==2){
+		        return false;
+		    }
+	    });
 		$('.alert-danger').css('display','none');
 		$('.alert-success').css('display','none');
 		if (localStorage.getItem('lis_lec_bob')!=null){
@@ -104,9 +124,15 @@
 					$('#tipo_lectura_update').val(bob_upd[i]['tipo_lectura']);
 					$('#maquina_upd').val(bob_upd[i]['maquina']);
 					$('#unidad_upd').val(bob_upd[i]['unidad']);
-					$('#kgs_upd').val(bob_upd[i]['kgs']);
-					$('#purgador_upd').val(bob_upd[i]['purgador']);
-					$('#empalmes_upd').val(bob_upd[i]['empalmes']);
+					kilos = bob_upd[i]['kgs'].split(".");
+					$('#kgs_1').val(kilos[0]);
+					$('#kgs_2').val(kilos[1]);
+					purgador = bob_upd[i]['purgador'].split(".");
+					$('#purgador_1').val(purgador[0]);
+					$('#purgador_2').val(purgador[1]);
+					empalmes = bob_upd[i]['empalmes'].split(".");
+					$('#empalmes_1').val(empalmes[0]);
+					$('#empalmes_2').val(empalmes[1]);
 				}
 			}
 		}
@@ -118,9 +144,15 @@
 					$('#tipo_lectura_update').val(lp[i]['tipo_lectura']);
 					$('#maquina_upd').val(lp[i]['maquina']);
 					$('#unidad_upd').val(lp[i]['unidad']);
-					$('#kgs_upd').val(lp[i]['kgs']);
-					$('#purgador_upd').val(lp[i]['purgador']);
-					$('#empalmes_upd').val(lp[i]['empalmes']);
+					kilos_p = lp[i]['kgs'].split(".");
+					$('#kgs_1').val(kilos_p[0]);
+					$('#kgs_2').val(kilos_p[1]);
+					purgador_p = lp[i]['purgador'].split(".");
+					$('#purgador_1').val(purgador_p[0]);
+					$('#purgador_2').val(purgador_p[1]);
+					empalmes_p = lp[i]['empalmes'].split(".");
+					$('#empalmes_1').val(empalmes_p[0]);
+					$('#empalmes_2').val(empalmes_p[1]);
 				}
 			}
 		}
@@ -132,9 +164,9 @@
 					lis_bob = JSON.parse(localStorage.getItem('lis_lec_bob'));
 					for(var i=0;i<lis_bob.length;i++){
 						if(lis_bob[i]['id']==id){
-							lis_bob[i]['kgs'] = $('#kgs_upd').val();
-							lis_bob[i]['purgador'] = $('#purgador_upd').val();
-							lis_bob[i]['empalmes'] = $('#empalmes_upd').val();
+							lis_bob[i]['kgs'] = $('#kgs_1').val()+"."+VerVacio('kgs_2');
+							lis_bob[i]['purgador'] = $('#purgador_1').val()+"."+VerVacio('purgador_2');
+							lis_bob[i]['empalmes'] = $('#empalmes_1').val()+"."+VerVacio('empalmes_2');
 							myjson_string = JSON.stringify(lis_bob);
 							localStorage.setItem('lis_lec_bob',myjson_string);
 							$('.alert-success').show().delay(5000).fadeOut();
@@ -146,9 +178,9 @@
 					lp = JSON.parse(localStorage.getItem('lis_parcial_bob'));
 					for(var i=0;i<lp.length;i++){
 						if(lp[i]['id']==id){
-							lp[i]['kgs'] = $('#kgs_upd').val();
-							lp[i]['purgador'] = $('#purgador_upd').val();
-							lp[i]['empalmes'] = $('#empalmes_upd').val();
+							lp[i]['kgs'] = $('#kgs_1').val()+"."+VerVacio('kgs_2');
+							lp[i]['purgador'] = $('#purgador_1').val()+"."+VerVacio('purgador_2');
+							lp[i]['empalmes'] = $('#empalmes_1').val()+"."+VerVacio('empalmes_2');
 							myjson_string = JSON.stringify(lp);
 							localStorage.setItem('lis_parcial_bob',myjson_string);
 							$('.alert-success').show().delay(5000).fadeOut();
@@ -162,19 +194,26 @@
 
 		function Valida(){
 			var rpta=0;
-			if ($('#kgs_upd').val()==""){
+			if ($('#kgs_1').val()==""){
 				rpta = 1;
 				$('#error-kgs').show().delay(5000).fadeOut();
 			}
-			if ($('#purgador_upd').val()==""){
+			if ($('#purgador_1').val()==""){
 				rpta = 1;
 				$('#error-purgador').show().delay(5000).fadeOut();
 			}
-			if ($('#empalmes_upd').val()==""){
+			if ($('#empalmes_1').val()==""){
 				rpta = 1;
 				$('#error-empalmes').show().delay(5000).fadeOut();
 			}
 			return rpta;
+		}
+		function VerVacio(campo){
+			valor = $(String('#'+campo)).val();
+			if($(String('#'+campo)).val()==""){
+				valor = "0";
+			}
+			return valor;
 		}
 
 	})

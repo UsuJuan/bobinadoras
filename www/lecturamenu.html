@@ -20,27 +20,6 @@
 			MENU <span class="glyphicon glyphicon-align-justify" ></span>
 		</a>
 	</div>
-	<!-- Button trigger modal -->
-	<!-- <button id="modalbox" class="btn btn-primary btn-lg hidden" data-toggle="modal" data-target="#myModal">
-	  	Modal
-	</button> -->
-	<!-- Modal -->
-	<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
-	  	<div class="modal-dialog">
-	    	<div class="modal-content">
-		      <div class="modal-header">
-			        <h4 class="modal-title alert alert-info text-center" id="myModalLabel">Cargando...</h4>
-		      </div>
-		      <div class="modal-body">
-	      			<div id="loading" class="text-center" >
-						<img src="loading.GIF" width="100px" heigth="100px" />
-					</div>
-		      </div>
-		      <div class="modal-footer"></div>
-	    	</div>
-	  	</div>
-	</div> -->
-	<!-- Modal -->
 	<div class="row cuerpo">
 		<div class="row">
 			<a href="lectura1.html" id="add" class="item-menu" >
@@ -57,7 +36,7 @@
 			</a>
 		</div>
 		<div class="row">
-			<a href="lecturaparcial1.html" id="parcial" class="item-menu" >
+			<a href="lectura1.html" id="parcial" class="item-menu" >
 				<p class="items" >
 					PARCIAL
 				</p>
@@ -68,10 +47,18 @@
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <script>
 	$(function(){
-		$('a#add').on('click', function(event) {
+		$('#add').on('click', function(event) {
+			localStorage.setItem('tipo_lec_1_bob',0);
 			if(localStorage.getItem('turno_bob')!=null){
 				event.preventDefault();
 				window.location = 'lectura2.html';
+			}
+		});
+		$('#parcial').on('click', function(event) {
+			localStorage.setItem('tipo_lec_1_bob',1);
+			if(localStorage.getItem('turno_bob')!=null){
+				event.preventDefault();
+				window.location = 'lecturaparcial2.html';				
 			}
 		});
 	})
