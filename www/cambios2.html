@@ -118,6 +118,11 @@
 		      		<h2>COMPLETAR!</h2>
 		      	</div>
 		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-codigo2" role="alert">
+		      		<h2>8 DIGITOS!</h2>
+		      	</div>
+		    </div>
 		</div>
 		<div class="form-group">
 			<div class="text-center">
@@ -411,6 +416,13 @@
 				if($('#codigo').val()==""){
 					rpta = 0;
 					$('#error-codigo').show().delay(5000).fadeOut();
+				}else{
+					if($('#codigo').val()!="0"){
+						if($('#codigo').val().length!=8){
+							rpta = 0;
+							$('#error-codigo2').show().delay(5000).fadeOut();				
+						}
+					}
 				}
 				if($('#vp').val()==""){
 					rpta = 0;
