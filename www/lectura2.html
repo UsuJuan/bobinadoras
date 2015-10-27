@@ -75,6 +75,26 @@
 	      		<h2>COMPLETAR!</h2>
 	      	</div>
 	    </div>
+	    <div class="form-group">
+			<div class="text-center">
+		   		<label for="e_tec" class="control-label label_grande">Ef. Tec</label>
+		   	</div>
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="e_tec_1" name="e_tec_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="e_tec_2" name="e_tec_2" >
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-e_tec" role="alert">
+	      		<h2>ERROR!</h2>
+	      	</div>
+	    </div>
 		<div class="form-group">
 			<div class="text-center">
 		   		<label for="purgador" class="control-label label_grande">CORTE PURGADOR</label>
@@ -199,6 +219,7 @@
 		$('#error-kgs').css('display','none');
 		$('#error-purgador').css('display','none');
 		$('#error-empalmes').css('display','none');
+		$('#error-e_tec').css('display','none');
 
 		function MyFunction(){
 			$('#maquina').val(JSON.parse(localStorage.getItem("maquinas_bob"))[0].nombre);
@@ -224,6 +245,20 @@
 				rpta = 0;
 				$('#error-kgs').show().delay(5000).fadeOut();
 			}
+			if ($('#e_tec_1').val()==""){
+				rpta = 0;
+				$('#error-e_tec').show().delay(5000).fadeOut();
+			}else{
+				if($('#e_tec_2').val()==""){
+					e_tec = $('#e_tec_1').val()+".0";
+				}else{
+					e_tec = $('#e_tec_1').val()+"."+$('#e_tec_2').val();
+				}
+				if(parseFloat(e_tec,10)>100.0){
+					rpta = 0;
+					$('#error-e_tec').show().delay(5000).fadeOut();	
+				}
+			}
 			if ($('#purgador_1').val()==""){
 				rpta = 0;
 				$('#error-purgador').show().delay(5000).fadeOut();
@@ -243,6 +278,11 @@
 				}else{
 					kgs = $('#kgs_1').val()+"."+$('#kgs_2').val();
 				}
+				if($('#e_tec_2').val()==""){
+					e_tec = $('#e_tec_1').val()+".0";
+				}else{
+					e_tec = $('#e_tec_1').val()+"."+$('#e_tec_2').val();
+				}
 				if($('#purgador_2').val()==""){
 					purgador = $('#purgador_1').val()+".0";
 				}else{
@@ -259,6 +299,7 @@
 					"maquina" : $('#maquina').val(),
 					"unidad" : $('#unidad').val(),
 					"kgs" : kgs,
+					"e_tec" : e_tec,
 					"purgador" : purgador,
 					"empalmes" : empalmes,
 					"fecha" : fecha_lec_bob,

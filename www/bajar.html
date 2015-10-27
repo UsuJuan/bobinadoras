@@ -55,7 +55,9 @@
 			$.getJSON('http://10.240.17.56/transferencias/coneccion/bobinado/?callback=?')
 			.done(function(response) {
 				console.log('exito');
-				localStorage.setItem("turno_val_bob", response.turno);
+				if(localStorage.getItem('turno_bob')==null){
+					localStorage.setItem("turno_val_bob", response.turno);
+				}
 				$('#bajar').css('display','inline');
 			})
 			.fail(function() {

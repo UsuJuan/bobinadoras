@@ -169,6 +169,25 @@
 		</div>
 		<div class="form-group">
 			<div class="text-center">
+		   		<label for="e_tec" class="control-label label_grande">Ef. Tec</label>
+		   	</div>
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="e_tec_1" name="e_tec_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="e_tec_2" name="e_tec_2" >
+		    </div>
+		    <div class="row">
+		    	<div class="alert alert-danger text-center col-sm-10 col-md-6" id="error-e_tec" role="alert">
+		      		<h2>ERROR!</h2>
+		      	</div>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
 		   		<label for="purgador" class="control-label label_grande">PURGADOR</label>
 		   	</div>
 		   	<div class="col-sm-7 col-xs-7">
@@ -333,6 +352,11 @@
 				}else{
 					kgs = $('#kgs_1').val()+"."+$('#kgs_2').val();
 				}
+				if($('#e_tec_2').val()==""){
+					e_tec = $('#e_tec_1').val()+".0";
+				}else{
+					e_tec = $('#e_tec_1').val()+"."+$('#e_tec_2').val();
+				}
 				if($('#purgador_2').val()==""){
 					purgador = $('#purgador_1').val()+".0";
 				}else{
@@ -353,6 +377,7 @@
 					"vp" : $('#vp').val(),
 					"linea" : $("#linea").val(),
 					"kgs" : kgs,
+					"e_tec" : e_tec,
 					"purgador" : purgador,
 					"empalmes" : empalmes,
 					"hora_cambio" : HoraTwoPto+":00",
@@ -435,6 +460,20 @@
 				if($('#kgs_1').val()==""){
 					rpta = 0;
 					$('#error-kgs').show().delay(5000).fadeOut();
+				}
+				if($('#e_tec_1').val()==""){
+					rpta = 0;
+					$('#error-e_tec').show().delay(5000).fadeOut();
+				}else{
+					if($('#e_tec_2').val()==""){
+						e_tec = $('#e_tec_1').val()+".0";
+					}else{
+						e_tec = $('#e_tec_1').val()+"."+$('#e_tec_2').val();
+					}
+					if(parseFloat(e_tec,10)>100.0){
+						rpta = 0;
+						$('#error-e_tec').show().delay(5000).fadeOut();	
+					}
 				}
 				if($('#purgador_1').val()==""){
 					rpta = 0;
