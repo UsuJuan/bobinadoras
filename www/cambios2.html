@@ -150,6 +150,16 @@
 		</div>
 		<div class="form-group">
 			<div class="text-center">
+		    	<label for="hilo" class="control-label label_grande">HILO PARA:</label>
+		    </div>
+		    <div class="col-md-3"></div>
+		    <div class="col-sm-10 col-md-6">
+		      	<select name="hilo" id="hilo" class="form-control input_grande" required="required" >
+				</select>
+		    </div>
+		</div>
+		<div class="form-group">
+			<div class="text-center">
 		   		<label for="kgs" class="control-label label_grande">KGS</label>
 		   	</div>
 		   	<div class="col-sm-7 col-xs-7">
@@ -326,6 +336,10 @@
 		for(var i=0;i<array_lineas.length;i++){
 			$('#linea').append('<option value='+array_lineas[i].id+' >'+array_lineas[i].descripcion+'</option>');
 		}
+		array_hilos = JSON.parse(localStorage.getItem("hilos"));
+		for(var i=0;i<array_hilos.length;i++){
+			$('#hilo').append('<option value='+array_hilos[i].id+' >'+array_hilos[i].descripcion+'</option>');
+		}
 
 		$('#cancelar').on('click',function(){
 			$('#mensajitos').remove();
@@ -376,6 +390,7 @@
 					"codigo" : $('#codigo').val(),
 					"vp" : $('#vp').val(),
 					"linea" : $("#linea").val(),
+					"hilo" : $("#hilo").val(),
 					"kgs" : kgs,
 					"e_tec" : e_tec,
 					"purgador" : purgador,

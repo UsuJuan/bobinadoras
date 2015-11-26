@@ -79,6 +79,10 @@
 			lineas_array = JSON.stringify(json);
 			localStorage.setItem("lineas", lineas_array);
 		};
+		var mostrar_hilos = function(json){
+			hilos_array = JSON.stringify(json);
+			localStorage.setItem("hilos", hilos_array);
+		};
 		var mostrar_motivos_paro = function(json){
 			motivos_paro_array = JSON.stringify(json);
 			localStorage.setItem("motivos_paro", motivos_paro_array);
@@ -120,6 +124,16 @@
 			  	});	
 
 			$.getJSON('http://10.240.17.56/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
+				.done(function() {
+			    	$('.alert-success').show().delay(5000).fadeOut();
+			    	console.log('exito');
+			  	})
+			  	.fail(function() {
+			    	$('.alert-danger').show().delay(5000).fadeOut();
+			    	console.log('fallo');
+			  	});
+
+			$.getJSON('http://10.240.17.56/transferencias/bajar/hilos/?callback=?', mostrar_hilos)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');

@@ -89,6 +89,7 @@
 					<th class="text-center" >MAQUINA</th>
 					<th class="text-center" >UNIDAD</th>
 					<th class="text-center" >KGS</th>
+					<th class="text-center" >EF TEC</th>
 					<th class="text-center" >PURGADOR</th>
 					<th class="text-center" >EMPALME</th>
 					<th class="text-center" >TURNO</th>
@@ -175,7 +176,7 @@
 				lb = JSON.parse(localStorage.getItem('lis_lec_bob'));
 				for(var i=0;i<lb.length;i++){
 					turno = knowTurno(lb[i]['turno']);
-					$('tbody').append("<tr><td>"+knowNombre(lb[i]['maquina'])+"</td><td>"+lb[i]['unidad']+"</td><td>"+lb[i]['kgs']+"</td><td>"+lb[i]['purgador']+"</td><td>"+lb[i]['empalmes']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lb[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+					$('tbody').append("<tr><td>"+knowNombre(lb[i]['maquina'])+"</td><td>"+lb[i]['unidad']+"</td><td>"+lb[i]['kgs']+"</td><td>"+lb[i]['e_tec']+"</td><td>"+lb[i]['purgador']+"</td><td>"+lb[i]['empalmes']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lb[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
 				}
 				Prueba();
 			}
@@ -183,7 +184,7 @@
 				lp = JSON.parse(localStorage.getItem('lis_parcial_bob'));
 				for(var i=0;i<lp.length;i++){
 					turno = knowTurno(lp[i]['turno']);
-					$('tbody').append("<tr><td>"+knowNombre(lp[i]['maquina'])+"</td><td>"+lp[i]['unidad']+"</td><td>"+lp[i]['kgs']+"</td><td>"+lp[i]['purgador']+"</td><td>"+lp[i]['empalmes']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lp[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
+					$('tbody').append("<tr><td>"+knowNombre(lp[i]['maquina'])+"</td><td>"+lp[i]['unidad']+"</td><td>"+lp[i]['kgs']+"</td><td>"+lp[i]['e_tec']+"</td><td>"+lp[i]['purgador']+"</td><td>"+lp[i]['empalmes']+"</td><td>"+turno+"</td><td><a href='lecturaupdate2.html' id="+lp[i]['id']+" class='btn btn-primary' ><span class='glyphicon glyphicon-pencil' ></span></a></td></tr>");		
 				}
 				Prueba();
 			}

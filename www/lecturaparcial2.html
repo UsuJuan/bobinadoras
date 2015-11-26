@@ -94,7 +94,7 @@
 	    </div>
 	    <div class="form-group">
 			<div class="text-center">
-		   		<label for="e_tec" class="control-label label_grande">Ef. Tec</label>
+		   		<label for="e_tec" class="control-label label_grande">EF. TEC</label>
 		   	</div>
 		   	<div class="col-sm-7 col-xs-7">
 		      	<input type="number" class="form-control input_grande" id="e_tec_1" name="e_tec_1" >
@@ -221,7 +221,7 @@
 		$('.alert-danger').css('display','none');
 		var metros="";
 		function Valida(unidad){
-			var rpta = 0;
+			var rpta = 1;
 			var flag_repeat = 0;
 			$('#digitos').remove();
 			nombre = $('#maquina').val();		
@@ -232,7 +232,7 @@
 				for (var i=0;i<parcial.length;i++){
 					if(nombre==parcial[i]['maquina'] && unidad==parcial[i]['unidad'] && v1==parcial[i]['turno'] && v2 == parcial[i]['fecha']){
 						flag_repeat = 1;
-						rpta = 1;
+						rpta = 0;
 						$('#maquina-repeat').show().delay(5000).fadeOut();		
 					}
 				}
@@ -273,7 +273,7 @@
 				}
 				if (flag!=1){
 					$('#error-unidad').show().delay(5000).fadeOut();
-					rpta = 1;
+					rpta = 0;
 				}
 			}
 			return rpta;
@@ -301,7 +301,7 @@
 			}else{
 				empalmes = $('#empalmes_1').val()+"."+$('#empalmes_2').val();
 			}	
-			if(Valida(unidad)==0){
+			if(Valida(unidad)==1){
 				MyJson_lectura = {
 					"id" : localStorage.getItem("id_bob"),
 					"maquina" : $('#maquina').val(),

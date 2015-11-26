@@ -58,6 +58,26 @@
 	      		<h2>COMPLETAR!</h2>
 	      	</div>
 	    </div>
+	    <div class="form-group">
+			<div class="text-center">
+		   		<label for="e_tec" class="control-label label_grande">EF. TEC</label>
+		   	</div>
+		   	<div class="col-sm-7 col-xs-7">
+		      	<input type="number" class="form-control input_grande" id="e_tec_1" name="e_tec_1" >
+		    </div>
+		    <div class="col-sm-1 col-xs-1">
+		    	<label class="control-label label_grande">.</label>
+		    </div>
+		    <div class="col-sm-4 col-xs-4">
+		    	<input type="number" class="form-control input_grande decimal" id="e_tec_2" name="e_tec_2" >
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+	    	<div class="alert alert-danger text-center col-sm-1 col-md-4" id="error-e_tec" role="alert">
+	      		<h2>ERROR!</h2>
+	      	</div>
+	    </div>
 		<div class="form-group">
 			<div class="text-center">
 		   		<label for="purgador" class="control-label label_grande">CORTE PURGADOR</label>
@@ -127,6 +147,9 @@
 					kilos = bob_upd[i]['kgs'].split(".");
 					$('#kgs_1').val(kilos[0]);
 					$('#kgs_2').val(kilos[1]);
+					e_tec = bob_upd[i]['e_tec'].split(".");
+					$('#e_tec_1').val(kilos[0]);
+					$('#e_tec_2').val(kilos[1]);
 					purgador = bob_upd[i]['purgador'].split(".");
 					$('#purgador_1').val(purgador[0]);
 					$('#purgador_2').val(purgador[1]);
@@ -147,6 +170,9 @@
 					kilos_p = lp[i]['kgs'].split(".");
 					$('#kgs_1').val(kilos_p[0]);
 					$('#kgs_2').val(kilos_p[1]);
+					e_tec = lp[i]['e_tec'].split(".");
+					$('#e_tec_1').val(e_tec[0]);
+					$('#e_tec_2').val(e_tec[1]);
 					purgador_p = lp[i]['purgador'].split(".");
 					$('#purgador_1').val(purgador_p[0]);
 					$('#purgador_2').val(purgador_p[1]);
@@ -165,6 +191,7 @@
 					for(var i=0;i<lis_bob.length;i++){
 						if(lis_bob[i]['id']==id){
 							lis_bob[i]['kgs'] = $('#kgs_1').val()+"."+VerVacio('kgs_2');
+							lis_bob[i]['e_tec'] = $('#e_tec_1').val()+"."+VerVacio('e_tec_2');
 							lis_bob[i]['purgador'] = $('#purgador_1').val()+"."+VerVacio('purgador_2');
 							lis_bob[i]['empalmes'] = $('#empalmes_1').val()+"."+VerVacio('empalmes_2');
 							myjson_string = JSON.stringify(lis_bob);
@@ -179,6 +206,7 @@
 					for(var i=0;i<lp.length;i++){
 						if(lp[i]['id']==id){
 							lp[i]['kgs'] = $('#kgs_1').val()+"."+VerVacio('kgs_2');
+							lp[i]['e_tec'] = $('#e_tec_1').val()+"."+VerVacio('e_tec_2');
 							lp[i]['purgador'] = $('#purgador_1').val()+"."+VerVacio('purgador_2');
 							lp[i]['empalmes'] = $('#empalmes_1').val()+"."+VerVacio('empalmes_2');
 							myjson_string = JSON.stringify(lp);
@@ -205,6 +233,20 @@
 			if ($('#empalmes_1').val()==""){
 				rpta = 1;
 				$('#error-empalmes').show().delay(5000).fadeOut();
+			}
+			if ($('#e_tec_1').val()==""){
+				rpta = 1;
+				$('#error-e_tec').show().delay(5000).fadeOut();
+			}else{
+				if($('#e_tec_2').val()==""){
+					e_tec = $('#e_tec_1').val()+".0";
+				}else{
+					e_tec = $('#e_tec_1').val()+"."+$('#e_tec_2').val();
+				}
+				if(parseFloat(e_tec,10)>100.0){
+					rpta = 1;
+					$('#error-e_tec').show().delay(5000).fadeOut();	
+				}
 			}
 			return rpta;
 		}
