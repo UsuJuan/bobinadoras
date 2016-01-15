@@ -20,8 +20,11 @@
 			        <h4 class="modal-title alert alert-info" id="myModalLabel">Mensaje</h4>
 		      </div>
 		      <div class="modal-body">
-		      		<div class="alert alert-danger" id="mensajes" role="alert">
-
+		      		<div class="alert alert-danger text-center" role="alert">
+						<h3>Error al subir Datos.</h3>
+		      		</div>
+		      		<div class="alert alert-success text-center" role="alert">
+		      			<h3>Datos subidos con exito.</h3>
 		      		</div>
 		      </div>
 		      <div class="modal-footer">
@@ -36,59 +39,65 @@
 			MENU <span class="glyphicon glyphicon-align-justify" ></span>
 		</a>
 	</div>	
-	<form class="form-horizontal my_form" role="form" action="" method="POST" >
+	<form class="form-horizontal" role="form" action="" method="POST" >
 		<div id="loading" class="text-center" >
 			<img src="loading.GIF" width="100px" heigth="100px" />
 		</div>
 		<div class="row text-center flechita">
 			<span class="glyphicon glyphicon-upload"></span>
 		</div>
-		<div class="row text-center" >
-			<button type="submit" id="subir" style="font-size:4em;" class="btn btn-success btn-lg">Subir Datos</button>
-		</div>
 	</form>
+	<div class="row text-center" >
+		<button type="button" id="subir" style="font-size:4em;" class="btn btn-success btn-lg">Subir Datos</button>
+	</div>
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
 	<script type="text/javascript" src="js/bootstrap.js" ></script>
 	<script>
 
 	$(function(){	
 
-		$('#mensajitos').remove();		
-		$('#mensajes').append("<div id='mensajitos' ></div>");
-		$('#subir').css('display','none');
+		$('#subir').fadeOut();
+		$('#loading').fadeOut();
+		$('.alert-success').fadeOut();
+		$('.alert-danger').fadeOut();
+
+		function ShowError(message){
+			$('.alert-danger h3').remove();
+			$('.alert-danger').append('<h3 >'+message+'</h3>');
+			$('.alert-danger').fadeIn();
+		}
 
 		$.getJSON('http://10.240.17.56/transferencias/coneccion/bobinado/?callback=?')
 		.done(function() {
 			console.log('exito');
-			$('#subir').css('display','inline');
+			$('#subir').fadeIn();
 		})
 		.fail(function() {
-			$('#mensajitos').append("<h3 >Compruebe su coneccion a la red.</h2>");
+			ShowError("Compruebe su coneccion a la red.");
 			$('#modalbox').click();
 		});
 	
 		if(localStorage.getItem("lis_lec_bob")!=null){
 			if((JSON.parse(localStorage.getItem("lis_lec_bob")).length % JSON.parse(localStorage.getItem("maquinas_bob")).length)!=0){
-					$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
+					ShowError("Completar ruta de lectura.");
 					$('#modalbox').click();
 				}
 		}else{
 			if(localStorage.getItem("lis_parcial_bob")==null){
-				$('#mensajitos').append("<h4 >Completar ruta de lectura.</h4>");
+				ShowError("Completar ruta de lectura.");
 				$('#modalbox').click();
 			}
 		}
 		
-		$('form').on('submit',function(evt){
-			evt.preventDefault();
+		$('#subir').on('click',function(){
+			console.log('click in the button');
+			$(this).prop('disabled',true);
 			terminar();
 		});
 
-		$('#loading').css('display','none');
-
 		function terminar(){
 			
-			$('#loading').css('display','block');
+			$('#loading').fadeIn();
 
 			array01 = JSON.parse(localStorage.getItem('lis_parcial_bob'));
 			if (array01!=null){
@@ -129,32 +138,35 @@
 				},
 				dataType: 'json',		
 			})
-			.done(function() {
-				console.log("success");
-				$('#loading').css('display','none');
-				$('#mensajes').remove();
-				$(".modal-body").append('<div class="alert alert-success text-center" id="mensajes" role="alert"><h3>Datos subidos con exito.</h3></div>');
+			.done(function(response) {
+				$('#loading').fadeOut();
+				if(response.msg=='ok'){
+					console.log("success ok");
+					$('.alert-success').fadeIn();
+					localStorage.removeItem('lis_paros_bob');
+					localStorage.removeItem('lis_paros_ind_bob');
+					localStorage.removeItem('lis_cambios_bob');
+					localStorage.removeItem('lis_parcial_bob');
+					localStorage.removeItem('lis_lec_bob');
+					localStorage.removeItem('id_cam_bob');
+					localStorage.removeItem('id_bob');
+					localStorage.removeItem('contador_bob');
+					localStorage.removeItem('paro_bob');
+					localStorage.removeItem('tipo_lec_1_bob');
+					localStorage.removeItem('tipo_lec_2_bob');
+					localStorage.removeItem('turno_bob');
+				}else{
+					console.log("success fail");
+					ShowError("Error al subir datos (2).");	
+				}
 				$('#modalbox').click();
 			})
 			.fail(function() {
 				console.log("error");
-				$('#loading').css('display','none');
-				$('#mensajes').remove();
-				$(".modal-body").append('<div class="alert alert-success text-center" id="mensajes" role="alert"><h3>Datos subidos con exito.</h3></div>');
+				$('#loading').fadeOut();
+				ShowError("Error al subir datos (1).");
 				$('#modalbox').click();
 			});
-			localStorage.removeItem('lis_paros_bob');
-			localStorage.removeItem('lis_paros_ind_bob');
-			localStorage.removeItem('lis_cambios_bob');
-			localStorage.removeItem('lis_parcial_bob');
-			localStorage.removeItem('lis_lec_bob');
-			localStorage.removeItem('id_cam_bob');
-			localStorage.removeItem('id_bob');
-			localStorage.removeItem('contador_bob');
-			localStorage.removeItem('paro_bob');
-			localStorage.removeItem('tipo_lec_1_bob');
-			localStorage.removeItem('tipo_lec_2_bob');
-			localStorage.removeItem('turno_bob');
       }
 	})
 	</script>
