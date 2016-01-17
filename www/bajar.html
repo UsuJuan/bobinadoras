@@ -44,7 +44,7 @@
 		}
 
 		if(localStorage.getItem("lis_lec_bob")==null && localStorage.getItem("lis_parcial_bob")==null){
-			$.getJSON('http://192.168.1.35/transferencias/coneccion/bobinado/?callback=?')
+			$.getJSON('http://10.240.17.56/transferencias/coneccion/bobinado/?callback=?')
 			.done(function(response) {
 				console.log('exito');
 				if(localStorage.getItem('turno_bob')==null){
@@ -85,7 +85,7 @@
 		};
 		$('form').on('submit',function(evt){
 			evt.preventDefault();
-			$.getJSON('http://192.168.1.35/transferencias/bajar/maquinas/bobinadoras/?callback=?', mostrar_maquinas)
+			$.getJSON('http://10.240.17.56/transferencias/bajar/maquinas/bobinadoras/?callback=?', mostrar_maquinas)
 				.done(function() {
 					$('.alert-success').show().delay(5000).fadeOut();
 					console.log('exito');
@@ -95,7 +95,7 @@
 			  		console.log('fallo');
 			  	});				
 
-			$.getJSON('http://192.168.1.35/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
+			$.getJSON('http://10.240.17.56/transferencias/bajar/turnos/?callback=?', mostrar_turnos)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -105,7 +105,7 @@
 			    	console.log('fallo');
 			  	});	
 
-			$.getJSON('http://192.168.1.35/transferencias/bajar/tipobobinadoras/?callback=?', mostrar_tipo_bobinadoras)
+			$.getJSON('http://10.240.17.56/transferencias/bajar/tipobobinadoras/?callback=?', mostrar_tipo_bobinadoras)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -115,7 +115,7 @@
 			    	console.log('fallo');
 			  	});	
 
-			$.getJSON('http://192.168.1.35/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
+			$.getJSON('http://10.240.17.56/transferencias/bajar/lineas/?callback=?', mostrar_lineas)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -125,7 +125,7 @@
 			    	console.log('fallo');
 			  	});
 
-			$.getJSON('http://192.168.1.35/transferencias/bajar/hilos/?callback=?', mostrar_hilos)
+			$.getJSON('http://10.240.17.56/transferencias/bajar/hilos/?callback=?', mostrar_hilos)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
@@ -135,7 +135,7 @@
 			    	console.log('fallo');
 			  	});
 
-			$.getJSON('http://192.168.1.35/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
+			$.getJSON('http://10.240.17.56/transferencias/bajar/motivosparo/?callback=?', mostrar_motivos_paro)
 				.done(function() {
 			    	$('.alert-success').show().delay(5000).fadeOut();
 			    	console.log('exito');
