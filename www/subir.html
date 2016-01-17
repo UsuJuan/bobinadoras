@@ -67,7 +67,7 @@
 			$('.alert-danger').fadeIn();
 		}
 
-		$.getJSON('http://10.240.17.56/transferencias/coneccion/bobinado/?callback=?')
+		$.getJSON('http://192.168.1.35/transferencias/coneccion/bobinado/?callback=?')
 		.done(function() {
 			console.log('exito');
 			$('#subir').fadeIn();
@@ -128,7 +128,7 @@
 			}
 
 			$.ajax({
-				url: 'http://10.240.17.56/transferencias/subir/bobinadoras/',
+				url: 'http://192.168.1.35/transferencias/subir/bobinadoras/',
 				type: 'POST',
 				crossDomain: true,
 				data: {					
